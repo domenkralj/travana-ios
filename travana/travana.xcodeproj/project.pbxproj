@@ -246,6 +246,7 @@
 		20518C5F252253080006F190 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				20518CAB252272640006F190 /* Fonts */,
 				20518C2B25224F910006F190 /* Assets.xcassets */,
 				20518C9825225D0F0006F190 /* Localizable.strings */,
 			);
@@ -416,6 +417,13 @@
 				20518CA5252262DE0006F190 /* Loading.storyboard */,
 			);
 			path = Loading;
+			sourceTree = "<group>";
+		};
+		20518CAB252272640006F190 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		6B7EF75A15E2324E5911059B /* Frameworks */ = {
