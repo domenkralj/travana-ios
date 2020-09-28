@@ -6,6 +6,7 @@ target 'travana' do
   use_frameworks!
 
   pod 'SwiftyJSON', '5.0.0'
+  pod 'Willow', '5.2.1'
 
   target 'travanaTests' do
     inherit! :search_paths

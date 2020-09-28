@@ -7,7 +7,25 @@
 		<key>travana.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>20518C1E25224F900006F190</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>20518C3425224F910006F190</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>20518C3F25224F910006F190</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
