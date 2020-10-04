@@ -5,16 +5,11 @@ target 'travana' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   pod 'SwiftyJSON', '5.0.0'
   pod 'Willow', '5.2.1'
-
-  target 'travanaTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'travanaUITests' do
-    # Pods for testing
-  end
-
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'SideMenu', "6.4.9" # Side menu (drawer)
 end

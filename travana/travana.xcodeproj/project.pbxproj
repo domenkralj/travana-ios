@@ -11,8 +11,6 @@
 		20518C2525224F900006F190 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C2425224F900006F190 /* SceneDelegate.swift */; };
 		20518C2725224F900006F190 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C2625224F900006F190 /* ViewController.swift */; };
 		20518C2C25224F910006F190 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20518C2B25224F910006F190 /* Assets.xcassets */; };
-		20518C3A25224F910006F190 /* travanaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C3925224F910006F190 /* travanaTests.swift */; };
-		20518C4525224F910006F190 /* travanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C4425224F910006F190 /* travanaUITests.swift */; };
 		20518C53252250680006F190 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C52252250680006F190 /* HttpClient.swift */; };
 		20518C58252252330006F190 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C57252252330006F190 /* HttpError.swift */; };
 		20518C5A252252650006F190 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C59252252650006F190 /* RequestError.swift */; };
@@ -39,31 +37,21 @@
 		20518CA6252262DE0006F190 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20518CA5252262DE0006F190 /* Loading.storyboard */; };
 		20518CA8252267DE0006F190 /* LppApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518CA7252267DE0006F190 /* LppApi.swift */; };
 		20518CAA2522687B0006F190 /* TravanaAppDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518CA92522687B0006F190 /* TravanaAppDataContainer.swift */; };
-		3CE82FFB9ACF6956A0390C68 /* Pods_travana_travanaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1525D219EA7372060BBEC796 /* Pods_travana_travanaUITests.framework */; };
+		2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */; };
+		2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */; };
+		2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */; };
+		2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1A0252A1D6600DC221D /* google-maps-style.json */; };
+		2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */; };
+		2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A6252A41D000DC221D /* SearchViewController.swift */; };
+		2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A8252A439300DC221D /* MainNavigationDrawerViewController.swift */; };
+		2066F1AC252A4BA000DC221D /* DetoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1AB252A4BA000DC221D /* DetoursViewController.swift */; };
+		2066F1B1252A4CE300DC221D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B0252A4CE300DC221D /* SettingsViewController.swift */; };
+		2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B2252A4D1200DC221D /* InfoViewController.swift */; };
 		855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */; };
-		FADB6C3D0D852DF7BD51F7CF /* Pods_travanaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FA4D7AB5F769293E959BA9 /* Pods_travanaTests.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		20518C3625224F910006F190 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20518C1725224F900006F190 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 20518C1E25224F900006F190;
-			remoteInfo = travana;
-		};
-		20518C4125224F910006F190 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20518C1725224F900006F190 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 20518C1E25224F900006F190;
-			remoteInfo = travana;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_travana.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1525D219EA7372060BBEC796 /* Pods_travana_travanaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_travana_travanaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.release.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.release.xcconfig"; sourceTree = "<group>"; };
 		20518C1F25224F900006F190 /* travana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = travana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20518C2225224F900006F190 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,12 +59,6 @@
 		20518C2625224F900006F190 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		20518C2B25224F910006F190 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20518C3025224F910006F190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20518C3525224F910006F190 /* travanaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = travanaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		20518C3925224F910006F190 /* travanaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travanaTests.swift; sourceTree = "<group>"; };
-		20518C3B25224F910006F190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20518C4025224F910006F190 /* travanaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = travanaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		20518C4425224F910006F190 /* travanaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travanaUITests.swift; sourceTree = "<group>"; };
-		20518C4625224F910006F190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20518C52252250680006F190 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		20518C57252252330006F190 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		20518C59252252650006F190 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -104,12 +86,15 @@
 		20518CA5252262DE0006F190 /* Loading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
 		20518CA7252267DE0006F190 /* LppApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppApi.swift; sourceTree = "<group>"; };
 		20518CA92522687B0006F190 /* TravanaAppDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravanaAppDataContainer.swift; sourceTree = "<group>"; };
-		72FA4D7AB5F769293E959BA9 /* Pods_travanaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_travanaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FC825ACC203083D73492140 /* Pods-travana-travanaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana-travanaUITests.debug.xcconfig"; path = "Target Support Files/Pods-travana-travanaUITests/Pods-travana-travanaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		A43655B521F1C8A468C8B94B /* Pods-travanaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travanaTests.release.xcconfig"; path = "Target Support Files/Pods-travanaTests/Pods-travanaTests.release.xcconfig"; sourceTree = "<group>"; };
+		2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2066F1A0252A1D6600DC221D /* google-maps-style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "google-maps-style.json"; sourceTree = "<group>"; };
+		2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsBottomSheetViewController.swift; sourceTree = "<group>"; };
+		2066F1A6252A41D000DC221D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2066F1A8252A439300DC221D /* MainNavigationDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationDrawerViewController.swift; sourceTree = "<group>"; };
+		2066F1AB252A4BA000DC221D /* DetoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetoursViewController.swift; sourceTree = "<group>"; };
+		2066F1B0252A4CE300DC221D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2066F1B2252A4D1200DC221D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.debug.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.debug.xcconfig"; sourceTree = "<group>"; };
-		CF3C93121598BB1F382DD225 /* Pods-travanaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travanaTests.debug.xcconfig"; path = "Target Support Files/Pods-travanaTests/Pods-travanaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D51D5C0E4D3AD347870EC97E /* Pods-travana-travanaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana-travanaUITests.release.xcconfig"; path = "Target Support Files/Pods-travana-travanaUITests/Pods-travana-travanaUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,22 +106,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20518C3225224F910006F190 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FADB6C3D0D852DF7BD51F7CF /* Pods_travanaTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		20518C3D25224F910006F190 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CE82FFB9ACF6956A0390C68 /* Pods_travana_travanaUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -144,8 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				20518C2125224F900006F190 /* travana */,
-				20518C3825224F910006F190 /* travanaTests */,
-				20518C4325224F910006F190 /* travanaUITests */,
 				20518C2025224F900006F190 /* Products */,
 				E30F6384637D3793C558EF6E /* Pods */,
 				6B7EF75A15E2324E5911059B /* Frameworks */,
@@ -156,8 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				20518C1F25224F900006F190 /* travana.app */,
-				20518C3525224F910006F190 /* travanaTests.xctest */,
-				20518C4025224F910006F190 /* travanaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,24 +138,6 @@
 				20518C2625224F900006F190 /* ViewController.swift */,
 			);
 			path = travana;
-			sourceTree = "<group>";
-		};
-		20518C3825224F910006F190 /* travanaTests */ = {
-			isa = PBXGroup;
-			children = (
-				20518C3925224F910006F190 /* travanaTests.swift */,
-				20518C3B25224F910006F190 /* Info.plist */,
-			);
-			path = travanaTests;
-			sourceTree = "<group>";
-		};
-		20518C4325224F910006F190 /* travanaUITests */ = {
-			isa = PBXGroup;
-			children = (
-				20518C4425224F910006F190 /* travanaUITests.swift */,
-				20518C4625224F910006F190 /* Info.plist */,
-			);
-			path = travanaUITests;
 			sourceTree = "<group>";
 		};
 		20518C542522520E0006F190 /* Utils */ = {
@@ -224,6 +171,7 @@
 		20518C5C252252E30006F190 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */,
 				20518C3025224F910006F190 /* Info.plist */,
 			);
 			path = Config;
@@ -249,6 +197,7 @@
 				20518CAB252272640006F190 /* Fonts */,
 				20518C2B25224F910006F190 /* Assets.xcassets */,
 				20518C9825225D0F0006F190 /* Localizable.strings */,
+				2066F1A0252A1D6600DC221D /* google-maps-style.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -404,8 +353,14 @@
 		20518C9D252261310006F190 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2066F1AF252A4CCF00DC221D /* Info */,
+				2066F1AE252A4CC700DC221D /* Settings */,
+				2066F1AD252A4CBB00DC221D /* Search */,
+				2066F1AA252A4B8200DC221D /* Detours */,
 				20518C9E2522616D0006F190 /* MainViewController.swift */,
 				20518CA0252261910006F190 /* Main.storyboard */,
+				2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */,
+				2066F1A8252A439300DC221D /* MainNavigationDrawerViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -426,12 +381,42 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2066F1AA252A4B8200DC221D /* Detours */ = {
+			isa = PBXGroup;
+			children = (
+				2066F1AB252A4BA000DC221D /* DetoursViewController.swift */,
+			);
+			path = Detours;
+			sourceTree = "<group>";
+		};
+		2066F1AD252A4CBB00DC221D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				2066F1A6252A41D000DC221D /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		2066F1AE252A4CC700DC221D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2066F1B0252A4CE300DC221D /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2066F1AF252A4CCF00DC221D /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				2066F1B2252A4D1200DC221D /* InfoViewController.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		6B7EF75A15E2324E5911059B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */,
-				1525D219EA7372060BBEC796 /* Pods_travana_travanaUITests.framework */,
-				72FA4D7AB5F769293E959BA9 /* Pods_travanaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -441,10 +426,6 @@
 			children = (
 				CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */,
 				19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */,
-				7FC825ACC203083D73492140 /* Pods-travana-travanaUITests.debug.xcconfig */,
-				D51D5C0E4D3AD347870EC97E /* Pods-travana-travanaUITests.release.xcconfig */,
-				CF3C93121598BB1F382DD225 /* Pods-travanaTests.debug.xcconfig */,
-				A43655B521F1C8A468C8B94B /* Pods-travanaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -461,6 +442,8 @@
 				20518C1C25224F900006F190 /* Frameworks */,
 				20518C1D25224F900006F190 /* Resources */,
 				8A4214F4DBB3157C6ABEB7F2 /* [CP] Embed Pods Frameworks */,
+				2063D2002528FD0C00E05A2D /* ShellScript */,
+				9C4E660301E648807D36A51D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -470,45 +453,6 @@
 			productName = travana;
 			productReference = 20518C1F25224F900006F190 /* travana.app */;
 			productType = "com.apple.product-type.application";
-		};
-		20518C3425224F910006F190 /* travanaTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 20518C4C25224F910006F190 /* Build configuration list for PBXNativeTarget "travanaTests" */;
-			buildPhases = (
-				D191C3034ECC6D6E3CB64916 /* [CP] Check Pods Manifest.lock */,
-				20518C3125224F910006F190 /* Sources */,
-				20518C3225224F910006F190 /* Frameworks */,
-				20518C3325224F910006F190 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				20518C3725224F910006F190 /* PBXTargetDependency */,
-			);
-			name = travanaTests;
-			productName = travanaTests;
-			productReference = 20518C3525224F910006F190 /* travanaTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		20518C3F25224F910006F190 /* travanaUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 20518C4F25224F910006F190 /* Build configuration list for PBXNativeTarget "travanaUITests" */;
-			buildPhases = (
-				40C0F3BA84446B998A6939E3 /* [CP] Check Pods Manifest.lock */,
-				20518C3C25224F910006F190 /* Sources */,
-				20518C3D25224F910006F190 /* Frameworks */,
-				20518C3E25224F910006F190 /* Resources */,
-				F22ECB1C2A04644AF458E93F /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				20518C4225224F910006F190 /* PBXTargetDependency */,
-			);
-			name = travanaUITests;
-			productName = travanaUITests;
-			productReference = 20518C4025224F910006F190 /* travanaUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -522,14 +466,6 @@
 				TargetAttributes = {
 					20518C1E25224F900006F190 = {
 						CreatedOnToolsVersion = 11.4;
-					};
-					20518C3425224F910006F190 = {
-						CreatedOnToolsVersion = 11.4;
-						TestTargetID = 20518C1E25224F900006F190;
-					};
-					20518C3F25224F910006F190 = {
-						CreatedOnToolsVersion = 11.4;
-						TestTargetID = 20518C1E25224F900006F190;
 					};
 				};
 			};
@@ -548,8 +484,6 @@
 			projectRoot = "";
 			targets = (
 				20518C1E25224F900006F190 /* travana */,
-				20518C3425224F910006F190 /* travanaTests */,
-				20518C3F25224F910006F190 /* travanaUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -561,29 +495,19 @@
 			files = (
 				20518CA1252261910006F190 /* Main.storyboard in Resources */,
 				20518C9625225D0F0006F190 /* Localizable.strings in Resources */,
+				2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */,
 				20518CA6252262DE0006F190 /* Loading.storyboard in Resources */,
+				2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */,
 				20518C2C25224F910006F190 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		20518C3325224F910006F190 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		20518C3E25224F910006F190 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */,
+				2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		40C0F3BA84446B998A6939E3 /* [CP] Check Pods Manifest.lock */ = {
+		2063D2002528FD0C00E05A2D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -591,19 +515,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-travana-travanaUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		878B5A2C38198167216DBC12 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -644,43 +565,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-travana/Pods-travana-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D191C3034ECC6D6E3CB64916 /* [CP] Check Pods Manifest.lock */ = {
+		9C4E660301E648807D36A51D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-travana/Pods-travana-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-travanaTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-travana/Pods-travana-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F22ECB1C2A04644AF458E93F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-travana-travanaUITests/Pods-travana-travanaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-travana-travanaUITests/Pods-travana-travanaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-travana-travanaUITests/Pods-travana-travanaUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-travana/Pods-travana-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -707,48 +606,25 @@
 				20518C8425225A2B0006F190 /* UIViewController.swift in Sources */,
 				20518C8F25225AEF0006F190 /* Constants.swift in Sources */,
 				20518C53252250680006F190 /* HttpClient.swift in Sources */,
+				2066F1AC252A4BA000DC221D /* DetoursViewController.swift in Sources */,
+				2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */,
 				20518C7E252258270006F190 /* UIFont.swift in Sources */,
+				2066F1B1252A4CE300DC221D /* SettingsViewController.swift in Sources */,
 				20518C77252257910006F190 /* Colors.swift in Sources */,
 				20518C71252256D70006F190 /* Date.swift in Sources */,
 				20518C7B252257CC0006F190 /* UIAlertController.swift in Sources */,
+				2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */,
+				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,
 				20518C9125225B040006F190 /* K.swift in Sources */,
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,
 				20518C8725225A5F0006F190 /* UIView.swift in Sources */,
+				2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */,
 				20518C66252256290006F190 /* UIUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20518C3125224F910006F190 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				20518C3A25224F910006F190 /* travanaTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		20518C3C25224F910006F190 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				20518C4525224F910006F190 /* travanaUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		20518C3725224F910006F190 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 20518C1E25224F900006F190 /* travana */;
-			targetProxy = 20518C3625224F910006F190 /* PBXContainerItemProxy */;
-		};
-		20518C4225224F910006F190 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 20518C1E25224F900006F190 /* travana */;
-			targetProxy = 20518C4125224F910006F190 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		20518C9825225D0F0006F190 /* Localizable.strings */ = {
@@ -797,7 +673,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -915,90 +791,6 @@
 			};
 			name = Release;
 		};
-		20518C4D25224F910006F190 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF3C93121598BB1F382DD225 /* Pods-travanaTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = travanaTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vegasolutions.travanaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/travana.app/travana";
-			};
-			name = Debug;
-		};
-		20518C4E25224F910006F190 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A43655B521F1C8A468C8B94B /* Pods-travanaTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = travanaTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vegasolutions.travanaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/travana.app/travana";
-			};
-			name = Release;
-		};
-		20518C5025224F910006F190 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FC825ACC203083D73492140 /* Pods-travana-travanaUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = travanaUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vegasolutions.travanaUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = travana;
-			};
-			name = Debug;
-		};
-		20518C5125224F910006F190 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D51D5C0E4D3AD347870EC97E /* Pods-travana-travanaUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = travanaUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vegasolutions.travanaUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = travana;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1016,24 +808,6 @@
 			buildConfigurations = (
 				20518C4A25224F910006F190 /* Debug */,
 				20518C4B25224F910006F190 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		20518C4C25224F910006F190 /* Build configuration list for PBXNativeTarget "travanaTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				20518C4D25224F910006F190 /* Debug */,
-				20518C4E25224F910006F190 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		20518C4F25224F910006F190 /* Build configuration list for PBXNativeTarget "travanaUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				20518C5025224F910006F190 /* Debug */,
-				20518C5125224F910006F190 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

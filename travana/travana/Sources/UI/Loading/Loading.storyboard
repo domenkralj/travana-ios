@@ -33,10 +33,21 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Domen Kralj, Žiga Leskovec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHQ-AL-aGH">
+                                <rect key="frame" x="89.5" y="816.5" width="235.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="authors"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176470588234" green="0.14509803921568626" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="sxI-fc-GLx" firstAttribute="centerY" secondItem="bTM-It-Ax9" secondAttribute="centerY" constant="-57" id="Bm8-3l-xvY"/>
+                            <constraint firstItem="oHQ-AL-aGH" firstAttribute="centerX" secondItem="bTM-It-Ax9" secondAttribute="centerX" id="eRn-70-yVL"/>
+                            <constraint firstItem="7Kv-p3-ABI" firstAttribute="bottom" secondItem="oHQ-AL-aGH" secondAttribute="bottom" constant="25" id="upF-r2-m5n"/>
                             <constraint firstItem="sxI-fc-GLx" firstAttribute="centerX" secondItem="bTM-It-Ax9" secondAttribute="centerX" id="ywu-0v-fvz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Kv-p3-ABI"/>

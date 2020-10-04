@@ -11,7 +11,7 @@ import Foundation
 // class used for operating with lpp api backend (data)
 class LppApi {
     
-    private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "WeatherApi")
+    private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "LppApi")
     private let httpClient: HttpClient
     private let decoder: JSONDecoder
     
@@ -19,4 +19,6 @@ class LppApi {
         self.httpClient = httpClient
         self.decoder = JSONDecoder()
     }
+    
+    
 }
