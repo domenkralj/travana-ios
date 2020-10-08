@@ -36,6 +36,10 @@
 		20518CA6252262DE0006F190 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20518CA5252262DE0006F190 /* Loading.storyboard */; };
 		20518CA8252267DE0006F190 /* LppApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518CA7252267DE0006F190 /* LppApi.swift */; };
 		20518CAA2522687B0006F190 /* TravanaAppDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518CA92522687B0006F190 /* TravanaAppDataContainer.swift */; };
+		20538FF9252F8FDF00EBD06A /* LppApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20538FF8252F8FDF00EBD06A /* LppApiResponse.swift */; };
+		20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20538FFA252F92AB00EBD06A /* LppStation.swift */; };
+		20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20538FFE252F955E00EBD06A /* LppRoute.swift */; };
+		20539001252F97AD00EBD06A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20539000252F97AD00EBD06A /* Response.swift */; };
 		2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */; };
 		2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */; };
 		2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */; };
@@ -86,6 +90,10 @@
 		20518CA5252262DE0006F190 /* Loading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
 		20518CA7252267DE0006F190 /* LppApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppApi.swift; sourceTree = "<group>"; };
 		20518CA92522687B0006F190 /* TravanaAppDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravanaAppDataContainer.swift; sourceTree = "<group>"; };
+		20538FF8252F8FDF00EBD06A /* LppApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppApiResponse.swift; sourceTree = "<group>"; };
+		20538FFA252F92AB00EBD06A /* LppStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppStation.swift; sourceTree = "<group>"; };
+		20538FFE252F955E00EBD06A /* LppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppRoute.swift; sourceTree = "<group>"; };
+		20539000252F97AD00EBD06A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2066F1A0252A1D6600DC221D /* google-maps-style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "google-maps-style.json"; sourceTree = "<group>"; };
 		2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -214,8 +222,10 @@
 		20518C64252253A00006F190 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				20538FFC252F951900EBD06A /* LppApiObjects */,
 				20518C52252250680006F190 /* HttpClient.swift */,
 				20518CA7252267DE0006F190 /* LppApi.swift */,
+				20539000252F97AD00EBD06A /* Response.swift */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -380,6 +390,16 @@
 			children = (
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		20538FFC252F951900EBD06A /* LppApiObjects */ = {
+			isa = PBXGroup;
+			children = (
+				20538FF8252F8FDF00EBD06A /* LppApiResponse.swift */,
+				20538FFA252F92AB00EBD06A /* LppStation.swift */,
+				20538FFE252F955E00EBD06A /* LppRoute.swift */,
+			);
+			path = LppApiObjects;
 			sourceTree = "<group>";
 		};
 		2066F1AA252A4B8200DC221D /* Detours */ = {
@@ -594,8 +614,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				20518C8A25225AAB0006F190 /* String.swift in Sources */,
+				20538FF9252F8FDF00EBD06A /* LppApiResponse.swift in Sources */,
 				20518CAA2522687B0006F190 /* TravanaAppDataContainer.swift in Sources */,
 				20518C9F2522616D0006F190 /* MainViewController.swift in Sources */,
+				20539001252F97AD00EBD06A /* Response.swift in Sources */,
 				20518C692522567A0006F190 /* Array.swift in Sources */,
 				20518C6D252256AD0006F190 /* Data.swift in Sources */,
 				20518C2325224F900006F190 /* AppDelegate.swift in Sources */,
@@ -617,6 +639,8 @@
 				20518C77252257910006F190 /* Colors.swift in Sources */,
 				20518C71252256D70006F190 /* Date.swift in Sources */,
 				20518C7B252257CC0006F190 /* UIAlertController.swift in Sources */,
+				20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */,
+				20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */,
 				2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */,
 				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,
 				20518C9125225B040006F190 /* K.swift in Sources */,

@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     let orientationLock = UIInterfaceOrientationMask.portrait // Only portrait allowed
+    let appData: TravanaAppDataContainer = TravanaAppDataContainer()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -57,6 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock
+    }
+    // returns travana app data container, which contains most important references to the data
+    public func getAppData() -> TravanaAppDataContainer {
+        return self.appData
     }
 
 }

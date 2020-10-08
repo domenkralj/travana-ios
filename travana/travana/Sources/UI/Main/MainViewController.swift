@@ -217,3 +217,7 @@ class MainViewController: UIViewController {
         self.present(slideMenuNavigationController, animated: true, completion: nil)
     }
 }
+
+enum ScreenState {
+    case error, done, loading
+}
