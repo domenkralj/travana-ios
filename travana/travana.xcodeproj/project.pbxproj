@@ -52,6 +52,7 @@
 		2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B2252A4D1200DC221D /* InfoViewController.swift */; };
 		2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */; };
 		2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */; };
+		2068F4C625337A0500975226 /* SearchResultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F4C525337A0500975226 /* SearchResultContainer.swift */; };
 		855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 		2066F1B2252A4D1200DC221D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		2068F4C525337A0500975226 /* SearchResultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultContainer.swift; sourceTree = "<group>"; };
 		CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.debug.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -416,6 +418,7 @@
 				2066F1A6252A41D000DC221D /* SearchViewController.swift */,
 				2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */,
 				2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */,
+				2068F4C525337A0500975226 /* SearchResultContainer.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 			files = (
 				20518C8A25225AAB0006F190 /* String.swift in Sources */,
 				20538FF9252F8FDF00EBD06A /* LppApiResponse.swift in Sources */,
+				2068F4C625337A0500975226 /* SearchResultContainer.swift in Sources */,
 				20518CAA2522687B0006F190 /* TravanaAppDataContainer.swift in Sources */,
 				20518C9F2522616D0006F190 /* MainViewController.swift in Sources */,
 				20539001252F97AD00EBD06A /* Response.swift in Sources */,

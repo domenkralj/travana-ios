@@ -34,7 +34,7 @@ class SearchResultTableViewCell: UITableViewCell {
         
         self.mainText.text = mainText
         
-        if type == SearchResultType.busLine {
+        if type == SearchResultType.route {
             self.busLineView.isHidden = false
             self.busLineText.text = line
         } else if type == SearchResultType.station {
