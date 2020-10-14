@@ -53,6 +53,7 @@
 		2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */; };
 		2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */; };
 		2068F4C625337A0500975226 /* SearchResultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F4C525337A0500975226 /* SearchResultContainer.swift */; };
+		208201092537900A009F00C3 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208201082537900A009F00C3 /* RouteViewController.swift */; };
 		855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		2068F4C525337A0500975226 /* SearchResultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultContainer.swift; sourceTree = "<group>"; };
+		208201082537900A009F00C3 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
 		CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.debug.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -366,6 +368,7 @@
 		20518C9D252261310006F190 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2082010725378FDE009F00C3 /* Route */,
 				2066F1AF252A4CCF00DC221D /* Info */,
 				2066F1AE252A4CC700DC221D /* Settings */,
 				2066F1AD252A4CBB00DC221D /* Search */,
@@ -437,6 +440,14 @@
 				2066F1B2252A4D1200DC221D /* InfoViewController.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		2082010725378FDE009F00C3 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				208201082537900A009F00C3 /* RouteViewController.swift */,
+			);
+			path = Route;
 			sourceTree = "<group>";
 		};
 		6B7EF75A15E2324E5911059B /* Frameworks */ = {
@@ -634,6 +645,7 @@
 				20518CA4252262D30006F190 /* LoadingViewController.swift in Sources */,
 				20518C8425225A2B0006F190 /* UIViewController.swift in Sources */,
 				20518C8F25225AEF0006F190 /* Constants.swift in Sources */,
+				208201092537900A009F00C3 /* RouteViewController.swift in Sources */,
 				20518C53252250680006F190 /* HttpClient.swift in Sources */,
 				2066F1AC252A4BA000DC221D /* DetoursViewController.swift in Sources */,
 				2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */,

@@ -30,18 +30,24 @@ class SearchResultTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setResultCell(type: SearchResultType, line: String, mainText: String, toCenter: Bool){
-        
-        self.mainText.text = mainText
-        
-        if type == SearchResultType.route {
+    // set result cell (station or route)
+    public func setResultCell(result: SearchResultContainer){
+        if result.resultType == SearchResultType.route {
+            let route = result.route!
             self.busLineView.isHidden = false
-            self.busLineText.text = line
-        } else if type == SearchResultType.station {
-            stationImageView.isHidden = false
-            if (toCenter) {
+            self.busLineView.setBackgroundColor(color: Colors.getColorFromString(string: route.routeNumber))
+            self.busLineText.text = route.routeNumber
+            self.mainText.text = route.routeName
+        } else if result.resultType == SearchResultType.station {
+            let station = result.station!
+            if station.refId.toInt() % 2 == 0 {
                 self.toCenterView.isHidden = false
+            } else {
+                self.toCenterView.isHidden = true
             }
+            self.stationImageView.isHidden = false
+            self.busLineView.isHidden = true
+            self.mainText.text = station.name
         }
     }
 }

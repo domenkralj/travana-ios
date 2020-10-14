@@ -60,6 +60,22 @@ extension String {
         return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
     }
     
+    func contains(find: String) -> Bool{
+        return self.range(of: find) != nil
+    }
+    func containsIgnoringCase(find: String) -> Bool{
+        return self.range(of: find, options: .caseInsensitive) != nil
+    }
+    
+    func toInt() -> Int {
+        let value = Int(self)
+        if (value == nil) {
+            return 0
+        } else {
+            return value!
+        }
+    }
+    
     var bool: Bool? {
         switch self.lowercased() {
         case "true":

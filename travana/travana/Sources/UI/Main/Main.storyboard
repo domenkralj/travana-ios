@@ -114,6 +114,36 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="786"/>
         </scene>
+        <!--Route View Controller-->
+        <scene sceneID="CfM-gz-xaO">
+            <objects>
+                <viewController storyboardIdentifier="RouteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="odl-it-e7f" customClass="RouteViewController" customModule="travana" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ji-XZ-NPo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-sf-jP6">
+                                <rect key="frame" x="184.66666666666666" y="437.66666666666669" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Dip-sf-jP6" firstAttribute="centerY" secondItem="4ji-XZ-NPo" secondAttribute="centerY" id="7EO-tl-D05"/>
+                            <constraint firstItem="Dip-sf-jP6" firstAttribute="centerX" secondItem="4ji-XZ-NPo" secondAttribute="centerX" id="YZl-nI-dtZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hz0-Q1-YxQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="routeText" destination="Dip-sf-jP6" id="r4S-2J-CY2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yLl-OC-l4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720" y="-532"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="jWv-0w-htU">
             <objects>
@@ -137,12 +167,15 @@
                                             <action selector="backButtonClicked:" destination="jbQ-Dk-F3R" eventType="touchUpInside" id="1fa-Ui-RRN"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="&quot;Bavarski dvor&quot;, &quot;19B&quot;, &quot;dolgi most&quot;" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-Cv-fx9">
-                                        <rect key="frame" x="60" y="8" width="346" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="&quot;Bavarski dvor&quot;, &quot;19B&quot;, &quot;dolgi most&quot;" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-Cv-fx9">
+                                        <rect key="frame" x="60" y="7" width="346" height="34"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="searchTextFieldChanged:" destination="jbQ-Dk-F3R" eventType="editingChanged" id="cnO-gr-qWI"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>

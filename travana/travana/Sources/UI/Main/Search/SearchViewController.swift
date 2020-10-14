@@ -37,7 +37,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
     
         // set search place hodler (text and color)
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "Bavarski dvor, 19B, dolgi most".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.GREY])
+        searchTextField.attributedPlaceholder = NSAttributedString(string: "Bavarski dvor, 6B, dolgi most".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.GREY])
         
         // set search result table view
         self.searchResultsTableView.dataSource = self
@@ -55,6 +55,7 @@ class SearchViewController: UIViewController {
         self.tryAgainView.addGestureRecognizer(tryAgainViewGesture!)
         
         self.retrieveStationsAndBusRoutes()
+        
     }
     
     private func retrieveStationsAndBusRoutes() {
@@ -69,10 +70,12 @@ class SearchViewController: UIViewController {
                 self.searchResult = []
                 
                 // add stations and routes to the list
+                
                 let stations = result.data!["stations"] as! [LppStation]
                 for station in stations {
                     self.searchResult!.append(SearchResultContainer(station: station))
                 }
+                
                 let routes = result.data!["routes"] as! [LppRoute]
                 for route in routes {
                     self.searchResult!.append(SearchResultContainer(route: route))
@@ -83,6 +86,10 @@ class SearchViewController: UIViewController {
                     self.setUI(state: ScreenState.done)
                     self.searchResultsTableView.reloadData()
                 }
+                
+                // set results to the filtered list (data was loaded - search text is empty - show all results)
+                self.filtertedSearchResult = self.searchResult
+                
             } else {
                 // set ui to error
                 DispatchQueue.main.async {
@@ -104,6 +111,10 @@ class SearchViewController: UIViewController {
         // if search pattern is empty show all results
         if searchPattern == nil || searchPattern!.isEmpty {
             self.filtertedSearchResult = searchResult
+            DispatchQueue.main.async {
+                self.searchResultsTableView.reloadData()
+            }
+            return
         }
         
         // clear search pattern
@@ -116,11 +127,28 @@ class SearchViewController: UIViewController {
         for result in searchResult! {
             if result.resultType == SearchResultType.route {
                 let route = result.route!
-                //var routeSearchid = route.routeName + route.
-                
+                var routeSearchid = route.routeName + "#" + route.shortRouteName + "#" + route.routeNumber
+                routeSearchid = routeSearchid.replacingOccurrences(of: "ž", with: "z")
+                routeSearchid = routeSearchid.replacingOccurrences(of: "č", with: "c")
+                routeSearchid = routeSearchid.replacingOccurrences(of: "š", with: "s")
+                routeSearchid = routeSearchid.replacingOccurrences(of: " ", with: "")
+                if routeSearchid.containsIgnoringCase(find: searchPattern!) {
+                    filtertedSearchResult?.append(result)
+                }
             } else {
-                
+                let station = result.station!
+                var stationSearchId = station.name
+                stationSearchId = stationSearchId.replacingOccurrences(of: "ž", with: "z")
+                stationSearchId = stationSearchId.replacingOccurrences(of: "č", with: "c")
+                stationSearchId = stationSearchId.replacingOccurrences(of: "š", with: "s")
+                stationSearchId = stationSearchId.replacingOccurrences(of: " ", with: "")
+                if stationSearchId.containsIgnoringCase(find: searchPattern!) {
+                    filtertedSearchResult?.append(result)
+                }
             }
+        }
+        DispatchQueue.main.async {
+            self.searchResultsTableView.reloadData()
         }
     }
     
@@ -159,6 +187,11 @@ class SearchViewController: UIViewController {
             self.retrieveStationsAndBusRoutes()
         })
     }
+    
+    // called whean search text field is changed
+    @IBAction func searchTextFieldChanged(_ sender: UITextField) {
+        self.updateResultTable()
+    }
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
@@ -166,20 +199,39 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     // return result tableview size
     // if there is more than 200 results, display 200
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchResult == nil {
+        if filtertedSearchResult == nil {
             return 0
         }
-        return searchResult!.count
+        
+        if filtertedSearchResult!.count > 200  {
+            return 200
+        }
+        
+        return filtertedSearchResult!.count
     }
     
     // reneder result cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultTableViewCell", for: indexPath) as? SearchResultTableViewCell
-
-        cell?.mainText.text = String(indexPath.row)
-
-        
+        let result = filtertedSearchResult![indexPath.row]
+        cell?.setResultCell(result: result)
         return cell!
+    }
+    
+    // called when one of the cells is clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("clicked")
+        
+        let result = self.filtertedSearchResult![indexPath.row]
+        if result.resultType == SearchResultType.station {
+            // TODO - OPEN STATION
+        } else {
+            let route = filtertedSearchResult![indexPath.row].route
+            let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as? RouteViewController)!
+            vc.route = route!.routeName
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 

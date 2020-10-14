@@ -20,6 +20,10 @@ extension UIView {
     func width(constant: CGFloat) {
         self.setConstraint(value: constant, attribute: .width)
     }
+    
+    func setBackgroundColor(color: UIColor) {
+        self.layer.backgroundColor = color.cgColor
+    }
 
     /// Method for removing current constraints from UIView.
     private func removeConstraint(attribute: NSLayoutConstraint.Attribute) {
