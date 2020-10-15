@@ -17,7 +17,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqh-IQ-Ayc" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKz-1Y-LVp">
                                 <rect key="frame" x="15" y="59" width="384" height="50"/>
@@ -122,22 +122,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3X-ih-hpC">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3X-ih-hpC" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-sf-jP6">
-                                <rect key="frame" x="184.66666666666666" y="437.66666666666669" width="45" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Dip-sf-jP6" firstAttribute="centerY" secondItem="4ji-XZ-NPo" secondAttribute="centerY" id="7EO-tl-D05"/>
                             <constraint firstItem="D3X-ih-hpC" firstAttribute="trailing" secondItem="Hz0-Q1-YxQ" secondAttribute="trailing" id="FWQ-Bi-VBD"/>
-                            <constraint firstItem="Dip-sf-jP6" firstAttribute="centerX" secondItem="4ji-XZ-NPo" secondAttribute="centerX" id="YZl-nI-dtZ"/>
                             <constraint firstItem="D3X-ih-hpC" firstAttribute="bottom" secondItem="Hz0-Q1-YxQ" secondAttribute="bottom" id="q7V-2C-vCe"/>
                             <constraint firstItem="D3X-ih-hpC" firstAttribute="leading" secondItem="Hz0-Q1-YxQ" secondAttribute="leading" id="th3-ii-kdf"/>
                             <constraint firstItem="D3X-ih-hpC" firstAttribute="top" secondItem="Hz0-Q1-YxQ" secondAttribute="top" id="yjO-bm-Pd4"/>
@@ -145,7 +137,7 @@
                         <viewLayoutGuide key="safeArea" id="Hz0-Q1-YxQ"/>
                     </view>
                     <connections>
-                        <outlet property="routeText" destination="Dip-sf-jP6" id="r4S-2J-CY2"/>
+                        <outlet property="mapView" destination="D3X-ih-hpC" id="gi8-8V-u8w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yLl-OC-l4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

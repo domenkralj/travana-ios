@@ -42,7 +42,8 @@ class RouteBottomSheetViewController: UIViewController {
         self.routeStationsTableView.dataSource = self
         self.routeStationsTableView.register(UINib(nibName: "RouteStationTableViewCell", bundle: nil), forCellReuseIdentifier: "RouteStationTableViewCell")
         
-        self.routeName.text = route!.routeName
+        // set route labels
+        self.routeName.text = route!.routeName + "     "    // spaces on the end separates the start of the label with the end (moving label)
         self.routeNumberText.text = route!.routeNumber
     }
     

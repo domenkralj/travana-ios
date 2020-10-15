@@ -20,5 +20,4 @@ class LppRoute: Decodable, Encodable {
     private enum CodingKeys : String, CodingKey {
         case tripId = "trip_id", routeId = "route_id", routeNumber = "route_number", routeName = "route_name", shortRouteName = "short_route_name", tripIntId = "trip_int_id"
     }
-    
 }

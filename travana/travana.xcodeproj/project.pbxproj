@@ -58,6 +58,8 @@
 		20847F402538B2BB00EFC157 /* MovingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F3F2538B2BB00EFC157 /* MovingLabel.swift */; };
 		20847F432538B4BC00EFC157 /* RouteStationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F412538B4BC00EFC157 /* RouteStationTableViewCell.swift */; };
 		20847F442538B4BC00EFC157 /* RouteStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20847F422538B4BC00EFC157 /* RouteStationTableViewCell.xib */; };
+		20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F452538CA9A00EFC157 /* LppStationArrival.swift */; };
+		20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F472538CBCA00EFC157 /* LppArrival.swift */; };
 		855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +118,8 @@
 		20847F3F2538B2BB00EFC157 /* MovingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingLabel.swift; sourceTree = "<group>"; };
 		20847F412538B4BC00EFC157 /* RouteStationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStationTableViewCell.swift; sourceTree = "<group>"; };
 		20847F422538B4BC00EFC157 /* RouteStationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteStationTableViewCell.xib; sourceTree = "<group>"; };
+		20847F452538CA9A00EFC157 /* LppStationArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppStationArrival.swift; sourceTree = "<group>"; };
+		20847F472538CBCA00EFC157 /* LppArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival.swift; sourceTree = "<group>"; };
 		CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.debug.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -412,6 +416,8 @@
 				20538FF8252F8FDF00EBD06A /* LppApiResponse.swift */,
 				20538FFA252F92AB00EBD06A /* LppStation.swift */,
 				20538FFE252F955E00EBD06A /* LppRoute.swift */,
+				20847F452538CA9A00EFC157 /* LppStationArrival.swift */,
+				20847F472538CBCA00EFC157 /* LppArrival.swift */,
 			);
 			path = LppApiObjects;
 			sourceTree = "<group>";
@@ -662,6 +668,7 @@
 				20518C8F25225AEF0006F190 /* Constants.swift in Sources */,
 				208201092537900A009F00C3 /* RouteViewController.swift in Sources */,
 				20518C53252250680006F190 /* HttpClient.swift in Sources */,
+				20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */,
 				2066F1AC252A4BA000DC221D /* DetoursViewController.swift in Sources */,
 				2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */,
 				2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */,
@@ -670,6 +677,7 @@
 				20518C77252257910006F190 /* Colors.swift in Sources */,
 				20518C71252256D70006F190 /* Date.swift in Sources */,
 				20847F3E2538A8AB00EFC157 /* RouteBottomSheetViewController.swift in Sources */,
+				20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */,
 				20518C7B252257CC0006F190 /* UIAlertController.swift in Sources */,
 				20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */,
 				20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */,

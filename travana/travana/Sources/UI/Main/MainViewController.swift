@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
         case collapsed
     }
     
-    var cardViewController:FavoriteNearbyStationsBottomSheetViewController!
+    var favoriteNearbyStationBottomSheetViewController:FavoriteNearbyStationsBottomSheetViewController!
     var visualEffectView:UIVisualEffectView!
     
     var cardHeight:CGFloat = 0
@@ -41,10 +41,10 @@ class MainViewController: UIViewController {
         do {
             // Set the map style by passing the URL of the local file.
             if let styleURL = Bundle.main.url(forResource: "google-maps-style", withExtension: "json") {
-            self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-        } else {
-            logger.error("Unable to find google-maps-style.json")
-        }
+                self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                logger.error("Unable to find google-maps-style.json")
+            }
         } catch {
             logger.error("One or more of the map styles failed to load. \(error)")
         }
@@ -80,25 +80,22 @@ class MainViewController: UIViewController {
         visualEffectView.frame = self.view.frame
         self.view.addSubview(visualEffectView)
         
-        cardViewController = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FavoriteNearbyStationsBottomSheetViewController")) as? FavoriteNearbyStationsBottomSheetViewController
-        self.addChild(cardViewController)
-        self.view.addSubview(cardViewController.view)
+        favoriteNearbyStationBottomSheetViewController = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FavoriteNearbyStationsBottomSheetViewController")) as? FavoriteNearbyStationsBottomSheetViewController
+        self.addChild(favoriteNearbyStationBottomSheetViewController)
+        self.view.addSubview(favoriteNearbyStationBottomSheetViewController.view)
         
-        cardViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
+        favoriteNearbyStationBottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
         
-        cardViewController.view.clipsToBounds = true
+        favoriteNearbyStationBottomSheetViewController.view.clipsToBounds = true
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.handleCardTap(recognzier:)))
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.handleCardPan(recognizer:)))
         
-        cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-        cardViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
+        favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
+        favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
         
         // enable user interaction with self.view
         self.visualEffectView.removeFromSuperview()
-        //self.cardViewController.view.removeFromSuperview()
-        //self.cardViewController.removeFromParent()
-        
         
     }
     
@@ -116,7 +113,7 @@ class MainViewController: UIViewController {
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
         case .changed:
-            let translation = recognizer.translation(in: self.cardViewController.handleArea)
+            let translation = recognizer.translation(in: self.favoriteNearbyStationBottomSheetViewController.handleArea)
             var fractionComplete = translation.y / cardHeight
             fractionComplete = cardVisible ? fractionComplete : -fractionComplete
             updateInteractiveTransition(fractionCompleted: fractionComplete)
@@ -133,9 +130,9 @@ class MainViewController: UIViewController {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
                 case .expanded:
-                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
+                    self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
                 case .collapsed:
-                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
+                    self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
                 }
             }
             

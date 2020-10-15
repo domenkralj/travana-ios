@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 // Screen used for showing route data
 class RouteViewController: UIViewController {
@@ -16,26 +17,34 @@ class RouteViewController: UIViewController {
         case collapsed
     }
 
-    public var route: LppRoute? = nil
-    private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
-
-    var cardViewController:RouteBottomSheetViewController!
+    var routeBottomSheetViewController:RouteBottomSheetViewController!
     var visualEffectView:UIVisualEffectView!
-    
-    var cardHeight:CGFloat = 0
-    let cardHandleAreaHeight:CGFloat = 120
-    
-    var cardVisible = false
-    var nextState:CardState {
-        return cardVisible ? .collapsed : .expanded
-    }
     
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrupted:CGFloat = 0
-
     
-    @IBOutlet weak var routeText: UILabel!
-    // when view is loaded.
+    var cardVisible = false
+    var nextState: CardState {
+        return cardVisible ? .collapsed : .expanded
+    }
+    
+    public var route: LppRoute? = nil
+    private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
+    private let lppApi: LppApi
+    
+    var cardHeight:CGFloat = 0
+    let cardHandleAreaHeight:CGFloat = 120
+
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let appData: TravanaAppDataContainer = app.getAppData()
+        self.lppApi = appData.getLppApi()
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +52,26 @@ class RouteViewController: UIViewController {
         if route == nil {
             self.logger.info("Opening route view controller without lpp route data")
             self.dismiss(animated: true, completion: nil)
+        }
+        
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "google-maps-style", withExtension: "json") {
+            self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+        } else {
+            logger.error("Unable to find google-maps-style.json")
+        }
+        } catch {
+            logger.error("One or more of the map styles failed to load. \(error)")
+        }
+        
+        self.lppApi.getArrivalsOnRoute(tripId: route!.tripId) {
+            (result) in
+            if result.success {
+                print(result.data)
+            } else {
+                print("Error")
+            }
         }
         
         self.setUpRouteStationBottomSheetViewController(route: route!)
@@ -72,20 +101,20 @@ class RouteViewController: UIViewController {
         visualEffectView.frame = self.view.frame
         self.view.addSubview(visualEffectView)
         
-        cardViewController = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteBottomSheetViewController")) as? RouteBottomSheetViewController
-        cardViewController.route = route
-        self.addChild(cardViewController)
-        self.view.addSubview(cardViewController.view)
+        routeBottomSheetViewController = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteBottomSheetViewController")) as? RouteBottomSheetViewController
+        routeBottomSheetViewController.route = route
+        self.addChild(routeBottomSheetViewController)
+        self.view.addSubview(routeBottomSheetViewController.view)
         
-        cardViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
+        routeBottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
         
-        cardViewController.view.clipsToBounds = true
+        routeBottomSheetViewController.view.clipsToBounds = true
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.handleCardTap(recognzier:)))
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.handleCardPan(recognizer:)))
         
-        cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-        cardViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
+        routeBottomSheetViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
+        routeBottomSheetViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
         
         // enable user interaction with self.view
         self.visualEffectView.removeFromSuperview()
@@ -106,7 +135,7 @@ class RouteViewController: UIViewController {
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
         case .changed:
-            let translation = recognizer.translation(in: self.cardViewController.handleArea)
+            let translation = recognizer.translation(in: self.routeBottomSheetViewController.handleArea)
             var fractionComplete = translation.y / cardHeight
             fractionComplete = cardVisible ? fractionComplete : -fractionComplete
             updateInteractiveTransition(fractionCompleted: fractionComplete)
@@ -123,9 +152,9 @@ class RouteViewController: UIViewController {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
                 case .expanded:
-                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
+                    self.routeBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
                 case .collapsed:
-                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
+                    self.routeBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
                 }
             }
             
