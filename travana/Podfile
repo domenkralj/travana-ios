@@ -12,4 +12,5 @@ target 'travana' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'SideMenu', "6.4.9" # Side menu (drawer)
+  pod 'MarqueeLabel' # Moving text
 end

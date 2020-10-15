@@ -102,8 +102,7 @@ class MainViewController: UIViewController {
         
     }
     
-    @objc
-    func handleCardTap(recognzier:UITapGestureRecognizer) {
+    @IBAction func handleCardTap(recognzier:UITapGestureRecognizer) {
         switch recognzier.state {
         case .ended:
             animateTransitionIfNeeded(state: nextState, duration: 0.9)
@@ -112,8 +111,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    @objc
-    func handleCardPan (recognizer:UIPanGestureRecognizer) {
+    @IBAction func handleCardPan (recognizer:UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
@@ -149,18 +147,6 @@ class MainViewController: UIViewController {
             frameAnimator.startAnimation()
             runningAnimations.append(frameAnimator)
             
-            
-            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
-                switch state {
-                case .expanded:
-                    self.cardViewController.view.layer.cornerRadius = 12
-                case .collapsed:
-                    self.cardViewController.view.layer.cornerRadius = 0
-                }
-            }
-            
-            cornerRadiusAnimator.startAnimation()
-            runningAnimations.append(cornerRadiusAnimator)
             
             let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {

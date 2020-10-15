@@ -147,6 +147,9 @@ class SearchViewController: UIViewController {
                 }
             }
         }
+        
+        // TODO - FILTER LIST, THE BEST RESUTLS ARE AT THE TOP
+        
         DispatchQueue.main.async {
             self.searchResultsTableView.reloadData()
         }
@@ -226,9 +229,10 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if result.resultType == SearchResultType.station {
             // TODO - OPEN STATION
         } else {
+            // pass route data to RouteViewController and open RouteViewController
             let route = filtertedSearchResult![indexPath.row].route
             let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as? RouteViewController)!
-            vc.route = route!.routeName
+            vc.route = route
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }

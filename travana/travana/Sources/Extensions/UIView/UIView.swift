@@ -24,6 +24,10 @@ extension UIView {
     func setBackgroundColor(color: UIColor) {
         self.layer.backgroundColor = color.cgColor
     }
+    
+    func setCornerRadius(cornerRadius: CGFloat) {
+        self.layer.cornerRadius = cornerRadius
+    }
 
     /// Method for removing current constraints from UIView.
     private func removeConstraint(attribute: NSLayoutConstraint.Attribute) {
