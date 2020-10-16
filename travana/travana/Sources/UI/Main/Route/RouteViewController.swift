@@ -36,6 +36,8 @@ class RouteViewController: UIViewController {
     let cardHandleAreaHeight:CGFloat = 120
 
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var centerOnLocationView: UIView!
+    @IBOutlet weak var centerOnLocationIcon: UIImageView!
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -48,6 +50,9 @@ class RouteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // create circle
+        self.centerOnLocationView.setCornerRadius(cornerRadius: 27)
+        
         // returs if lpp route data is nil
         if route == nil {
             self.logger.info("Opening route view controller without lpp route data")
@@ -57,10 +62,10 @@ class RouteViewController: UIViewController {
         do {
             // Set the map style by passing the URL of the local file.
             if let styleURL = Bundle.main.url(forResource: "google-maps-style", withExtension: "json") {
-            self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-        } else {
-            logger.error("Unable to find google-maps-style.json")
-        }
+                self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                logger.error("Unable to find google-maps-style.json")
+            }
         } catch {
             logger.error("One or more of the map styles failed to load. \(error)")
         }

@@ -1,0 +1,26 @@
+{
+  "images" : [
+    {
+      "filename" : "Hunt-595b40b75ba036ed117d7ac8 1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Hunt-595b40b75ba036ed117d7ac8 1 (1).png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Hunt-595b40b75ba036ed117d7ac8 1 (2).png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}
