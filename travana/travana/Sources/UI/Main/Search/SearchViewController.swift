@@ -11,8 +11,8 @@ import UIKit
 // Screen used for searching
 class SearchViewController: UIViewController {
 
-    private var searchResult: [SearchResultContainer]?
-    private var filtertedSearchResult: [SearchResultContainer]?
+    private var searchResult: [SearchResultDataContainer]?
+    private var filtertedSearchResult: [SearchResultDataContainer]?
     private let lppApi: LppApi
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "SearchViewController")
     
@@ -58,6 +58,18 @@ class SearchViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // set status bar font to white
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    // set status bar font to white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     private func retrieveStationsAndBusRoutes() {
         // set ui to loading
         DispatchQueue.main.async {
@@ -73,12 +85,12 @@ class SearchViewController: UIViewController {
                 
                 let stations = result.data!["stations"] as! [LppStation]
                 for station in stations {
-                    self.searchResult!.append(SearchResultContainer(station: station))
+                    self.searchResult!.append(SearchResultDataContainer(station: station))
                 }
                 
                 let routes = result.data!["routes"] as! [LppRoute]
                 for route in routes {
-                    self.searchResult!.append(SearchResultContainer(route: route))
+                    self.searchResult!.append(SearchResultDataContainer(route: route))
                 }
                 
                 // update ui and reload searchResultTableview

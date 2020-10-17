@@ -31,7 +31,7 @@ class SearchResultTableViewCell: UITableViewCell {
     }
     
     // set result cell (station or route)
-    public func setResultCell(result: SearchResultContainer){
+    public func setResultCell(result: SearchResultDataContainer){
         if result.resultType == SearchResultType.route {
             let route = result.route!
             self.busLineView.isHidden = false

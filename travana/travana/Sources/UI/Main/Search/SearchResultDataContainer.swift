@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchResultContainer {
+class SearchResultDataContainer {
     
     public var resultType: SearchResultType
     public var station: LppStation?

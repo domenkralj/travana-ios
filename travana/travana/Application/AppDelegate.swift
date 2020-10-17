@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable google maps service
         GMSServices.provideAPIKey("AIzaSyBt22cBHw9_9apll0gVgxjtKkWRJ8Mi_d8")
         
-        
+        // set loading screen
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = UIStoryboard(name: "Loading", bundle: nil).instantiateInitialViewController()!
         window!.makeKeyAndVisible()
@@ -63,6 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public func getAppData() -> TravanaAppDataContainer {
         return self.appData
     }
-
+    
 }
 

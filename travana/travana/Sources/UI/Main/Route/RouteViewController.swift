@@ -31,6 +31,7 @@ class RouteViewController: UIViewController {
     public var route: LppRoute? = nil
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
     private let lppApi: LppApi
+    private let REFRESH_RATE = 5000     //5 seconds
     
     var cardHeight:CGFloat = 0
     let cardHandleAreaHeight:CGFloat = 120
@@ -38,6 +39,10 @@ class RouteViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centerOnLocationView: UIView!
     @IBOutlet weak var centerOnLocationIcon: UIImageView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var tryAgainView: UIView!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -59,6 +64,7 @@ class RouteViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
         
+        // set Google maps - map design
         do {
             // Set the map style by passing the URL of the local file.
             if let styleURL = Bundle.main.url(forResource: "google-maps-style", withExtension: "json") {
@@ -70,15 +76,27 @@ class RouteViewController: UIViewController {
             logger.error("One or more of the map styles failed to load. \(error)")
         }
         
-        self.lppApi.getArrivalsOnRoute(tripId: route!.tripId) {
+        self.lppApi.getBusesAndArrivalsOnRoute(tripId: route!.tripId, routeGroupNumber: route!.routeNumber) {
             (result) in
             if result.success {
-                print(result.data)
+                print(result.data!.busesOnRoute)
+                print(result.data!.routeStationArrivals)
             } else {
-                print("Error")
+                print("Error both")
             }
         }
         
+        self.setUi(state: ScreenState.done)
+        
+        // start loading animation
+        self.loadingIndicator.startAnimating()
+        
+        // set ui to the views
+        self.errorView.setCornerRadius(cornerRadius: 20)
+        self.tryAgainView.setCornerRadius(cornerRadius: 17)
+        self.loadingView.setCornerRadius(cornerRadius: 17)
+        
+        // set route stations bottom sheet view
         self.setUpRouteStationBottomSheetViewController(route: route!)
     }
     
@@ -98,7 +116,25 @@ class RouteViewController: UIViewController {
         .lightContent
     }
     
-    func setUpRouteStationBottomSheetViewController(route: LppRoute) {
+    
+    private func setUi(state: ScreenState) {
+        switch state {
+        case ScreenState.loading:
+            self.loadingView.isHidden = false
+            self.errorView.isHidden = true
+            self.tryAgainView.isHidden = true
+        case ScreenState.done:
+            self.loadingView.isHidden = true
+            self.errorView.isHidden = true
+            self.tryAgainView.isHidden = true
+        case ScreenState.error:
+            self.loadingView.isHidden = true
+            self.errorView.isHidden = false
+            self.tryAgainView.isHidden = false
+        }
+    }
+    
+    private func setUpRouteStationBottomSheetViewController(route: LppRoute) {
         
         self.cardHeight = self.view.frame.height - 20
         
@@ -149,10 +185,13 @@ class RouteViewController: UIViewController {
         default:
             break
         }
-        
     }
     
-    func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
+    @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
+        // TODO - TRY AGAIN
+    }
+    
+    private func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
@@ -186,7 +225,7 @@ class RouteViewController: UIViewController {
         }
     }
     
-    func startInteractiveTransition(state:CardState, duration:TimeInterval) {
+    private func startInteractiveTransition(state:CardState, duration:TimeInterval) {
         if runningAnimations.isEmpty {
             animateTransitionIfNeeded(state: state, duration: duration)
         }
@@ -196,13 +235,13 @@ class RouteViewController: UIViewController {
         }
     }
     
-    func updateInteractiveTransition(fractionCompleted:CGFloat) {
+    private func updateInteractiveTransition(fractionCompleted:CGFloat) {
         for animator in runningAnimations {
             animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
         }
     }
     
-    func continueInteractiveTransition (){
+    private func continueInteractiveTransition (){
         for animator in runningAnimations {
             animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
         }
