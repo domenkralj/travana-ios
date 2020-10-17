@@ -62,6 +62,7 @@
 		20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F472538CBCA00EFC157 /* LppArrival.swift */; };
 		20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DDD253AEB2D0062A133 /* LppBus.swift */; };
 		20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */; };
+		20EA6DE4253B42850062A133 /* GMSMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DE3253B42850062A133 /* GMSMarker.swift */; };
 		855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,7 @@
 		20847F472538CBCA00EFC157 /* LppArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival.swift; sourceTree = "<group>"; };
 		20EA6DDD253AEB2D0062A133 /* LppBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppBus.swift; sourceTree = "<group>"; };
 		20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDataContainer.swift; sourceTree = "<group>"; };
+		20EA6DE3253B42850062A133 /* GMSMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSMarker.swift; sourceTree = "<group>"; };
 		CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.debug.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +255,7 @@
 		20518C67252256640006F190 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				20EA6DE2253B42620062A133 /* GoogleMaps */,
 				20518C8B25225AC50006F190 /* Table */,
 				20518C8825225AA10006F190 /* String */,
 				20518C8525225A4F0006F190 /* UIView */,
@@ -472,6 +475,14 @@
 				20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */,
 			);
 			path = Route;
+			sourceTree = "<group>";
+		};
+		20EA6DE2253B42620062A133 /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				20EA6DE3253B42850062A133 /* GMSMarker.swift */,
+			);
+			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
 		6B7EF75A15E2324E5911059B /* Frameworks */ = {
@@ -695,6 +706,7 @@
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,
 				20518C8725225A5F0006F190 /* UIView.swift in Sources */,
+				20EA6DE4253B42850062A133 /* GMSMarker.swift in Sources */,
 				2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */,
 				20518C66252256290006F190 /* UIUtils.swift in Sources */,
 			);

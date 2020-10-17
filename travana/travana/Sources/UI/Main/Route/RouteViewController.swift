@@ -76,18 +76,9 @@ class RouteViewController: UIViewController {
             logger.error("One or more of the map styles failed to load. \(error)")
         }
         
-        self.lppApi.getBusesAndArrivalsOnRoute(tripId: route!.tripId, routeGroupNumber: route!.routeNumber) {
-            (result) in
-            if result.success {
-                print(result.data!.busesOnRoute)
-                print(result.data!.routeStationArrivals)
-            } else {
-                print("Error both")
-            }
-        }
-        
-        self.setUi(state: ScreenState.done)
-        
+        // add compas to the map
+        self.mapView.settings.compassButton = true
+    
         // start loading animation
         self.loadingIndicator.startAnimating()
         
@@ -98,10 +89,25 @@ class RouteViewController: UIViewController {
         
         // set route stations bottom sheet view
         self.setUpRouteStationBottomSheetViewController(route: route!)
+        
+        // set ui to loading
+        self.setUi(state: ScreenState.loading)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // set camera to Ljublajna - default city
+        let ljubljana = GMSCameraPosition.camera(
+          withLatitude: 46.056946,
+          longitude: 14.505751,
+          zoom: 12
+        )
+        self.mapView.camera = ljubljana
+        
+        // retrieve data and set ui
+        // this function is called just one - when view is created
+        self.retrieveBusesAndArrivalsOnRoute()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +122,26 @@ class RouteViewController: UIViewController {
         .lightContent
     }
     
+    private func retrieveBusesAndArrivalsOnRoute() {
+        DispatchQueue.main.async() {
+            self.setUi(state: ScreenState.loading)
+        }
+        self.lppApi.getBusesAndArrivalsOnRoute(tripId: route!.tripId, routeGroupNumber: route!.routeNumber) {
+            (result) in
+            if result.success {
+                DispatchQueue.main.async() {
+                    self.setUi(state: ScreenState.done)
+                    self.drawRouteOnMap(stations: result.data!.routeStationArrivals, routeColor: UIColor.red)
+                }
+            } else {
+                DispatchQueue.main.async() {
+                    self.setUi(state: ScreenState.error)
+                }
+            }
+        }
+    }
     
+    // set ui depends on screen state
     private func setUi(state: ScreenState) {
         switch state {
         case ScreenState.loading:
@@ -134,9 +159,50 @@ class RouteViewController: UIViewController {
         }
     }
     
+    private func drawRouteOnMap(stations: [LppStationArrival], routeColor: UIColor) {
+        let routePath = GMSMutablePath()
+        var bounds = GMSCoordinateBounds()
+        
+        for station in stations {
+            let stationCoor = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
+            routePath.add(stationCoor)
+            bounds = bounds.includingCoordinate(stationCoor)
+            
+            let house = UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate)
+            let markerView = UIImageView(image: house)
+            markerView.tintColor = .red
+            
+            let marker = GMSMarker(position: stationCoor)
+            marker.title = "Hello World"
+            marker.iconView = markerView
+            marker.isFlat = true
+            marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            marker.map = mapView
+            
+            let house1 = UIImage(named: "ic_station_pin_marker_inner")!.withRenderingMode(.alwaysTemplate)
+            let markerView1 = UIImageView(image: house1)
+            markerView1.tintColor = UIColor.MAIN_GREY
+            
+            let marker1 = GMSMarker(position: stationCoor)
+            marker1.title = "Hello World"
+            marker1.iconView = markerView1
+            marker1.isFlat = true
+            marker1.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            marker1.map = mapView
+        }
+        let rectangle = GMSPolyline(path: routePath)
+        rectangle.strokeWidth = 6.0
+        rectangle.strokeColor = routeColor
+        rectangle.map = self.mapView
+        
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+        self.mapView.animate(with: update)
+        
+    }
+    
     private func setUpRouteStationBottomSheetViewController(route: LppRoute) {
         
-        self.cardHeight = self.view.frame.height - 20
+        self.cardHeight = self.view.frame.height - (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 20)
         
         visualEffectView = UIVisualEffectView()
         visualEffectView.frame = self.view.frame
@@ -187,8 +253,37 @@ class RouteViewController: UIViewController {
         }
     }
     
+    // called when center on location button is clicked
+    // check if location is availible, update map camera view
+    @IBAction func centerOnLocationButtonClicked(_ sender: Any) {
+        
+            let rectanglePath = GMSMutablePath()
+            rectanglePath.add(CLLocationCoordinate2D(latitude: 45.958971, longitude: 14.660834))
+            rectanglePath.add(CLLocationCoordinate2D(latitude: 45.976153, longitude: 14.609149))
+            rectanglePath.add(CLLocationCoordinate2D(latitude: 46.000484, longitude: 14.555777))
+            rectanglePath.add(CLLocationCoordinate2D(latitude: 46.053294, longitude: 14.507261))
+            let rectangle = GMSPolyline(path: rectanglePath)
+            rectangle.strokeWidth = 5.0
+            rectangle.strokeColor = .green
+            rectangle.map = self.mapView
+        
+        
+        var bounds = GMSCoordinateBounds()
+        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 45.958971, longitude: 14.660834))
+        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 45.976153, longitude: 14.609149))
+        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 46.000484, longitude: 14.555777))
+        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 46.053294, longitude: 14.507261))
+
+        print("updating camera")
+        DispatchQueue.main.async() {
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+            self.mapView.animate(with: update)
+        }
+    }
+    // called when try again button is clicked
+    // try to retrieve data again and update ui
     @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
-        // TODO - TRY AGAIN
+        self.retrieveBusesAndArrivalsOnRoute()
     }
     
     private func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {

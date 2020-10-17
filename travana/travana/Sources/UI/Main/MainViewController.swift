@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
     
     func setUpBottomSheetViewController() {
         
-        self.cardHeight = self.view.frame.height - 20
+        self.cardHeight = self.view.frame.height - (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 20)
         
         visualEffectView = UIVisualEffectView()
         visualEffectView.frame = self.view.frame
