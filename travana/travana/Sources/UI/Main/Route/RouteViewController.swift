@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 
 // Screen used for showing route data
-class RouteViewController: UIViewController {
+class RouteViewController: UIViewController{
     
     enum CardState {
         case expanded
@@ -29,9 +29,9 @@ class RouteViewController: UIViewController {
     }
     
     public var route: LppRoute? = nil
-    private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
     private let lppApi: LppApi
     private let REFRESH_RATE = 5000     //5 seconds
+    private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
     
     var cardHeight:CGFloat = 0
     let cardHandleAreaHeight:CGFloat = 120
@@ -131,7 +131,7 @@ class RouteViewController: UIViewController {
             if result.success {
                 DispatchQueue.main.async() {
                     self.setUi(state: ScreenState.done)
-                    self.drawRouteOnMap(stations: result.data!.routeStationArrivals, routeColor: UIColor.red)
+                    self.drawRouteOnMap(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
                 }
             } else {
                 DispatchQueue.main.async() {
@@ -160,42 +160,42 @@ class RouteViewController: UIViewController {
     }
     
     private func drawRouteOnMap(stations: [LppStationArrival], routeColor: UIColor) {
+        
         let routePath = GMSMutablePath()
         var bounds = GMSCoordinateBounds()
         
+        // create station markers
+        let stationMarkerView = UIImageView(image: UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate))
+        stationMarkerView.tintColor = routeColor
+        
+        let stationMarkerViewInner = UIImageView(image: UIImage(named: "ic_station_pin_marker_inner")!.withRenderingMode(.alwaysTemplate))
+        stationMarkerViewInner.tintColor = UIColor.MAIN_GREY
+        
+        // add markers and draw line between markers
         for station in stations {
             let stationCoor = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
             routePath.add(stationCoor)
             bounds = bounds.includingCoordinate(stationCoor)
             
-            let house = UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate)
-            let markerView = UIImageView(image: house)
-            markerView.tintColor = .red
+            let stationMarker = GMSMarker(position: stationCoor)
+            stationMarker.iconView = stationMarkerView
+            stationMarker.isFlat = true
+            stationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            stationMarker.map = mapView
             
-            let marker = GMSMarker(position: stationCoor)
-            marker.title = "Hello World"
-            marker.iconView = markerView
-            marker.isFlat = true
-            marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-            marker.map = mapView
-            
-            let house1 = UIImage(named: "ic_station_pin_marker_inner")!.withRenderingMode(.alwaysTemplate)
-            let markerView1 = UIImageView(image: house1)
-            markerView1.tintColor = UIColor.MAIN_GREY
-            
-            let marker1 = GMSMarker(position: stationCoor)
-            marker1.title = "Hello World"
-            marker1.iconView = markerView1
-            marker1.isFlat = true
-            marker1.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-            marker1.map = mapView
+            let stationMarkerInner = GMSMarker(position: stationCoor)
+            stationMarkerInner.title = station.name
+            stationMarkerInner.iconView = stationMarkerViewInner
+            stationMarkerInner.isFlat = true
+            stationMarkerInner.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            stationMarkerInner.map = mapView
         }
         let rectangle = GMSPolyline(path: routePath)
         rectangle.strokeWidth = 6.0
         rectangle.strokeColor = routeColor
         rectangle.map = self.mapView
         
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
         self.mapView.animate(with: update)
         
     }
@@ -256,29 +256,7 @@ class RouteViewController: UIViewController {
     // called when center on location button is clicked
     // check if location is availible, update map camera view
     @IBAction func centerOnLocationButtonClicked(_ sender: Any) {
-        
-            let rectanglePath = GMSMutablePath()
-            rectanglePath.add(CLLocationCoordinate2D(latitude: 45.958971, longitude: 14.660834))
-            rectanglePath.add(CLLocationCoordinate2D(latitude: 45.976153, longitude: 14.609149))
-            rectanglePath.add(CLLocationCoordinate2D(latitude: 46.000484, longitude: 14.555777))
-            rectanglePath.add(CLLocationCoordinate2D(latitude: 46.053294, longitude: 14.507261))
-            let rectangle = GMSPolyline(path: rectanglePath)
-            rectangle.strokeWidth = 5.0
-            rectangle.strokeColor = .green
-            rectangle.map = self.mapView
-        
-        
-        var bounds = GMSCoordinateBounds()
-        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 45.958971, longitude: 14.660834))
-        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 45.976153, longitude: 14.609149))
-        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 46.000484, longitude: 14.555777))
-        bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: 46.053294, longitude: 14.507261))
-
-        print("updating camera")
-        DispatchQueue.main.async() {
-            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-            self.mapView.animate(with: update)
-        }
+        // TODO - CENTER ON USER LOCATION
     }
     // called when try again button is clicked
     // try to retrieve data again and update ui

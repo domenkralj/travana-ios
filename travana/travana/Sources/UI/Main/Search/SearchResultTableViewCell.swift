@@ -18,10 +18,11 @@ class SearchResultTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // remove cell highlight color when clicked
+        self.selectionStyle = .none
         
         self.toCenterView.layer.cornerRadius = 13
-        
         self.busLineView.layer.cornerRadius = 13
     }
 

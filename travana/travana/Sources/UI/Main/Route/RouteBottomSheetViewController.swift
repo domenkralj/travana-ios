@@ -45,6 +45,7 @@ class RouteBottomSheetViewController: UIViewController {
         // set route labels
         self.routeName.text = route!.routeName + "     "    // spaces on the end separates the start of the label with the end (moving label)
         self.routeNumberText.text = route!.routeNumber
+        self.routeNumberView.setBackgroundColor(color: Colors.getColorFromString(string: route!.routeNumber))
     }
     
     // called when back button is clicked
