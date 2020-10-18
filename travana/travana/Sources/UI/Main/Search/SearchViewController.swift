@@ -235,8 +235,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     // called when one of the cells is clicked
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked")
-        
         let result = self.filtertedSearchResult![indexPath.row]
         if result.resultType == SearchResultType.station {
             // TODO - OPEN STATION

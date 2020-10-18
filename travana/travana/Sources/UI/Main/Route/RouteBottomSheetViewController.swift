@@ -12,6 +12,7 @@ import UIKit
 // It is used for showing stations and arrivals in the bus route
 class RouteBottomSheetViewController: UIViewController {
 
+    public var showJustStationName = false
     public var route: LppRoute? = nil
     public var stationArrivals: [LppStationArrival]? = nil
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteBottomSheetViewController")
@@ -41,6 +42,7 @@ class RouteBottomSheetViewController: UIViewController {
         
         // set routeStationsTableView and set data source for routeStationsTableView
         self.routeStationsTableView.dataSource = self
+        self.routeStationsTableView.delegate = self
         self.routeStationsTableView.register(UINib(nibName: "RouteStationTableViewCell", bundle: nil), forCellReuseIdentifier: "RouteStationTableViewCell")
         
         // set route labels
@@ -51,6 +53,14 @@ class RouteBottomSheetViewController: UIViewController {
     
     public func setStationsArrivals(stationArrivals: [LppStationArrival]) {
         self.stationArrivals = stationArrivals
+        self.showJustStationName = false
+        DispatchQueue.main.async() {
+            self.routeStationsTableView.reloadData()
+        }
+    }
+    
+    public func removeArrivals() {
+        self.showJustStationName = true
         DispatchQueue.main.async() {
             self.routeStationsTableView.reloadData()
         }
@@ -78,7 +88,19 @@ extension RouteBottomSheetViewController: UITableViewDataSource, UITableViewDele
     // render station arrivals cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let routeStationCell = self.routeStationsTableView.dequeueReusableCell(withIdentifier: "RouteStationTableViewCell", for: indexPath) as! RouteStationTableViewCell
-        routeStationCell.setCell(stationArrivals: stationArrivals![indexPath.row])
+        var stationPostion = StationPositon.middle
+        if indexPath.row == 0 {
+            stationPostion = StationPositon.first
+        } else if indexPath.row == stationArrivals!.count - 1 {
+            stationPostion = StationPositon.last
+        }
+        routeStationCell.setCell(stationArrivals: stationArrivals![indexPath.row], stationPostion: stationPostion, routeColor: Colors.getColorFromString(string: route!.routeNumber), showJustStationName: showJustStationName)
         return routeStationCell
+    }
+    
+    // called when one of the cells is clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("clicked")
+        // TODO OPEN STATION VIEW CONTROLLER
     }
 }

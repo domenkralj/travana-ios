@@ -18,11 +18,20 @@ class RouteStationTableViewCell: UITableViewCell {
     @IBOutlet weak var secondArrivalTimeContainer: UIView!
     @IBOutlet weak var secondArrivalTimeLiveIcon: UIImageView!
     
+    @IBOutlet weak var upperStationLineView: UIView!
+    @IBOutlet weak var stationDotView: UIView!
+    @IBOutlet weak var downStationDotView: UIView!
+    
     private let log: ConsoleLogger = LoggerFactory.getLogger(name: "RouteStationTableViewCell")
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // create circle
+        self.stationDotView.setCornerRadius(cornerRadius: 6)
+        
+        // remove cell highlight color when clicked
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,8 +40,34 @@ class RouteStationTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setCell(stationArrivals: LppStationArrival) {
+    public func setCell(stationArrivals: LppStationArrival, stationPostion: StationPositon, routeColor: UIColor, showJustStationName: Bool) {
+        
+        // set route color
+        self.upperStationLineView.setBackgroundColor(color: routeColor)
+        self.stationDotView.setBackgroundColor(color: routeColor)
+        self.downStationDotView.setBackgroundColor(color: routeColor)
+        
+        // set staion lines depends on the station position
+        if stationPostion == StationPositon.first {
+            self.upperStationLineView.isHidden = true
+            self.downStationDotView.isHidden = false
+        } else if stationPostion == StationPositon.last {
+            self.upperStationLineView.isHidden = false
+            self.downStationDotView.isHidden = true
+        } else {
+            self.upperStationLineView.isHidden = false
+            self.downStationDotView.isHidden = false
+        }
+        
+        // add station to the label
         self.stationNameText.text = stationArrivals.name
+        
+        // data is outdated - remove arrivals times
+        if showJustStationName {
+            self.firstArrivalTimeContainer.isHidden = true
+            self.secondArrivalTimeContainer.isHidden = true
+            return
+        }
         
         let arrivals = stationArrivals.arrivals
         
@@ -134,4 +169,8 @@ class RouteStationTableViewCell: UITableViewCell {
         self.secondArrivalTimeContainer.isHidden = true
     }
     
+}
+
+enum StationPositon {
+    case first, middle, last
 }

@@ -31,9 +31,11 @@ class RouteViewController: UIViewController{
     public var route: LppRoute? = nil
     private var screenState: ScreenState = ScreenState.done
     private var isRouteInitilized = false
+    private var requestFailedInRow = 0              // if 4 request failed in row (data is outdated for 40 seconds) - remove arrivals
     private var timer: Timer!
+    private let NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS = 4
     private let lppApi: LppApi
-    private let REFRESH_RATE = 5.0     //5 seconds
+    private let REFRESH_RATE = 10.0     // 10 seconds
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
     
     var cardHeight:CGFloat = 0
@@ -57,6 +59,9 @@ class RouteViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // create timer which tries to update bus arrivals and bus locations data every 5 seconds
+         self.timer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
         
         self.centerOnLocationView.setCornerRadius(cornerRadius: 27)
         
@@ -139,9 +144,6 @@ class RouteViewController: UIViewController{
                     self.drawRouteOnMap(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
                     self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
                 }
-                
-                // create timer which tries to update bus arrivals and bus locations data every 5 seconds
-                self.timer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
             } else {
                 self.isRouteInitilized = false
                 DispatchQueue.main.async() {
@@ -162,10 +164,15 @@ class RouteViewController: UIViewController{
                     }
                     // TODO UPDATE BUSES
                     self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
+                    self.requestFailedInRow = 0
                 }
             } else {
                 DispatchQueue.main.async() {
                     self.setUi(state: ScreenState.error)
+                }
+                self.requestFailedInRow = self.requestFailedInRow + 1
+                if self.requestFailedInRow >= self.NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS {
+                    self.routeBottomSheetViewController.removeArrivals()
                 }
             }
         }
