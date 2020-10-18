@@ -22,7 +22,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
     
-    private var tryAgainViewGesture: UITapGestureRecognizer?
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -50,9 +49,6 @@ class SearchViewController: UIViewController {
         
         //start animating loading
         self.loading.startAnimating()
-        
-        self.tryAgainViewGesture = UITapGestureRecognizer(target: self, action: #selector(tryAgainViewClicked))
-        self.tryAgainView.addGestureRecognizer(tryAgainViewGesture!)
         
         self.retrieveStationsAndBusRoutes()
         
@@ -194,10 +190,12 @@ class SearchViewController: UIViewController {
     }
     
     // called when try again view is clicked
-    @IBAction func tryAgainViewClicked() {
+    @IBAction func tryAgainViewClicked(_ sender: UIButton) {
+        // set ui to loading
         DispatchQueue.main.async {
             self.setUI(state: ScreenState.loading)
         }
+        // try to retieve data again
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             self.retrieveStationsAndBusRoutes()
         })

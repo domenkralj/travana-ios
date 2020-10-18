@@ -27,8 +27,7 @@
 		20518C8725225A5F0006F190 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C8625225A5F0006F190 /* UIView.swift */; };
 		20518C8A25225AAB0006F190 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C8925225AAB0006F190 /* String.swift */; };
 		20518C8D25225AD00006F190 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C8C25225AD00006F190 /* Table.swift */; };
-		20518C8F25225AEF0006F190 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C8E25225AEF0006F190 /* Constants.swift */; };
-		20518C9125225B040006F190 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C9025225B040006F190 /* K.swift */; };
+		20518C9125225B040006F190 /* Constatnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C9025225B040006F190 /* Constatnts.swift */; };
 		20518C9625225D0F0006F190 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20518C9825225D0F0006F190 /* Localizable.strings */; };
 		20518C9F2522616D0006F190 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C9E2522616D0006F190 /* MainViewController.swift */; };
 		20518CA1252261910006F190 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20518CA0252261910006F190 /* Main.storyboard */; };
@@ -92,8 +91,7 @@
 		20518C8625225A5F0006F190 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		20518C8925225AAB0006F190 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		20518C8C25225AD00006F190 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
-		20518C8E25225AEF0006F190 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		20518C9025225B040006F190 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		20518C9025225B040006F190 /* Constatnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constatnts.swift; sourceTree = "<group>"; };
 		20518C9725225D0F0006F190 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20518C9925225D2A0006F190 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20518C9E2522616D0006F190 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -178,8 +176,7 @@
 			children = (
 				20518C55252252160006F190 /* Error */,
 				20518C65252256290006F190 /* UIUtils.swift */,
-				20518C8E25225AEF0006F190 /* Constants.swift */,
-				20518C9025225B040006F190 /* K.swift */,
+				20518C9025225B040006F190 /* Constatnts.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -685,7 +682,6 @@
 				20518CA4252262D30006F190 /* LoadingViewController.swift in Sources */,
 				20847F432538B4BC00EFC157 /* RouteStationTableViewCell.swift in Sources */,
 				20518C8425225A2B0006F190 /* UIViewController.swift in Sources */,
-				20518C8F25225AEF0006F190 /* Constants.swift in Sources */,
 				208201092537900A009F00C3 /* RouteViewController.swift in Sources */,
 				20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */,
 				20518C53252250680006F190 /* HttpClient.swift in Sources */,
@@ -706,7 +702,7 @@
 				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,
 				20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */,
 				207EC14B253CB9EA00888B30 /* Lpp.swift in Sources */,
-				20518C9125225B040006F190 /* K.swift in Sources */,
+				20518C9125225B040006F190 /* Constatnts.swift in Sources */,
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,
 				20518C8725225A5F0006F190 /* UIView.swift in Sources */,

@@ -15,5 +15,22 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // set status bar font to white
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    // set status bar font to white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
+    // called when back button is clicked
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 

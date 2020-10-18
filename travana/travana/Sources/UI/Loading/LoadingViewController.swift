@@ -23,7 +23,7 @@ class LoadingViewController: UIViewController {
         super.viewDidLoad()
         // Open Main screen after DELAY
         DispatchQueue.main.asyncAfter(deadline: .now() + LoadingViewController.DELAY) {
-            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.mainViewControllerStoryboardId) as? MainViewController {
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
             }
