@@ -53,6 +53,7 @@
 		2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */; };
 		2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */; };
 		2068F4C625337A0500975226 /* SearchResultDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F4C525337A0500975226 /* SearchResultDataContainer.swift */; };
+		207EC14B253CB9EA00888B30 /* Lpp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207EC14A253CB9EA00888B30 /* Lpp.swift */; };
 		208201092537900A009F00C3 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208201082537900A009F00C3 /* RouteViewController.swift */; };
 		20847F3E2538A8AB00EFC157 /* RouteBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F3D2538A8AB00EFC157 /* RouteBottomSheetViewController.swift */; };
 		20847F402538B2BB00EFC157 /* MovingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F3F2538B2BB00EFC157 /* MovingLabel.swift */; };
@@ -116,6 +117,7 @@
 		2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		2068F4C525337A0500975226 /* SearchResultDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDataContainer.swift; sourceTree = "<group>"; };
+		207EC14A253CB9EA00888B30 /* Lpp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lpp.swift; sourceTree = "<group>"; };
 		208201082537900A009F00C3 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
 		20847F3D2538A8AB00EFC157 /* RouteBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBottomSheetViewController.swift; sourceTree = "<group>"; };
 		20847F3F2538B2BB00EFC157 /* MovingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingLabel.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				20847F452538CA9A00EFC157 /* LppStationArrival.swift */,
 				20847F472538CBCA00EFC157 /* LppArrival.swift */,
 				20EA6DDD253AEB2D0062A133 /* LppBus.swift */,
+				207EC14A253CB9EA00888B30 /* Lpp.swift */,
 			);
 			path = LppApiObjects;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */,
 				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,
 				20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */,
+				207EC14B253CB9EA00888B30 /* Lpp.swift in Sources */,
 				20518C9125225B040006F190 /* K.swift in Sources */,
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,

@@ -23,14 +23,24 @@
                                 <rect key="frame" x="0.0" y="0.0" width="75" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARRIVAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47q-Zk-Jop">
-                                        <rect key="frame" x="5" y="8.5" width="65" height="18"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <rect key="frame" x="7.5" y="8.5" width="60" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_live" translatesAutoresizingMaskIntoConstraints="NO" id="V7N-Lx-6rO">
+                                        <rect key="frame" x="67" y="0.0" width="8" height="8"/>
+                                        <color key="tintColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="8" id="32Q-ba-ZHP"/>
+                                            <constraint firstAttribute="width" constant="8" id="6R4-r8-Zgn"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="V7N-Lx-6rO" secondAttribute="trailing" id="09z-Zv-bPd"/>
                                     <constraint firstItem="47q-Zk-Jop" firstAttribute="centerX" secondItem="sXx-ZJ-neQ" secondAttribute="centerX" id="A6n-Uq-eYb"/>
+                                    <constraint firstItem="V7N-Lx-6rO" firstAttribute="top" secondItem="sXx-ZJ-neQ" secondAttribute="top" id="Jx8-fL-0T0"/>
                                     <constraint firstAttribute="width" constant="75" id="fhB-eB-tZF"/>
                                     <constraint firstItem="47q-Zk-Jop" firstAttribute="centerY" secondItem="sXx-ZJ-neQ" secondAttribute="centerY" id="vIx-iD-dp6"/>
                                     <constraint firstAttribute="height" constant="35" id="xiU-9B-yze"/>
@@ -39,18 +49,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L36-tc-eni">
                                 <rect key="frame" x="75" y="0.0" width="75" height="35"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="56 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltE-lm-nl6">
-                                        <rect key="frame" x="14" y="8.5" width="47.5" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltE-lm-nl6">
+                                        <rect key="frame" x="15" y="8.5" width="45" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="SoG-XU-jpk">
-                                        <rect key="frame" x="57" y="2" width="18" height="12"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_live" translatesAutoresizingMaskIntoConstraints="NO" id="SoG-XU-jpk">
+                                        <rect key="frame" x="67" y="0.0" width="8" height="8"/>
                                         <color key="tintColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="16.5" id="NWE-nb-qIc"/>
-                                            <constraint firstAttribute="width" constant="18" id="ZMh-PZ-PDf"/>
+                                            <constraint firstAttribute="height" constant="8" id="NWE-nb-qIc"/>
+                                            <constraint firstAttribute="width" constant="8" id="ZMh-PZ-PDf"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -81,10 +91,19 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="firstArrivalTimeContainer" destination="sXx-ZJ-neQ" id="cMY-Iw-44c"/>
+                <outlet property="firstArrivalTimeLiveIcon" destination="V7N-Lx-6rO" id="eZh-EB-dsN"/>
+                <outlet property="firstArrivalTimeText" destination="47q-Zk-Jop" id="Tyi-24-MNd"/>
+                <outlet property="secondArrivalTimeContainer" destination="L36-tc-eni" id="2ty-BP-SsC"/>
+                <outlet property="secondArrivalTimeLiveIcon" destination="SoG-XU-jpk" id="gZ5-lZ-whi"/>
+                <outlet property="secondArrivalTimeText" destination="ltE-lm-nl6" id="Pyn-e4-OnW"/>
+                <outlet property="stationNameText" destination="CKE-N3-l82" id="MWl-eS-vSe"/>
+            </connections>
             <point key="canvasLocation" x="187.68115942028987" y="158.70535714285714"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="wifi" catalog="system" width="128" height="92"/>
+        <image name="ic_live" width="32" height="32"/>
     </resources>
 </document>

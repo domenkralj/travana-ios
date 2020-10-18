@@ -29,8 +29,11 @@ class RouteViewController: UIViewController{
     }
     
     public var route: LppRoute? = nil
+    private var screenState: ScreenState = ScreenState.done
+    private var isRouteInitilized = false
+    private var timer: Timer!
     private let lppApi: LppApi
-    private let REFRESH_RATE = 5000     //5 seconds
+    private let REFRESH_RATE = 5.0     //5 seconds
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
     
     var cardHeight:CGFloat = 0
@@ -55,7 +58,6 @@ class RouteViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create circle
         self.centerOnLocationView.setCornerRadius(cornerRadius: 27)
         
         // returs if lpp route data is nil
@@ -122,6 +124,7 @@ class RouteViewController: UIViewController{
         .lightContent
     }
     
+    // retrieve bus route data and update ui - called just first time
     private func retrieveBusesAndArrivalsOnRoute() {
         DispatchQueue.main.async() {
             self.setUi(state: ScreenState.loading)
@@ -129,9 +132,36 @@ class RouteViewController: UIViewController{
         self.lppApi.getBusesAndArrivalsOnRoute(tripId: route!.tripId, routeGroupNumber: route!.routeNumber) {
             (result) in
             if result.success {
+                self.isRouteInitilized = true
                 DispatchQueue.main.async() {
                     self.setUi(state: ScreenState.done)
+                    // TODO - DRAW BUSSES
                     self.drawRouteOnMap(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
+                    self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
+                }
+                
+                // create timer which tries to update bus arrivals and bus locations data every 5 seconds
+                self.timer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
+            } else {
+                self.isRouteInitilized = false
+                DispatchQueue.main.async() {
+                    self.setUi(state: ScreenState.error)
+                }
+            }
+        }
+    }
+    
+    // update buses and arrivals data
+    @IBAction private func upadateBusesAndArrivalsOnRoute() {
+        self.lppApi.getBusesAndArrivalsOnRoute(tripId: route!.tripId, routeGroupNumber: route!.routeNumber) {
+            (result) in
+            if result.success {
+                DispatchQueue.main.async() {
+                    if self.screenState == ScreenState.error {
+                        self.setUi(state: ScreenState.done)
+                    }
+                    // TODO UPDATE BUSES
+                    self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
                 }
             } else {
                 DispatchQueue.main.async() {
@@ -148,14 +178,17 @@ class RouteViewController: UIViewController{
             self.loadingView.isHidden = false
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
+            self.screenState = ScreenState.loading
         case ScreenState.done:
             self.loadingView.isHidden = true
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
+            self.screenState = ScreenState.done
         case ScreenState.error:
             self.loadingView.isHidden = true
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
+            self.screenState = ScreenState.error
         }
     }
     
@@ -237,7 +270,7 @@ class RouteViewController: UIViewController{
     }
     
     
-    @IBAction func handleCardPan (recognizer:UIPanGestureRecognizer) {
+    @IBAction func handleCardPan(recognizer:UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
@@ -261,7 +294,12 @@ class RouteViewController: UIViewController{
     // called when try again button is clicked
     // try to retrieve data again and update ui
     @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
-        self.retrieveBusesAndArrivalsOnRoute()
+        // if route is already drawn just upadate bus locations data, otherwise retrieve data and update whole ui (route and arrivals)
+        if isRouteInitilized {
+            self.upadateBusesAndArrivalsOnRoute()
+        } else {
+            self.retrieveBusesAndArrivalsOnRoute()
+        }
     }
     
     private func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {

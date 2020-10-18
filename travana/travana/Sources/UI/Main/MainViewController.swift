@@ -204,3 +204,4 @@ class MainViewController: UIViewController {
 enum ScreenState {
     case error, done, loading
 }
+

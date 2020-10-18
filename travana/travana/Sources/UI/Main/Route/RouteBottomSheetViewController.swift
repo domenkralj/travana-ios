@@ -13,6 +13,7 @@ import UIKit
 class RouteBottomSheetViewController: UIViewController {
 
     public var route: LppRoute? = nil
+    public var stationArrivals: [LppStationArrival]? = nil
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteBottomSheetViewController")
     
     @IBOutlet weak var handleArea: UIView!
@@ -28,8 +29,8 @@ class RouteBottomSheetViewController: UIViewController {
         
         // returs if lpp route data is nil
         if route == nil {
-            self.logger.info("Opening route view controller without lpp route data")
-            self.dismiss(animated: true, completion: nil)
+            self.logger.info("Opening route view controller without lpp route data or stations data")
+            self.dismiss(animated: false, completion: nil)
         }
         
         // set corner radius to the holderImageView
@@ -48,6 +49,13 @@ class RouteBottomSheetViewController: UIViewController {
         self.routeNumberView.setBackgroundColor(color: Colors.getColorFromString(string: route!.routeNumber))
     }
     
+    public func setStationsArrivals(stationArrivals: [LppStationArrival]) {
+        self.stationArrivals = stationArrivals
+        DispatchQueue.main.async() {
+            self.routeStationsTableView.reloadData()
+        }
+    }
+    
     // called when back button is clicked
     @IBAction func backButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -59,12 +67,18 @@ class RouteBottomSheetViewController: UIViewController {
 
 extension RouteBottomSheetViewController: UITableViewDataSource, UITableViewDelegate {
     
+    // returns size of the stations tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 200
+        if stationArrivals == nil {
+            return 0
+        }
+        return stationArrivals!.count
     }
     
+    // render station arrivals cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let routeStationCell = self.routeStationsTableView.dequeueReusableCell(withIdentifier: "RouteStationTableViewCell", for: indexPath) as! RouteStationTableViewCell
+        routeStationCell.setCell(stationArrivals: stationArrivals![indexPath.row])
         return routeStationCell
     }
 }
