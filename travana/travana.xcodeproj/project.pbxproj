@@ -61,9 +61,9 @@
 		20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F452538CA9A00EFC157 /* LppStationArrival.swift */; };
 		20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F472538CBCA00EFC157 /* LppArrival.swift */; };
 		20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20E3318E253D9F4100991CE1 /* InfoPlist.strings */; };
+		20E33191253DEFC400991CE1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E33190253DEFC400991CE1 /* Utils.swift */; };
 		20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DDD253AEB2D0062A133 /* LppBus.swift */; };
 		20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */; };
-		20EA6DE4253B42850062A133 /* GMSMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DE3253B42850062A133 /* GMSMarker.swift */; };
 		855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */; };
 /* End PBXBuildFile section */
 
@@ -126,9 +126,9 @@
 		20847F472538CBCA00EFC157 /* LppArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival.swift; sourceTree = "<group>"; };
 		20E3318D253D9F4100991CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20E3318F253D9F4600991CE1 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		20E33190253DEFC400991CE1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20EA6DDD253AEB2D0062A133 /* LppBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppBus.swift; sourceTree = "<group>"; };
 		20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDataContainer.swift; sourceTree = "<group>"; };
-		20EA6DE3253B42850062A133 /* GMSMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSMarker.swift; sourceTree = "<group>"; };
 		CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.debug.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +180,7 @@
 				20518C55252252160006F190 /* Error */,
 				20518C65252256290006F190 /* UIUtils.swift */,
 				20518C9025225B040006F190 /* Constatnts.swift */,
+				20E33190253DEFC400991CE1 /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -258,7 +259,6 @@
 		20518C67252256640006F190 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				20EA6DE2253B42620062A133 /* GoogleMaps */,
 				20518C8B25225AC50006F190 /* Table */,
 				20518C8825225AA10006F190 /* String */,
 				20518C8525225A4F0006F190 /* UIView */,
@@ -481,14 +481,6 @@
 			path = Route;
 			sourceTree = "<group>";
 		};
-		20EA6DE2253B42620062A133 /* GoogleMaps */ = {
-			isa = PBXGroup;
-			children = (
-				20EA6DE3253B42850062A133 /* GMSMarker.swift */,
-			);
-			path = GoogleMaps;
-			sourceTree = "<group>";
-		};
 		6B7EF75A15E2324E5911059B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +675,7 @@
 				20847F402538B2BB00EFC157 /* MovingLabel.swift in Sources */,
 				20518C58252252330006F190 /* HttpError.swift in Sources */,
 				20518C81252259BD0006F190 /* UILabel.swift in Sources */,
+				20E33191253DEFC400991CE1 /* Utils.swift in Sources */,
 				20518C632522537A0006F190 /* Logger.swift in Sources */,
 				20518CA4252262D30006F190 /* LoadingViewController.swift in Sources */,
 				20847F432538B4BC00EFC157 /* RouteStationTableViewCell.swift in Sources */,
@@ -711,7 +704,6 @@
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,
 				20518C8725225A5F0006F190 /* UIView.swift in Sources */,
-				20EA6DE4253B42850062A133 /* GMSMarker.swift in Sources */,
 				2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */,
 				20518C66252256290006F190 /* UIUtils.swift in Sources */,
 			);

@@ -767,11 +767,11 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-lU-kp3">
-                                <rect key="frame" x="71" y="437" width="124" height="61"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-lU-kp3">
+                                <rect key="frame" x="145" y="441" width="124" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRc-Pk-Bav">
-                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="24"/>
+                                        <rect key="frame" x="14.666666666666657" y="0.0" width="94.666666666666671" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -798,10 +798,10 @@
                         <constraints>
                             <constraint firstItem="D2N-me-ODR" firstAttribute="centerY" secondItem="icT-aa-psB" secondAttribute="centerY" constant="-102" id="0hH-zt-h55"/>
                             <constraint firstItem="JWA-9t-h0w" firstAttribute="centerX" secondItem="icT-aa-psB" secondAttribute="centerX" id="25o-gL-bid"/>
+                            <constraint firstItem="5vy-lU-kp3" firstAttribute="centerX" secondItem="icT-aa-psB" secondAttribute="centerX" id="J0i-ZM-Dvr"/>
                             <constraint firstItem="A7d-wu-fUB" firstAttribute="leading" secondItem="Art-QG-Bld" secondAttribute="leading" id="N7z-mV-kPa"/>
-                            <constraint firstItem="5vy-lU-kp3" firstAttribute="leading" secondItem="Art-QG-Bld" secondAttribute="leading" constant="71" id="boI-IY-Mhr"/>
+                            <constraint firstItem="5vy-lU-kp3" firstAttribute="top" secondItem="D2N-me-ODR" secondAttribute="bottom" constant="45" id="Sxe-Yl-eBM"/>
                             <constraint firstItem="D2N-me-ODR" firstAttribute="centerX" secondItem="icT-aa-psB" secondAttribute="centerX" id="cPl-oz-up1"/>
-                            <constraint firstItem="5vy-lU-kp3" firstAttribute="top" secondItem="D2N-me-ODR" secondAttribute="bottom" constant="41" id="h2K-yh-g0u"/>
                             <constraint firstItem="A7d-wu-fUB" firstAttribute="top" secondItem="Art-QG-Bld" secondAttribute="top" id="sKD-OZ-wU7"/>
                             <constraint firstItem="A7d-wu-fUB" firstAttribute="trailing" secondItem="Art-QG-Bld" secondAttribute="trailing" id="vYo-vW-rB1"/>
                             <constraint firstItem="Art-QG-Bld" firstAttribute="bottom" secondItem="JWA-9t-h0w" secondAttribute="bottom" constant="20" id="yi2-rL-TVb"/>

@@ -11,7 +11,7 @@ import GoogleMaps
 import CoreLocation
 
 // Screen used for showing route data
-class RouteViewController: UIViewController {
+class RouteViewController: UIViewController, GMSMapViewDelegate {
     
     enum CardState {
         case expanded
@@ -30,16 +30,19 @@ class RouteViewController: UIViewController {
     }
     
     public var route: LppRoute? = nil
-    private var userLocationMarker: GMSMarker? = nil
+    private var busesOnRouteMarkers: [GMSMarker]? = nil
     private var screenState: ScreenState = ScreenState.done
     private var isRouteInitilized = false
     private var requestFailedInRow = 0              // if 4 request failed in row (data is outdated for 40 seconds) - remove arrivals
     private var updateLppDatatimer: Timer!
-    private let NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS = 4
+    private let NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS = 6
     private let lppApi: LppApi
-    private let REFRESH_RATE = 10.0     // 10 seconds
+    private let REFRESH_RATE = 5.0     // 5 seconds
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
     private let locationManager = CLLocationManager()
+    
+    // create bus marker icon
+    private let busMarkerView = UIImageView(image: UIImage(named: "ic_bus_marker")!.withRenderingMode(.alwaysOriginal))
     
     var cardHeight:CGFloat = 0
     let cardHandleAreaHeight:CGFloat = 120
@@ -86,8 +89,9 @@ class RouteViewController: UIViewController {
             logger.error("One or more of the map styles failed to load. \(error)")
         }
         
-        // add compas to the map
+        // set mapview
         self.mapView.settings.compassButton = true
+        self.mapView.delegate = self
     
         // start loading animation
         self.loadingIndicator.startAnimating()
@@ -159,7 +163,7 @@ class RouteViewController: UIViewController {
                 self.isRouteInitilized = true
                 DispatchQueue.main.async() {
                     self.setUi(state: ScreenState.done)
-                    // TODO - DRAW BUSSES
+                    self.setOrUpdateBuses(buses: result.data!.busesOnRoute)
                     self.drawRouteOnMapAndUpdateCamera(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
                     self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
                 }
@@ -181,7 +185,7 @@ class RouteViewController: UIViewController {
                     if self.screenState == ScreenState.error {
                         self.setUi(state: ScreenState.done)
                     }
-                    // TODO UPDATE BUSES
+                    self.setOrUpdateBuses(buses: result.data!.busesOnRoute)
                     self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
                     self.requestFailedInRow = 0
                 }
@@ -192,7 +196,91 @@ class RouteViewController: UIViewController {
                 self.requestFailedInRow = self.requestFailedInRow + 1
                 if self.requestFailedInRow >= self.NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS {
                     self.routeBottomSheetViewController.removeArrivals()
+                    
+                    print("claning resurces")
+                    print(self.busesOnRouteMarkers!.count)
+                    // remove busses on route, if data is outdated
+                    DispatchQueue.main.async() {
+                       for busMarker in self.busesOnRouteMarkers! {
+                            busMarker.map = nil
+                        }
+                    }
                 }
+            }
+        }
+    }
+    
+    // TODO - FUNCTION SHOULD BE SHORTHER
+    // update or set buses on route on the map
+    private func setOrUpdateBuses(buses: [LppBus]) {
+        
+        // if markers are not already initlized, initilize and add buses to the map
+        if self.busesOnRouteMarkers == nil {
+            self.busesOnRouteMarkers = []
+            for bus in buses {
+                // show buses just on selected trip, not all buses on the row
+                // show just buses on line (GROSUPLJE - BEŽIGRAND) and not all the buses on the lines (GROSUPLJE - BEŽIGRAD and BEŽIGRAD - GROSUPLJE)
+                if route!.tripId != bus.tripId {
+                    continue
+                }
+                let busCoor = CLLocationCoordinate2D(latitude: bus.latitude, longitude: bus.longitude)
+                let busMarker = GMSMarker(position: busCoor)
+                busMarker.iconView = self.busMarkerView
+                busMarker.userData = bus.busUnitId              // add bus id to the marker
+                busMarker.isFlat = true
+                busMarker.rotation = bus.cardinalDirection
+                busMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+                busMarker.zIndex = 1                            // show marker above other icons
+                busMarker.map = mapView
+                self.busesOnRouteMarkers!.append(busMarker)
+            }
+            return
+        }
+        
+        // remove markers which are outdated
+        for i in 0..<self.busesOnRouteMarkers!.count {
+            let busMarker = self.busesOnRouteMarkers![i]
+            var isBusMarkOutdated = true
+            for bus in buses {
+                if bus.busUnitId == (busMarker.userData as! String) {
+                    isBusMarkOutdated = false
+                    break
+                }
+            }
+            if isBusMarkOutdated {
+                // remove marker from map
+                busMarker.map = nil
+                self.busesOnRouteMarkers?.remove(at: i)
+            }
+         }
+        
+        // add new markers and move/update and animate old, but still valid buses
+        for bus in buses {
+            if route!.tripId != bus.tripId {
+                continue
+            }
+            
+            var isBusAlreadyShown = false
+            for busMarker in self.busesOnRouteMarkers! {
+                if bus.busUnitId == (busMarker.userData as! String) {
+                    // update bus
+                    isBusAlreadyShown = true
+                    busMarker.position = CLLocationCoordinate2D(latitude: bus.latitude, longitude: bus.longitude)
+                    busMarker.rotation = bus.cardinalDirection
+                    busMarker.map = mapView
+                }
+            }
+            // add bus marker if bus is not already shown
+            if !isBusAlreadyShown {
+                let busCoor = CLLocationCoordinate2D(latitude: bus.latitude, longitude: bus.longitude)
+                let busMarker = GMSMarker(position: busCoor)
+                busMarker.iconView = self.busMarkerView
+                busMarker.userData = bus.busUnitId              // add bus id to the marker
+                busMarker.isFlat = true
+                busMarker.rotation = bus.cardinalDirection
+                busMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+                busMarker.map = mapView
+                self.busesOnRouteMarkers!.append(busMarker)
             }
         }
     }
@@ -237,6 +325,9 @@ class RouteViewController: UIViewController {
             bounds = bounds.includingCoordinate(stationCoor)
             
             let stationMarker = GMSMarker(position: stationCoor)
+            stationMarker.title = station.name
+            stationMarker.userData = station.stationCode            // add station code tag to marker - read station code - when user click on marker
+            stationMarker.snippet = ""                              // empty snippet creates info window better
             stationMarker.iconView = stationMarkerView
             stationMarker.isFlat = true
             stationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
@@ -244,6 +335,8 @@ class RouteViewController: UIViewController {
             
             let stationMarkerInner = GMSMarker(position: stationCoor)
             stationMarkerInner.title = station.name
+            stationMarker.userData = station.stationCode            // add station code tag to marker - read station code - when user click on marker
+            stationMarkerInner.snippet = ""                         // empty snippet creates info window better
             stationMarkerInner.iconView = stationMarkerViewInner
             stationMarkerInner.isFlat = true
             stationMarkerInner.groundAnchor = CGPoint(x: 0.5, y: 0.5)
@@ -286,6 +379,17 @@ class RouteViewController: UIViewController {
         self.visualEffectView.removeFromSuperview()
     }
     
+    // called when info window of marker is clicked
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        return false
+    }
+    
+    // called when info window (window, which is shown when user clicks on the marker)
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        //TODO - OPEN STATION VIEW CONTROLLER
+        print("TODO - OPEN STATION VIEW CONTROLLER FOR STATION WITH: " + (marker.userData as! String))
+    }
+    
     @IBAction func handleCardTap(recognzier:UITapGestureRecognizer) {
         switch recognzier.state {
         case .ended:
@@ -311,28 +415,7 @@ class RouteViewController: UIViewController {
             break
         }
     }
-    
-    //private var stationMarker: GMSMarker? = nil
-    /*
-        if self.stationMarker != nil {
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(0.5)
-            stationMarker!.position = CLLocationCoordinate2D(latitude: 46.007894, longitude: 14.506931)
-            CATransaction.commit()
-            return
-        }
-        
-        // create station markers
-        let stationCoor = CLLocationCoordinate2D(latitude: 46.052056, longitude: 14.499154)
-        let stationMarkerView = UIImageView(image: UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate))
-        stationMarkerView.tintColor = UIColor.red
-    
-        self.stationMarker = GMSMarker(position: stationCoor)
-        self.stationMarker!.iconView = stationMarkerView
-        self.stationMarker!.isFlat = true
-        self.stationMarker!.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        self.stationMarker!.map = mapView*/
-    
+
     // called when center on location button is clicked
     // check if location is availible, update map camera view
     @IBAction func centerOnLocationButtonClicked(_ sender: Any) {
