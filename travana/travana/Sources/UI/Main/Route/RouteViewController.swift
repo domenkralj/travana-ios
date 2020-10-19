@@ -197,8 +197,6 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
                 if self.requestFailedInRow >= self.NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS {
                     self.routeBottomSheetViewController.removeArrivals()
                     
-                    print("claning resurces")
-                    print(self.busesOnRouteMarkers!.count)
                     // remove busses on route, if data is outdated
                     DispatchQueue.main.async() {
                        for busMarker in self.busesOnRouteMarkers! {

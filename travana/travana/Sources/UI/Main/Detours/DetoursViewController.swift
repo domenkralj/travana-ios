@@ -28,7 +28,7 @@ class DetoursViewController: UIViewController {
         .lightContent
     }
     
-    @IBAction func close(_ sender: Any) {
+    @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
