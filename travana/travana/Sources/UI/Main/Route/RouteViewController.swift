@@ -8,9 +8,10 @@
 
 import UIKit
 import GoogleMaps
+import CoreLocation
 
 // Screen used for showing route data
-class RouteViewController: UIViewController{
+class RouteViewController: UIViewController {
     
     enum CardState {
         case expanded
@@ -29,14 +30,16 @@ class RouteViewController: UIViewController{
     }
     
     public var route: LppRoute? = nil
+    private var userLocationMarker: GMSMarker? = nil
     private var screenState: ScreenState = ScreenState.done
     private var isRouteInitilized = false
     private var requestFailedInRow = 0              // if 4 request failed in row (data is outdated for 40 seconds) - remove arrivals
-    private var timer: Timer!
+    private var updateLppDatatimer: Timer!
     private let NUMBERS_OF_FAILED_REQUEST_BEFORE_REMOVE_ARRIVALS = 4
     private let lppApi: LppApi
     private let REFRESH_RATE = 10.0     // 10 seconds
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteViewController")
+    private let locationManager = CLLocationManager()
     
     var cardHeight:CGFloat = 0
     let cardHandleAreaHeight:CGFloat = 120
@@ -60,8 +63,8 @@ class RouteViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create timer which tries to update bus arrivals and bus locations data every 5 seconds
-         self.timer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
+        // create timer which tries to update bus arrivals and bus locations data every 10 seconds
+         self.updateLppDatatimer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
         
         self.centerOnLocationView.setCornerRadius(cornerRadius: 27)
         
@@ -99,6 +102,7 @@ class RouteViewController: UIViewController{
         
         // set ui to loading
         self.setUi(state: ScreenState.loading)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -111,6 +115,21 @@ class RouteViewController: UIViewController{
           zoom: 12
         )
         self.mapView.camera = ljubljana
+        
+        // if location services are availible show location on map
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    self.mapView.isMyLocationEnabled = false
+                case .authorizedAlways, .authorizedWhenInUse:
+                    self.mapView.isMyLocationEnabled = true
+                default:
+                    self.mapView.isMyLocationEnabled = false
+            }
+        } else {
+            // Location services are not enabled
+            self.mapView.isMyLocationEnabled = false
+        }
         
         // retrieve data and set ui
         // this function is called just one - when view is created
@@ -141,7 +160,7 @@ class RouteViewController: UIViewController{
                 DispatchQueue.main.async() {
                     self.setUi(state: ScreenState.done)
                     // TODO - DRAW BUSSES
-                    self.drawRouteOnMap(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
+                    self.drawRouteOnMapAndUpdateCamera(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
                     self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
                 }
             } else {
@@ -199,7 +218,7 @@ class RouteViewController: UIViewController{
         }
     }
     
-    private func drawRouteOnMap(stations: [LppStationArrival], routeColor: UIColor) {
+    private func drawRouteOnMapAndUpdateCamera(stations: [LppStationArrival], routeColor: UIColor) {
         
         let routePath = GMSMutablePath()
         var bounds = GMSCoordinateBounds()
@@ -293,10 +312,43 @@ class RouteViewController: UIViewController{
         }
     }
     
+    //private var stationMarker: GMSMarker? = nil
+    /*
+        if self.stationMarker != nil {
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(0.5)
+            stationMarker!.position = CLLocationCoordinate2D(latitude: 46.007894, longitude: 14.506931)
+            CATransaction.commit()
+            return
+        }
+        
+        // create station markers
+        let stationCoor = CLLocationCoordinate2D(latitude: 46.052056, longitude: 14.499154)
+        let stationMarkerView = UIImageView(image: UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate))
+        stationMarkerView.tintColor = UIColor.red
+    
+        self.stationMarker = GMSMarker(position: stationCoor)
+        self.stationMarker!.iconView = stationMarkerView
+        self.stationMarker!.isFlat = true
+        self.stationMarker!.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+        self.stationMarker!.map = mapView*/
+    
     // called when center on location button is clicked
     // check if location is availible, update map camera view
     @IBAction func centerOnLocationButtonClicked(_ sender: Any) {
-        // TODO - CENTER ON USER LOCATION
+        // if location is enabled, center map camera on location or ask for location
+        if mapView.isMyLocationEnabled {
+            let location: CLLocationCoordinate2D? = self.locationManager.location?.coordinate
+            if location != nil {
+                self.mapView.animate(to: GMSCameraPosition.camera(withLatitude: location!.latitude, longitude: location!.longitude, zoom: 16.0))
+            } else {
+                // Do nothing - maybe show toast, that user location is not availible
+            }
+        } else {
+            // try to ask for user location
+            // ask for location use in foreground
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
     // called when try again button is clicked
     // try to retrieve data again and update ui

@@ -18,6 +18,18 @@ class LoadingViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // set status bar font to white
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    // set status bar font to white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     /// when view is loaded.
     override func viewDidLoad() {
         super.viewDidLoad()

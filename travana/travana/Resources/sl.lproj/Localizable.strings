@@ -1,5 +1,7 @@
-"app_name" = "travana slo";
+"app_name" = "Travana";
 "by_authors" = "Avtorja Domen Kralj, Žiga Leskovec";
+"info_mail" = "info@travana.si";
+"contact_us" = "Kontakt";
 "minutes_(3_min)" = "Minute (3 min)";
 "hours_(14_35)" = "Ure (14:35)";
 "how_to_show_arrival_time" = "Način prikaza prihoda";

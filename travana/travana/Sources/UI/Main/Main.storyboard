@@ -714,7 +714,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="settings"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="info"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
@@ -727,7 +727,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Domen Kralj, Žiga Leskovec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-9t-h0w">
-                                <rect key="frame" x="89" y="821" width="236" height="21"/>
+                                <rect key="frame" x="89.333333333333329" y="821.66666666666663" width="235.33333333333337" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -735,18 +735,73 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="by_authors"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="travana_logo" translatesAutoresizingMaskIntoConstraints="NO" id="AYV-XT-R56">
-                                <rect key="frame" x="226" y="334" width="132" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Q7z-pW-If2"/>
-                                    <constraint firstAttribute="width" constant="130" id="aJC-oh-Lwk"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="D2N-me-ODR">
+                                <rect key="frame" x="71" y="296" width="272.33333333333331" height="100"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="72A-H8-hQp">
+                                        <rect key="frame" x="0.0" y="11.666666666666686" width="162.33333333333334" height="76.666666666666671"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Travana" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub4-2r-XXa">
+                                                <rect key="frame" x="0.0" y="0.0" width="162.33333333333334" height="56.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="47"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="app_name"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8T-GP-0Tj">
+                                                <rect key="frame" x="65.666666666666657" y="56.333333333333321" width="96.666666666666657" height="20.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="travana_logo" translatesAutoresizingMaskIntoConstraints="NO" id="AYV-XT-R56">
+                                        <rect key="frame" x="172.33333333333334" y="0.0" width="100.00000000000003" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Q7z-pW-If2"/>
+                                            <constraint firstAttribute="width" constant="100" id="aJC-oh-Lwk"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-lU-kp3">
+                                <rect key="frame" x="71" y="437" width="124" height="61"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRc-Pk-Bav">
+                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="contact_us"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICq-fs-Wtq">
+                                        <rect key="frame" x="0.0" y="27" width="124" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" red="0.84705882349999995" green="0.1019607843" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="info@travana.si"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="info_mail"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="contactButtonClicked:" destination="uGe-g0-157" eventType="touchUpInside" id="G9k-6L-r1B"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="D2N-me-ODR" firstAttribute="centerY" secondItem="icT-aa-psB" secondAttribute="centerY" constant="-102" id="0hH-zt-h55"/>
                             <constraint firstItem="JWA-9t-h0w" firstAttribute="centerX" secondItem="icT-aa-psB" secondAttribute="centerX" id="25o-gL-bid"/>
                             <constraint firstItem="A7d-wu-fUB" firstAttribute="leading" secondItem="Art-QG-Bld" secondAttribute="leading" id="N7z-mV-kPa"/>
+                            <constraint firstItem="5vy-lU-kp3" firstAttribute="leading" secondItem="Art-QG-Bld" secondAttribute="leading" constant="71" id="boI-IY-Mhr"/>
+                            <constraint firstItem="D2N-me-ODR" firstAttribute="centerX" secondItem="icT-aa-psB" secondAttribute="centerX" id="cPl-oz-up1"/>
+                            <constraint firstItem="5vy-lU-kp3" firstAttribute="top" secondItem="D2N-me-ODR" secondAttribute="bottom" constant="41" id="h2K-yh-g0u"/>
                             <constraint firstItem="A7d-wu-fUB" firstAttribute="top" secondItem="Art-QG-Bld" secondAttribute="top" id="sKD-OZ-wU7"/>
                             <constraint firstItem="A7d-wu-fUB" firstAttribute="trailing" secondItem="Art-QG-Bld" secondAttribute="trailing" id="vYo-vW-rB1"/>
                             <constraint firstItem="Art-QG-Bld" firstAttribute="bottom" secondItem="JWA-9t-h0w" secondAttribute="bottom" constant="20" id="yi2-rL-TVb"/>

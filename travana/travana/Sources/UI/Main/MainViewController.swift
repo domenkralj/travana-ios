@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import SideMenu
+import CoreLocation
  
 // ViewController used for controlling all container views of the main application
 class MainViewController: UIViewController {
@@ -23,6 +24,7 @@ class MainViewController: UIViewController {
     
     var cardHeight:CGFloat = 0
     let cardHandleAreaHeight:CGFloat = 150
+    private let locationManager = CLLocationManager()
     
     var cardVisible = false
     var nextState:CardState {
@@ -54,6 +56,10 @@ class MainViewController: UIViewController {
         
         // set up bottom sheet favorite, nearby station
         setUpBottomSheetViewController()
+        
+        // ask for location use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

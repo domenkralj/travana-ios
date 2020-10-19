@@ -32,5 +32,18 @@ class InfoViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // called when contact button is clicked
+    @IBAction func contactButtonClicked(_ sender: UIButton) {
+        // open email
+        let email = "info_mail".localized
+        if let url = URL(string: "mailto:\(email)") {
+          if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+          } else {
+            UIApplication.shared.openURL(url)
+          }
+        }
+    }
 }
 

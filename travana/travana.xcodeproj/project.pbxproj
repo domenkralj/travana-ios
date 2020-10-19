@@ -60,6 +60,7 @@
 		20847F442538B4BC00EFC157 /* RouteStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20847F422538B4BC00EFC157 /* RouteStationTableViewCell.xib */; };
 		20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F452538CA9A00EFC157 /* LppStationArrival.swift */; };
 		20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F472538CBCA00EFC157 /* LppArrival.swift */; };
+		20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20E3318E253D9F4100991CE1 /* InfoPlist.strings */; };
 		20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DDD253AEB2D0062A133 /* LppBus.swift */; };
 		20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */; };
 		20EA6DE4253B42850062A133 /* GMSMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DE3253B42850062A133 /* GMSMarker.swift */; };
@@ -123,6 +124,8 @@
 		20847F422538B4BC00EFC157 /* RouteStationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteStationTableViewCell.xib; sourceTree = "<group>"; };
 		20847F452538CA9A00EFC157 /* LppStationArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppStationArrival.swift; sourceTree = "<group>"; };
 		20847F472538CBCA00EFC157 /* LppArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival.swift; sourceTree = "<group>"; };
+		20E3318D253D9F4100991CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		20E3318F253D9F4600991CE1 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20EA6DDD253AEB2D0062A133 /* LppBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppBus.swift; sourceTree = "<group>"; };
 		20EA6DE0253AF2710062A133 /* RouteDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDataContainer.swift; sourceTree = "<group>"; };
 		20EA6DE3253B42850062A133 /* GMSMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSMarker.swift; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 			children = (
 				2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */,
 				20518C3025224F910006F190 /* Info.plist */,
+				20E3318E253D9F4100991CE1 /* InfoPlist.strings */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -574,6 +578,7 @@
 				2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */,
 				20518C2C25224F910006F190 /* Assets.xcassets in Resources */,
 				2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */,
+				20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */,
 				2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,6 +727,15 @@
 				20518C9925225D2A0006F190 /* sl */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		20E3318E253D9F4100991CE1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20E3318D253D9F4100991CE1 /* en */,
+				20E3318F253D9F4600991CE1 /* sl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
