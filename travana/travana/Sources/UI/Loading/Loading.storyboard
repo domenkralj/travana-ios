@@ -42,11 +42,31 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="authors"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bZv-yI-EG3">
+                                <rect key="frame" x="130.5" y="536" width="153" height="66.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In callaboration with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nz-kB-28k">
+                                        <rect key="frame" x="0.0" y="0.0" width="153" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_lpp_logo" translatesAutoresizingMaskIntoConstraints="NO" id="C25-DS-01x">
+                                        <rect key="frame" x="31.5" y="28.5" width="90" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="aKk-sL-4hY"/>
+                                            <constraint firstAttribute="height" constant="38" id="vit-SA-czU"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176470588234" green="0.14509803921568626" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bZv-yI-EG3" firstAttribute="top" secondItem="sxI-fc-GLx" secondAttribute="bottom" constant="95" id="5BQ-ic-mas"/>
                             <constraint firstItem="sxI-fc-GLx" firstAttribute="centerY" secondItem="bTM-It-Ax9" secondAttribute="centerY" constant="-57" id="Bm8-3l-xvY"/>
                             <constraint firstItem="oHQ-AL-aGH" firstAttribute="centerX" secondItem="bTM-It-Ax9" secondAttribute="centerX" id="eRn-70-yVL"/>
+                            <constraint firstItem="bZv-yI-EG3" firstAttribute="centerX" secondItem="bTM-It-Ax9" secondAttribute="centerX" id="gNf-ln-DYA"/>
                             <constraint firstItem="7Kv-p3-ABI" firstAttribute="bottom" secondItem="oHQ-AL-aGH" secondAttribute="bottom" constant="25" id="upF-r2-m5n"/>
                             <constraint firstItem="sxI-fc-GLx" firstAttribute="centerX" secondItem="bTM-It-Ax9" secondAttribute="centerX" id="ywu-0v-fvz"/>
                         </constraints>
@@ -59,6 +79,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_lpp_logo" width="300" height="67"/>
         <image name="travana_logo" width="98" height="98"/>
     </resources>
 </document>

@@ -60,6 +60,9 @@
 		20847F442538B4BC00EFC157 /* RouteStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20847F422538B4BC00EFC157 /* RouteStationTableViewCell.xib */; };
 		20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F452538CA9A00EFC157 /* LppStationArrival.swift */; };
 		20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F472538CBCA00EFC157 /* LppArrival.swift */; };
+		20DC5002253EBB09008214F0 /* DetourTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */; };
+		20DC5003253EBB09008214F0 /* DetourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */; };
+		20DC5005253EFDC6008214F0 /* LppDetourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */; };
 		20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20E3318E253D9F4100991CE1 /* InfoPlist.strings */; };
 		20E33191253DEFC400991CE1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E33190253DEFC400991CE1 /* Utils.swift */; };
 		20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DDD253AEB2D0062A133 /* LppBus.swift */; };
@@ -124,6 +127,9 @@
 		20847F422538B4BC00EFC157 /* RouteStationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteStationTableViewCell.xib; sourceTree = "<group>"; };
 		20847F452538CA9A00EFC157 /* LppStationArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppStationArrival.swift; sourceTree = "<group>"; };
 		20847F472538CBCA00EFC157 /* LppArrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival.swift; sourceTree = "<group>"; };
+		20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetourTableViewCell.swift; sourceTree = "<group>"; };
+		20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetourTableViewCell.xib; sourceTree = "<group>"; };
+		20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppDetourInfo.swift; sourceTree = "<group>"; };
 		20E3318D253D9F4100991CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20E3318F253D9F4600991CE1 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20E33190253DEFC400991CE1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -430,6 +436,7 @@
 				20847F472538CBCA00EFC157 /* LppArrival.swift */,
 				20EA6DDD253AEB2D0062A133 /* LppBus.swift */,
 				207EC14A253CB9EA00888B30 /* Lpp.swift */,
+				20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */,
 			);
 			path = LppApiObjects;
 			sourceTree = "<group>";
@@ -438,6 +445,8 @@
 			isa = PBXGroup;
 			children = (
 				2066F1AB252A4BA000DC221D /* DetoursViewController.swift */,
+				20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */,
+				20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */,
 			);
 			path = Detours;
 			sourceTree = "<group>";
@@ -571,6 +580,7 @@
 				20518C2C25224F910006F190 /* Assets.xcassets in Resources */,
 				2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */,
 				20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */,
+				20DC5003253EBB09008214F0 /* DetourTableViewCell.xib in Resources */,
 				2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,6 +701,7 @@
 				2066F1B1252A4CE300DC221D /* SettingsViewController.swift in Sources */,
 				20518C77252257910006F190 /* Colors.swift in Sources */,
 				20518C71252256D70006F190 /* Date.swift in Sources */,
+				20DC5002253EBB09008214F0 /* DetourTableViewCell.swift in Sources */,
 				20847F3E2538A8AB00EFC157 /* RouteBottomSheetViewController.swift in Sources */,
 				20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */,
 				20518C7B252257CC0006F190 /* UIAlertController.swift in Sources */,
@@ -700,6 +711,7 @@
 				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,
 				20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */,
 				207EC14B253CB9EA00888B30 /* Lpp.swift in Sources */,
+				20DC5005253EFDC6008214F0 /* LppDetourInfo.swift in Sources */,
 				20518C9125225B040006F190 /* Constatnts.swift in Sources */,
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,

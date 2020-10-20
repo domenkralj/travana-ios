@@ -15,6 +15,7 @@ class LppApi {
     private static let STATIONS_DETAILS_LINK = "https://data.lpp.si/api/station/station-details"
     private static let ARRIVALS_ON_ROUTE_LINK = "https://data.lpp.si/api/route/arrivals-on-route"
     private static let BUSES_ON_ROUTE_LINK = "https://data.lpp.si/api/bus/buses-on-route"
+    private static let LPP_DETOURS_INFO = "https://www.lpp.si/javni-prevoz/obvozi"
     
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "LppApi")
     private let httpClient: HttpClient
@@ -231,6 +232,118 @@ class LppApi {
                 return
             }
         }
+    }
+    
+    public func getDetoursInfo(callback: @escaping (Response<[LppDetourInfo]>) -> ()) {
+        
+        var detours: [LppDetourInfo]? = nil
+        
+        self.httpClient.getRequest(urlStr: LppApi.LPP_DETOURS_INFO, params: nil, headers: nil) { [weak self] (error, response) in
+        guard let self = self else { return }
+            
+            if error != nil {
+                let errorMessage = "Error retrieving detours info, error: \(error!)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            if response != nil {
+                do {
+                    detours = try self.getDetoursFromHtml(htmlString: response!)
+                    if detours == nil {
+                        let errorMessage = "Error retrieving detours info, cannot extract detours from html string"
+                        self.logger.error(errorMessage)
+                        let error = RequestError.RequestFailedException(errorMessage)
+                        callback(Response.failure(error: error))
+                        return
+                    }
+                    callback(Response.success(data: detours!))
+                } catch let Error {
+                    let errorMessage = "Error retrieving detours info parsing json to object failed: \(Error)"
+                    self.logger.error(errorMessage)
+                    let error = RequestError.RequestFailedException(errorMessage)
+                    callback(Response.failure(error: error))
+                    return
+                }
+            } else {
+                let errorMessage = "Error retrieving detours info, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+    }
+    
+    public func getDetoursFromHtml(htmlString: String) throws -> [LppDetourInfo]? {
+        
+        var s = htmlString
+        
+        let main_html_word = "views-field views-field-nothing";
+        let main_html_word_title = "content__box--title";
+        let main_html_word_time = "content__box--date";
+        
+        var detours: [LppDetourInfo] = []
+        
+        while s.contains(find: main_html_word) && s.contains(find: main_html_word_title) {
+            s = s.substring(fromIndex: s.index(of: main_html_word)! + main_html_word.count)
+            s = s.substring(fromIndex: s.index(of: main_html_word_title)! + main_html_word_title.count)
+            
+            let index = s.index(of: "href")
+            if index == nil {
+                return nil
+            }
+            s = s.substring(fromIndex: index!)
+            
+            let index2 = s.index(of: "href")
+            if index2 == nil {
+                return nil
+            }
+            let index3 = s.index(of: ">")
+            if index3 == nil {
+                return nil
+            }
+            let href = s.substring(fromIndex: index2! + 6, toIndex: index3! - 1)
+            let index4 = s.index(of: href)
+            if index4 == nil {
+                return nil
+            }
+            s = s.substring(fromIndex: index4! + href.count)
+
+            let index5 = s.index(of: ">")
+            if index5 == nil {
+                return nil
+            }
+            let index6 = s.index(of: "<")
+            if index6 == nil {
+                return nil
+            }
+            let title = s.substring(fromIndex: index5! + 1, toIndex: index6!)
+
+            let index7 = s.index(of: title)
+            if index7 == nil {
+                return nil
+            }
+            s = s.substring(fromIndex: index7! + title.count)
+            let index8 = s.index(of: main_html_word_time)
+            if index8 == nil {
+                return nil
+            }
+            s = s.substring(fromIndex: index8! + main_html_word_title.count + 1)
+
+            let index9 = s.index(of: "<")
+            if index9 == nil {
+                return nil
+            }
+            let date = s.substring(fromIndex: 0, toIndex: index9!)
+
+            let df = LppDetourInfo(title: title, date: date, moreDataUrl: href)
+
+            detours.append(df)
+        }
+        return detours
     }
     
 }

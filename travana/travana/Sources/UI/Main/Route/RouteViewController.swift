@@ -66,9 +66,6 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create timer which tries to update bus arrivals and bus locations data every 10 seconds
-         self.updateLppDatatimer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
-        
         self.centerOnLocationView.setCornerRadius(cornerRadius: 27)
         
         // returs if lpp route data is nil
@@ -145,6 +142,14 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         
         // set status bar font to white
         setNeedsStatusBarAppearanceUpdate()
+        
+        // create timer which tries to update bus arrivals and bus locations data every 10 seconds
+        self.startUpadatingTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // stop timer
+        self.stopUpdatingTimer()
     }
     
     // set status bar font to white
@@ -236,6 +241,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         }
         
         // remove markers which are outdated
+        var removeIndexes: [Int] = []
         for i in 0..<self.busesOnRouteMarkers!.count {
             let busMarker = self.busesOnRouteMarkers![i]
             var isBusMarkOutdated = true
@@ -248,9 +254,12 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             if isBusMarkOutdated {
                 // remove marker from map
                 busMarker.map = nil
-                self.busesOnRouteMarkers?.remove(at: i)
+                removeIndexes.append(i)
             }
          }
+        for index in removeIndexes {
+            self.busesOnRouteMarkers?.remove(at: index)
+        }
         
         // add new markers and move/update and animate old, but still valid buses
         for bus in buses {
@@ -281,6 +290,15 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
                 self.busesOnRouteMarkers!.append(busMarker)
             }
         }
+    }
+    
+    private func startUpadatingTimer() {
+        self.updateLppDatatimer = Timer.scheduledTimer(timeInterval: self.REFRESH_RATE, target: self, selector: #selector(self.upadateBusesAndArrivalsOnRoute), userInfo: nil, repeats: true)
+    }
+    
+    private func stopUpdatingTimer() {
+        self.updateLppDatatimer?.invalidate()
+        self.updateLppDatatimer = nil
     }
     
     // set ui depends on screen state

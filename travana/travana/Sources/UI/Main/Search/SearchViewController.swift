@@ -44,8 +44,8 @@ class SearchViewController: UIViewController {
         self.searchResultsTableView.register(UINib(nibName: "SearchResultTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchResultTableViewCell")
 
         // set ui to the error and tru again view
-        self.errorView.layer.cornerRadius = 15
-        self.tryAgainView.layer.cornerRadius = 10
+        self.errorView.layer.cornerRadius = 20
+        self.tryAgainView.layer.cornerRadius = 15
         
         //start animating loading
         self.loading.startAnimating()

@@ -76,6 +76,7 @@ class RouteStationTableViewCell: UITableViewCell {
             self.firstArrivalTimeContainer.isHidden = true
             self.secondArrivalTimeContainer.isHidden = false
             self.secondArrivalTimeLiveIcon.isHidden = true
+            self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
             self.secondArrivalTimeText.text = "/"
             return
         }
@@ -103,9 +104,11 @@ class RouteStationTableViewCell: UITableViewCell {
             switch arrival.type {
             case Lpp.PREDICTED:
                 self.secondArrivalTimeText.text = String(arrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = false
             case Lpp.SCHEDULED:
                 self.secondArrivalTimeText.text = String(arrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = true
             case Lpp.APPROACHING_STATION:
                 self.secondArrivalTimeLiveIcon.isHidden = true
@@ -126,9 +129,11 @@ class RouteStationTableViewCell: UITableViewCell {
             switch firstArrival.type {
             case Lpp.PREDICTED:
                 self.firstArrivalTimeText.text = String(firstArrival.etaMin) + " " + "min".localized
+                self.firstArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.firstArrivalTimeLiveIcon.isHidden = false
             case Lpp.SCHEDULED:
                 self.firstArrivalTimeText.text = String(firstArrival.etaMin) + " " + "min".localized
+                self.firstArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.firstArrivalTimeLiveIcon.isHidden = true
             case Lpp.APPROACHING_STATION:
                 self.firstArrivalTimeLiveIcon.isHidden = true
@@ -145,9 +150,11 @@ class RouteStationTableViewCell: UITableViewCell {
             switch secondArrival.type {
             case Lpp.PREDICTED:
                 self.secondArrivalTimeText.text = String(secondArrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = false
             case Lpp.SCHEDULED:
                 self.secondArrivalTimeText.text = String(secondArrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = true
             case Lpp.APPROACHING_STATION:
                 self.secondArrivalTimeLiveIcon.isHidden = true

@@ -33,6 +33,15 @@ extension String {
       return prefix(1).uppercased() + self.lowercased().dropFirst()
     }
     
+   //Fucntion to get the index of a particular string
+    func index(of target: String) -> Int? {
+        if let range = self.range(of: target) {
+            return self.distance(from: startIndex, to: range.lowerBound)
+        } else {
+            return nil
+        }
+    }
+    
     subscript (r: Range<Int>) -> String {
         let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
                                             upper: min(length, max(0, r.upperBound))))
