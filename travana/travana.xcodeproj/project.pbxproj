@@ -63,6 +63,8 @@
 		20DC5002253EBB09008214F0 /* DetourTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */; };
 		20DC5003253EBB09008214F0 /* DetourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */; };
 		20DC5005253EFDC6008214F0 /* LppDetourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */; };
+		20DC5007253F5D87008214F0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5006253F5D87008214F0 /* WebViewController.swift */; };
+		20DC500A253F675C008214F0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DC5009253F675C008214F0 /* WebKit.framework */; };
 		20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20E3318E253D9F4100991CE1 /* InfoPlist.strings */; };
 		20E33191253DEFC400991CE1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E33190253DEFC400991CE1 /* Utils.swift */; };
 		20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA6DDD253AEB2D0062A133 /* LppBus.swift */; };
@@ -130,6 +132,8 @@
 		20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetourTableViewCell.swift; sourceTree = "<group>"; };
 		20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetourTableViewCell.xib; sourceTree = "<group>"; };
 		20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppDetourInfo.swift; sourceTree = "<group>"; };
+		20DC5006253F5D87008214F0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		20DC5009253F675C008214F0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		20E3318D253D9F4100991CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20E3318F253D9F4600991CE1 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20E33190253DEFC400991CE1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20DC500A253F675C008214F0 /* WebKit.framework in Frameworks */,
 				855AC220E6EC09C083CFBE41 /* Pods_travana.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +402,7 @@
 		20518C9D252261310006F190 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				20DC5008253F5D93008214F0 /* Web */,
 				2082010725378FDE009F00C3 /* Route */,
 				2066F1AF252A4CCF00DC221D /* Info */,
 				2066F1AE252A4CC700DC221D /* Settings */,
@@ -490,9 +496,18 @@
 			path = Route;
 			sourceTree = "<group>";
 		};
+		20DC5008253F5D93008214F0 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				20DC5006253F5D87008214F0 /* WebViewController.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		6B7EF75A15E2324E5911059B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				20DC5009253F675C008214F0 /* WebKit.framework */,
 				0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */,
 			);
 			name = Frameworks;
@@ -716,6 +731,7 @@
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,
 				20518C8725225A5F0006F190 /* UIView.swift in Sources */,
+				20DC5007253F5D87008214F0 /* WebViewController.swift in Sources */,
 				2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */,
 				20518C66252256290006F190 /* UIUtils.swift in Sources */,
 			);

@@ -342,7 +342,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             
             let stationMarker = GMSMarker(position: stationCoor)
             stationMarker.title = station.name
-            stationMarker.userData = station.stationCode            // add station code tag to marker - read station code - when user click on marker
+            stationMarker.userData = String(station.stationCode)    // add station code tag to marker - read station code - when user click on marker
             stationMarker.snippet = ""                              // empty snippet creates info window better
             stationMarker.iconView = stationMarkerView
             stationMarker.isFlat = true
@@ -351,7 +351,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             
             let stationMarkerInner = GMSMarker(position: stationCoor)
             stationMarkerInner.title = station.name
-            stationMarker.userData = station.stationCode            // add station code tag to marker - read station code - when user click on marker
+            stationMarker.userData = String(station.stationCode)    // add station code tag to marker - read station code - when user click on marker
             stationMarkerInner.snippet = ""                         // empty snippet creates info window better
             stationMarkerInner.iconView = stationMarkerViewInner
             stationMarkerInner.isFlat = true
@@ -394,16 +394,12 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         // enable user interaction with self.view
         self.visualEffectView.removeFromSuperview()
     }
-    
-    // called when info window of marker is clicked
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        return false
-    }
-    
+        
     // called when info window (window, which is shown when user clicks on the marker)
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         //TODO - OPEN STATION VIEW CONTROLLER
-        print("TODO - OPEN STATION VIEW CONTROLLER FOR STATION WITH: " + (marker.userData as! String))
+        print(marker.userData)
+        print("TODO - OPEN STATION VIEW CONTROLLER FOR STATION WITH: " + (marker.userData as? String ?? "user data is nil"))
     }
     
     @IBAction func handleCardTap(recognzier:UITapGestureRecognizer) {

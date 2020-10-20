@@ -74,7 +74,16 @@ class MainNavigationDrawerViewController: UIViewController {
     }
     
     @IBAction func newsViewClicked() {
-        // TODO OPEN - LPP WEBSIDE
+        let urlString = Constants.LPP_WEBSIDE_NEWS_LINK
+        if let url = URL(string: urlString) {
+            let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WebViewController") as? WebViewController)!
+            vc.url = url
+            vc.webTitle = urlString
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            UIUtils.showToast(controller: self, message: "something_went_wrong_cannot_open_news", seconds: 3)
+        }
     }
     
     @IBAction func settingsViewClicked() {

@@ -104,6 +104,25 @@ class DetoursViewController: UIViewController {
         }
     }
     
+    private func openWebView(url: URL, webTitle: String?) {
+        let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WebViewController") as? WebViewController)!
+        vc.url = url
+        if webTitle != nil {
+            vc.webTitle = webTitle!
+        }
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    // called when open lpp detours button is clicked
+    @IBAction func openLppDetousButtonClicked(_ sender: UIButton) {
+        let urlString = Constants.LPP_WEBSIDE_DETOURS_LINK
+        if let url = URL(string: urlString) {
+            self.openWebView(url: url, webTitle: urlString)
+        }
+    }
+    
+    // called when back button is pressed
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -141,7 +160,16 @@ extension DetoursViewController: UITableViewDataSource, UITableViewDelegate {
     
     // called when one of the cells is clicked
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO OPEN WEB
-        print("TODO - OPEN DETOUR VIEW")
+        
+        let detour = self.detours![indexPath.row]
+        print(detour.moreDataUrl)
+        
+        let urlString = Constants.LPP_WEBSIDE_LINK + detour.moreDataUrl
+        
+        if let url = URL(string: urlString) {
+            self.openWebView(url: url, webTitle: urlString)
+        } else {
+            UIUtils.showToast(controller: self, message: "canot_open_detailed_data_about_detour".localized, seconds: 2.5)
+        }
     }
 }
