@@ -36,6 +36,7 @@ class InfoViewController: UIViewController {
     // called when contact button is clicked
     @IBAction func contactButtonClicked(_ sender: UIButton) {
         // open email
+        // TODO - CHECK FOR ALTERNATIVES
         let email = "info_mail".localized
         if let url = URL(string: "mailto:\(email)") {
           if #available(iOS 10.0, *) {

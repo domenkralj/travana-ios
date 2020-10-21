@@ -349,14 +349,16 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             stationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
             stationMarker.map = mapView
             
+            
             let stationMarkerInner = GMSMarker(position: stationCoor)
             stationMarkerInner.title = station.name
-            stationMarker.userData = String(station.stationCode)    // add station code tag to marker - read station code - when user click on marker
+            stationMarkerInner.userData = String(station.stationCode)    // add station code tag to marker - read station code - when user click on marker
             stationMarkerInner.snippet = ""                         // empty snippet creates info window better
             stationMarkerInner.iconView = stationMarkerViewInner
             stationMarkerInner.isFlat = true
             stationMarkerInner.groundAnchor = CGPoint(x: 0.5, y: 0.5)
             stationMarkerInner.map = mapView
+            
         }
         let rectangle = GMSPolyline(path: routePath)
         rectangle.strokeWidth = 6.0

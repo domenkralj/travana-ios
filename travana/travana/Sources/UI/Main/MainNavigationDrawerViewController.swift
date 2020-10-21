@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Main navigation drawer
 class MainNavigationDrawerViewController: UIViewController {
 
     @IBOutlet weak var detoursView: UIView!
@@ -68,7 +69,7 @@ class MainNavigationDrawerViewController: UIViewController {
     }
     
     @IBAction func detoursViewClicked() {
-        let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "DetoursViewController") as? DetoursViewController)!
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "DetoursViewController") as! DetoursViewController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
@@ -76,7 +77,7 @@ class MainNavigationDrawerViewController: UIViewController {
     @IBAction func newsViewClicked() {
         let urlString = Constants.LPP_WEBSIDE_NEWS_LINK
         if let url = URL(string: urlString) {
-            let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WebViewController") as? WebViewController)!
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
             vc.url = url
             vc.webTitle = urlString
             vc.modalPresentationStyle = .fullScreen
@@ -87,13 +88,13 @@ class MainNavigationDrawerViewController: UIViewController {
     }
     
     @IBAction func settingsViewClicked() {
-        let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController)!
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func infoViewClicked() {
-        let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InfoViewController") as? InfoViewController)!
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }

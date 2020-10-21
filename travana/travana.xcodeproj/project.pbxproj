@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2021B1232540BDDA00F0A4CE /* StationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021B1222540BDDA00F0A4CE /* StationViewController.swift */; };
 		20518C2325224F900006F190 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C2225224F900006F190 /* AppDelegate.swift */; };
 		20518C2525224F900006F190 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20518C2425224F900006F190 /* SceneDelegate.swift */; };
 		20518C2C25224F910006F190 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20518C2B25224F910006F190 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		0B26BB0D4F81D14F591FFF10 /* Pods_travana.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_travana.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travana.release.xcconfig"; path = "Target Support Files/Pods-travana/Pods-travana.release.xcconfig"; sourceTree = "<group>"; };
+		2021B1222540BDDA00F0A4CE /* StationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationViewController.swift; sourceTree = "<group>"; };
 		20518C1F25224F900006F190 /* travana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = travana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20518C2225224F900006F190 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20518C2425224F900006F190 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2021B1212540BA6800F0A4CE /* Station */ = {
+			isa = PBXGroup;
+			children = (
+				2021B1222540BDDA00F0A4CE /* StationViewController.swift */,
+			);
+			path = Station;
+			sourceTree = "<group>";
+		};
 		20518C1625224F900006F190 = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +412,7 @@
 		20518C9D252261310006F190 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2021B1212540BA6800F0A4CE /* Station */,
 				20DC5008253F5D93008214F0 /* Web */,
 				2082010725378FDE009F00C3 /* Route */,
 				2066F1AF252A4CCF00DC221D /* Info */,
@@ -704,6 +715,7 @@
 				20518C632522537A0006F190 /* Logger.swift in Sources */,
 				20518CA4252262D30006F190 /* LoadingViewController.swift in Sources */,
 				20847F432538B4BC00EFC157 /* RouteStationTableViewCell.swift in Sources */,
+				2021B1232540BDDA00F0A4CE /* StationViewController.swift in Sources */,
 				20518C8425225A2B0006F190 /* UIViewController.swift in Sources */,
 				208201092537900A009F00C3 /* RouteViewController.swift in Sources */,
 				20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */,

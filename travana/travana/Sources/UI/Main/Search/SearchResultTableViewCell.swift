@@ -22,8 +22,8 @@ class SearchResultTableViewCell: UITableViewCell {
         // remove cell highlight color when clicked
         self.selectionStyle = .none
         
-        self.toCenterView.layer.cornerRadius = 13
-        self.busLineView.layer.cornerRadius = 13
+        self.toCenterView.setCornerRadius(cornerRadius: 13)
+        self.busLineView.setCornerRadius(cornerRadius: 13)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
