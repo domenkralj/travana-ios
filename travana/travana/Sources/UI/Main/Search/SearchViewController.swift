@@ -235,11 +235,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let result = self.filtertedSearchResult![indexPath.row]
         if result.resultType == SearchResultType.station {
-            // TODO - OPEN STATION
+            // pass route data to StationViewController and open StationViewController
+            let station = filtertedSearchResult![indexPath.row].station
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
+            vc.station = station
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         } else {
             // pass route data to RouteViewController and open RouteViewController
             let route = filtertedSearchResult![indexPath.row].route
-            let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as? RouteViewController)!
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as! RouteViewController
             vc.route = route
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)

@@ -29,7 +29,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         return cardVisible ? .collapsed : .expanded
     }
     
-    public var route: LppRoute? = nil
+    public var route: LppRoute!
     private var busesOnRouteMarkers: [GMSMarker]? = nil
     private var screenState: ScreenState = ScreenState.done
     private var isRouteInitilized = false

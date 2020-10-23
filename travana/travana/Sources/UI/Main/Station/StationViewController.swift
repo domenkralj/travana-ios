@@ -12,14 +12,27 @@ import UIKit
 class StationViewController: UIViewController, StationPageViewControllerListener {
     
     private static let TO_CENTER_VIEW_WIDTH = 70
+    
+    public var station: LppStation!
+    public var routesOnStation: [LppRouteOnStation]? = nil
     private var isStationInFavorites = false
     private var stationPageViewController: StationPageViewController!
     private var screenType: StationScreenType = StationScreenType.arrivals
+    private var lppApi: LppApi
     
     @IBOutlet weak var toCenterView: UIView!
     @IBOutlet weak var addToFavoritesButton: UIButton!
     @IBOutlet weak var pageLineView: UIView!
     @IBOutlet weak var pageLineViewConstraintLeftoSafeArea: NSLayoutConstraint!
+    @IBOutlet weak var stationNameText: UILabel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let appData: TravanaAppDataContainer = app.getAppData()
+        self.lppApi = appData.getLppApi()
+        
+        super.init(coder: aDecoder)
+    }
     
     // when view is loaded.
     override func viewDidLoad() {
@@ -35,10 +48,14 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         // protcol which is called every time when page view controller is swiped (not set by buttons)
         self.stationPageViewController.stationPageViewControllerListener = self
         
+        // set station name text
+        self.stationNameText.text = self.station.name
+        
+        // set station to center view
+        self.setToCenterView(show: station.refId.toInt() % 2 == 0)
+        
         // TODO - CHECK IF STATION IS FAVORITES
         // IF YES SET isStationInFavorites
-        
-        self.setToCenterView(show: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

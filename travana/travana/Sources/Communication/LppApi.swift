@@ -16,6 +16,7 @@ class LppApi {
     private static let ARRIVALS_ON_ROUTE_LINK = "https://data.lpp.si/api/route/arrivals-on-route"
     private static let BUSES_ON_ROUTE_LINK = "https://data.lpp.si/api/bus/buses-on-route"
     private static let LPP_DETOURS_INFO = "https://www.lpp.si/javni-prevoz/obvozi"
+    private static let ROUTES_ON_STATION_LINK = "https://data.lpp.si/api/station/routes-on-station"
     
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "LppApi")
     private let httpClient: HttpClient
@@ -46,31 +47,30 @@ class LppApi {
                 return
             }
             
-            
-            if response != nil {
-                do {
-                    routes = try self.decoder.decode(LppApiResponse<Array<LppRoute>>.self, from: Data(response!.utf8)).data
-                    if isOneRequestSuccessful {
-                        let routesAndStationsData = ["routes": routes!, "stations": stations!] as [String : Any]
-                        callback(Response.success(data: routesAndStationsData))
-                        return
-                    } else {
-                        isOneRequestSuccessful = true
-                    }
-                } catch let parseError {
-                    let errorMessage = "Error retrieving routes data, parsing json to object failed: \(parseError)"
-                    self.logger.error(errorMessage)
-                    let error = RequestError.RequestFailedException(errorMessage)
-                    callback(Response.failure(error: error))
-                    return
-                }
-            } else {
+            if response == nil {
                 let errorMessage = "Error retrieving routes data, response is null"
                 self.logger.error(errorMessage)
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))
                 return
             }
+            do {
+                routes = try self.decoder.decode(LppApiResponse<Array<LppRoute>>.self, from: Data(response!.utf8)).data
+                if isOneRequestSuccessful {
+                    let routesAndStationsData = ["routes": routes!, "stations": stations!] as [String : Any]
+                    callback(Response.success(data: routesAndStationsData))
+                    return
+                } else {
+                    isOneRequestSuccessful = true
+                }
+            } catch let parseError {
+                let errorMessage = "Error retrieving routes data, parsing json to object failed: \(parseError)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
             // retrieve stations data
             //------------------------------------------------------------
             
@@ -85,29 +85,27 @@ class LppApi {
                     return
                 }
                 
-                
-                if response != nil {
-                    do {
-                        stations = try self.decoder.decode(LppApiResponse<Array<LppStation>>.self, from: Data(response!.utf8)).data
-                        if isOneRequestSuccessful {
-                            let routesAndStationsData = ["routes": routes!, "stations": stations!] as [String : Any]
-                            callback(Response.success(data: routesAndStationsData))
-                            return
-                        } else {
-                            isOneRequestSuccessful = true
-                        }
-                    } catch let parseError {
-                        let errorMessage = "Error retrieving routes data, parsing json to object failed: \(parseError)"
-                        self.logger.error(errorMessage)
-                        let error = RequestError.RequestFailedException(errorMessage)
-                        callback(Response.failure(error: error))
-                        return
-                    }
-                } else {
+                if response == nil {
                     let errorMessage = "Error retrieving routes data, response is null"
                     self.logger.error(errorMessage)
                     let error = RequestError.RequestFailedException(errorMessage)
                     callback(Response.failure(error: error))
+                }
+                do {
+                    stations = try self.decoder.decode(LppApiResponse<Array<LppStation>>.self, from: Data(response!.utf8)).data
+                    if isOneRequestSuccessful {
+                        let routesAndStationsData = ["routes": routes!, "stations": stations!] as [String : Any]
+                        callback(Response.success(data: routesAndStationsData))
+                        return
+                    } else {
+                        isOneRequestSuccessful = true
+                    }
+                } catch let parseError {
+                    let errorMessage = "Error retrieving routes data, parsing json to object failed: \(parseError)"
+                    self.logger.error(errorMessage)
+                    let error = RequestError.RequestFailedException(errorMessage)
+                    callback(Response.failure(error: error))
+                    return
                 }
             }
         }
@@ -130,19 +128,19 @@ class LppApi {
                 return
             }
             
-            if response != nil {
-                do {
-                    stationsArrivals = try self.decoder.decode(LppApiResponse<[LppStationArrival]>.self, from: Data(response!.utf8)).data!
-                    callback(Response.success(data: stationsArrivals!))
-                } catch let parseError {
-                    let errorMessage = "Error retrieving arrivals on route data, parsing json to object failed: \(parseError)"
-                    self.logger.error(errorMessage)
-                    let error = RequestError.RequestFailedException(errorMessage)
-                    callback(Response.failure(error: error))
-                    return
-                }
-            } else {
+            if response == nil {
                 let errorMessage = "Error retrieving arrivals on route data, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            do {
+                stationsArrivals = try self.decoder.decode(LppApiResponse<[LppStationArrival]>.self, from: Data(response!.utf8)).data!
+                callback(Response.success(data: stationsArrivals!))
+            } catch let parseError {
+                let errorMessage = "Error retrieving arrivals on route data, parsing json to object failed: \(parseError)"
                 self.logger.error(errorMessage)
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))
@@ -170,19 +168,57 @@ class LppApi {
                 return
             }
             
-            if response != nil {
-                do {
-                    busesOnRoute = try self.decoder.decode(LppApiResponse<[LppBus]>.self, from: Data(response!.utf8)).data!
-                    callback(Response.success(data: busesOnRoute!))
-                } catch let parseError {
-                    let errorMessage = "Error retrieving buses on route data, parsing json to object failed: \(parseError)"
-                    self.logger.error(errorMessage)
-                    let error = RequestError.RequestFailedException(errorMessage)
-                    callback(Response.failure(error: error))
-                    return
-                }
-            } else {
+            if response == nil {
                 let errorMessage = "Error retrieving buses on route data, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            do {
+                busesOnRoute = try self.decoder.decode(LppApiResponse<[LppBus]>.self, from: Data(response!.utf8)).data!
+                callback(Response.success(data: busesOnRoute!))
+            } catch let parseError {
+                let errorMessage = "Error retrieving buses on route data, parsing json to object failed: \(parseError)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+    }
+    
+    public func getRoutesOnStation(stationCode: String, callback: @escaping (Response<[LppRouteOnStation]>) -> ()) {
+        
+        let params = ["station_code": stationCode]
+        
+        var routesOnStation: [LppRouteOnStation]? = nil
+        
+        self.httpClient.getRequest(urlStr: LppApi.ROUTES_ON_STATION_LINK, params: params, headers: nil) { [weak self] (error, response) in
+        guard let self = self else { return }
+            
+            if error != nil {
+                let errorMessage = "Error retrieving routes on station data, error: \(error!)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            if response == nil {
+                let errorMessage = "Error retrieving routes on station data, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            do {
+                routesOnStation = try self.decoder.decode(LppApiResponse<[LppRouteOnStation]>.self, from: Data(response!.utf8)).data!
+                callback(Response.success(data: routesOnStation!))
+            } catch let parseError {
+                let errorMessage = "Error retrieving routes on station data, parsing json to object failed: \(parseError)"
                 self.logger.error(errorMessage)
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))
@@ -249,26 +285,26 @@ class LppApi {
                 return
             }
             
-            if response != nil {
-                do {
-                    detours = try self.getDetoursFromHtml(htmlString: response!)
-                    if detours == nil {
-                        let errorMessage = "Error retrieving detours info, cannot extract detours from html string"
-                        self.logger.error(errorMessage)
-                        let error = RequestError.RequestFailedException(errorMessage)
-                        callback(Response.failure(error: error))
-                        return
-                    }
-                    callback(Response.success(data: detours!))
-                } catch let Error {
-                    let errorMessage = "Error retrieving detours info parsing json to object failed: \(Error)"
+            if response == nil {
+                let errorMessage = "Error retrieving detours info, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            do {
+                detours = try self.getDetoursFromHtml(htmlString: response!)
+                if detours == nil {
+                    let errorMessage = "Error retrieving detours info, cannot extract detours from html string"
                     self.logger.error(errorMessage)
                     let error = RequestError.RequestFailedException(errorMessage)
                     callback(Response.failure(error: error))
                     return
                 }
-            } else {
-                let errorMessage = "Error retrieving detours info, response is null"
+                callback(Response.success(data: detours!))
+            } catch let Error {
+                let errorMessage = "Error retrieving detours info parsing json to object failed: \(Error)"
                 self.logger.error(errorMessage)
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))

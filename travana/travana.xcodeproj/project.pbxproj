@@ -56,6 +56,9 @@
 		2071C65B25433F3700FA80B2 /* StationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65A25433F3700FA80B2 /* StationPageViewController.swift */; };
 		2071C65D254344A500FA80B2 /* StationArrivalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */; };
 		2071C65F254344EE00FA80B2 /* StationRoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65E254344EE00FA80B2 /* StationRoutesViewController.swift */; };
+		2071C66125436A7D00FA80B2 /* LppRouteOnStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C66025436A7D00FA80B2 /* LppRouteOnStation.swift */; };
+		2071C665254372F300FA80B2 /* RoutesOnStationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C663254372F300FA80B2 /* RoutesOnStationTableViewCell.swift */; };
+		2071C666254372F300FA80B2 /* RoutesOnStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2071C664254372F300FA80B2 /* RoutesOnStationTableViewCell.xib */; };
 		207EC14B253CB9EA00888B30 /* Lpp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207EC14A253CB9EA00888B30 /* Lpp.swift */; };
 		208201092537900A009F00C3 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208201082537900A009F00C3 /* RouteViewController.swift */; };
 		20847F3E2538A8AB00EFC157 /* RouteBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20847F3D2538A8AB00EFC157 /* RouteBottomSheetViewController.swift */; };
@@ -129,6 +132,9 @@
 		2071C65A25433F3700FA80B2 /* StationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPageViewController.swift; sourceTree = "<group>"; };
 		2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalsViewController.swift; sourceTree = "<group>"; };
 		2071C65E254344EE00FA80B2 /* StationRoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRoutesViewController.swift; sourceTree = "<group>"; };
+		2071C66025436A7D00FA80B2 /* LppRouteOnStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppRouteOnStation.swift; sourceTree = "<group>"; };
+		2071C663254372F300FA80B2 /* RoutesOnStationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesOnStationTableViewCell.swift; sourceTree = "<group>"; };
+		2071C664254372F300FA80B2 /* RoutesOnStationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesOnStationTableViewCell.xib; sourceTree = "<group>"; };
 		207EC14A253CB9EA00888B30 /* Lpp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lpp.swift; sourceTree = "<group>"; };
 		208201082537900A009F00C3 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
 		20847F3D2538A8AB00EFC157 /* RouteBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -166,10 +172,10 @@
 		2021B1212540BA6800F0A4CE /* Station */ = {
 			isa = PBXGroup;
 			children = (
+				2071C6622543725400FA80B2 /* routesOnStation */,
 				2021B1222540BDDA00F0A4CE /* StationViewController.swift */,
 				2071C65A25433F3700FA80B2 /* StationPageViewController.swift */,
 				2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */,
-				2071C65E254344EE00FA80B2 /* StationRoutesViewController.swift */,
 			);
 			path = Station;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 				20EA6DDD253AEB2D0062A133 /* LppBus.swift */,
 				207EC14A253CB9EA00888B30 /* Lpp.swift */,
 				20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */,
+				2071C66025436A7D00FA80B2 /* LppRouteOnStation.swift */,
 			);
 			path = LppApiObjects;
 			sourceTree = "<group>";
@@ -502,6 +509,16 @@
 				2066F1B2252A4D1200DC221D /* InfoViewController.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		2071C6622543725400FA80B2 /* routesOnStation */ = {
+			isa = PBXGroup;
+			children = (
+				2071C65E254344EE00FA80B2 /* StationRoutesViewController.swift */,
+				2071C663254372F300FA80B2 /* RoutesOnStationTableViewCell.swift */,
+				2071C664254372F300FA80B2 /* RoutesOnStationTableViewCell.xib */,
+			);
+			path = routesOnStation;
 			sourceTree = "<group>";
 		};
 		2082010725378FDE009F00C3 /* Route */ = {
@@ -607,6 +624,7 @@
 			files = (
 				2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */,
 				20518CA1252261910006F190 /* Main.storyboard in Resources */,
+				2071C666254372F300FA80B2 /* RoutesOnStationTableViewCell.xib in Resources */,
 				20518C9625225D0F0006F190 /* Localizable.strings in Resources */,
 				2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */,
 				20847F442538B4BC00EFC157 /* RouteStationTableViewCell.xib in Resources */,
@@ -705,6 +723,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2071C66125436A7D00FA80B2 /* LppRouteOnStation.swift in Sources */,
 				20518C8A25225AAB0006F190 /* String.swift in Sources */,
 				20538FF9252F8FDF00EBD06A /* LppApiResponse.swift in Sources */,
 				2068F4C625337A0500975226 /* SearchResultDataContainer.swift in Sources */,
@@ -735,6 +754,7 @@
 				2066F1AC252A4BA000DC221D /* DetoursViewController.swift in Sources */,
 				2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */,
 				2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */,
+				2071C665254372F300FA80B2 /* RoutesOnStationTableViewCell.swift in Sources */,
 				20518C7E252258270006F190 /* UIFont.swift in Sources */,
 				2066F1B1252A4CE300DC221D /* SettingsViewController.swift in Sources */,
 				2071C65D254344A500FA80B2 /* StationArrivalsViewController.swift in Sources */,
