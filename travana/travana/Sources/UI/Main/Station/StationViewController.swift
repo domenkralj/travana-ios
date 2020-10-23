@@ -9,20 +9,31 @@
 import UIKit
 
 // Screen used for showing station data
-class StationViewController: UIViewController {
+class StationViewController: UIViewController, StationPageViewControllerListener {
     
     private static let TO_CENTER_VIEW_WIDTH = 70
     private var isStationInFavorites = false
+    private var stationPageViewController: StationPageViewController!
+    private var screenType: StationScreenType = StationScreenType.arrivals
     
     @IBOutlet weak var toCenterView: UIView!
     @IBOutlet weak var addToFavoritesButton: UIButton!
+    @IBOutlet weak var pageLineView: UIView!
+    @IBOutlet weak var pageLineViewConstraintLeftoSafeArea: NSLayoutConstraint!
     
     // when view is loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // se to center view
+        // set to center view
         self.toCenterView.setCornerRadius(cornerRadius: 13)
+        
+        // set line view to be the half of the screen
+        self.pageLineView.width(constant: UIScreen.main.bounds.width/2)
+        
+        // add listner to the station page view controler
+        // protcol which is called every time when page view controller is swiped (not set by buttons)
+        self.stationPageViewController.stationPageViewControllerListener = self
         
         // TODO - CHECK IF STATION IS FAVORITES
         // IF YES SET isStationInFavorites
@@ -37,9 +48,20 @@ class StationViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? StationPageViewController, segue.identifier == "showStationPageViewController" {
+            self.stationPageViewController = vc
+        }
+    }
+    
     // set status bar font to white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
+    }
+    
+    // called when page is swiped
+    func pageSwiped(screenType: StationScreenType) {
+        self.toggleStationScreenType(screenType: screenType)
     }
     
     private func setToCenterView(show: Bool) {
@@ -52,12 +74,49 @@ class StationViewController: UIViewController {
         }
     }
     
+    // toggle station screen type
+    private func toggleStationScreenType(screenType: StationScreenType) {
+        if self.screenType == StationScreenType.arrivals {
+            self.screenType = StationScreenType.routes
+            self.stationPageViewController.setStationRoutesViewController()
+        } else {
+            self.screenType = StationScreenType.arrivals
+            self.stationPageViewController.setStationArrivalsViewController()
+        }
+        self.toggleStationScreenTypeButtons(screenType: self.screenType)
+    }
+    
+    // toggle stations type buttons (arrivals or routes) and animate
+    private func toggleStationScreenTypeButtons(screenType: StationScreenType) {
+        if screenType == StationScreenType.arrivals {
+            self.pageLineViewConstraintLeftoSafeArea.constant = 0
+        } else {
+            self.pageLineViewConstraintLeftoSafeArea.constant = UIScreen.main.bounds.width/2
+        }
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    // set favorite button ui depends on state (selected or not)
     private func setFavoritesButton(selected: Bool) {
         if selected {
             self.addToFavoritesButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             self.addToFavoritesButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
+    }
+    
+    // called when arrivals button is clicked
+    @IBAction func arrivalsButtonClicked(_ sender: UIButton) {
+        self.toggleStationScreenTypeButtons(screenType: StationScreenType.arrivals)
+        self.stationPageViewController.setStationArrivalsViewController()
+    }
+    
+    // called when routes button is clicked
+    @IBAction func routesButtonClicked(_ sender: UIButton) {
+        self.toggleStationScreenTypeButtons(screenType: StationScreenType.routes)
+        self.stationPageViewController.setStationRoutesViewController()
     }
     
     // called when back button is clicked
@@ -75,4 +134,8 @@ class StationViewController: UIViewController {
     // called when opposite station button is clicked
     @IBAction func oppositeStationButtonClicked(_ sender: UIButton) {
     }
+}
+
+enum StationScreenType {
+    case arrivals, routes
 }
