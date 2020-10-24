@@ -9,16 +9,32 @@
 import UIKit
 
 class RoutesOnStationTableViewCell: UITableViewCell {
-
+    
+    private var route: LppRouteOnStation!
+    
+    @IBOutlet weak var routeNameText: UILabel!
+    @IBOutlet weak var routeNumberView: UIView!
+    @IBOutlet weak var routeNumberText: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        // remove cell highlight color when clicked
+        self.selectionStyle = .none
+    
+        self.routeNumberView.setCornerRadius(cornerRadius: 14)
     }
     
+    public func setCell(route: LppRouteOnStation) {
+        self.route = route
+        self.routeNumberText.text = route.routeNumber
+        self.routeNumberView.setBackgroundColor(color: Colors.getColorFromString(string: route.routeNumber))
+        self.routeNameText.text = route.routeGroupName
+    }
+    @IBAction func openTimetableButtonClicked(_ sender: UIButton) {
+        print("TODO OPEN " + self.route.routeId)
+    }
+    @IBAction func openRouteButtonClicked(_ sender: UIButton) {
+        print("TODO OPEN " + self.route.routeId)
+    }
 }

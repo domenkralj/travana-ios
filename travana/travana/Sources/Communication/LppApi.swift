@@ -191,7 +191,7 @@ class LppApi {
     
     public func getRoutesOnStation(stationCode: String, callback: @escaping (Response<[LppRouteOnStation]>) -> ()) {
         
-        let params = ["station_code": stationCode]
+        let params = ["station-code": stationCode]
         
         var routesOnStation: [LppRouteOnStation]? = nil
         

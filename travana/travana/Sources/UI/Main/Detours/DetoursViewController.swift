@@ -40,8 +40,8 @@ class DetoursViewController: UIViewController {
         self.loading.startAnimating()
         
         // set ui to the error and tru again view
-        self.errorView.layer.cornerRadius = 20
-        self.tryAgainView.layer.cornerRadius = 15
+        self.errorView.setCornerRadius(cornerRadius: 20)
+        self.tryAgainView.setCornerRadius(cornerRadius: 15)
         
         // set ui to loading
         self.setUI(state: ScreenState.loading)
@@ -83,7 +83,7 @@ class DetoursViewController: UIViewController {
         }
     }
     
-        // set ui, depends on screen state
+    // set ui, depends on screen state
     private func setUI(state: ScreenState) {
         switch state {
         case ScreenState.done:

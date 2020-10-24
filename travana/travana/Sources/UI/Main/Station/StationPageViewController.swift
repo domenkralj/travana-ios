@@ -17,6 +17,7 @@ class StationPageViewController: UIPageViewController, UIPageViewControllerDataS
         return [self.getArrivalsViewController(), self.getRoutesViewController()]}()
     
     public var stationPageViewControllerListener: StationPageViewControllerListener? = nil
+    public var station: LppStation!
     
     // when view is loaded.
     override func viewDidLoad() {
@@ -27,7 +28,6 @@ class StationPageViewController: UIPageViewController, UIPageViewControllerDataS
         
         // set first view controller - arrivals
         if let firstViewController = self.orderedViewControllers.first { self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil) }
-        
     }
     
     // set view to the arrivals view
@@ -51,7 +51,11 @@ class StationPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     // creates routes view controller
     private func getRoutesViewController() -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StationRoutesViewController")
+        print("hello domen")
+        print(station == nil)
+        let routesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StationRoutesViewController") as! StationRoutesViewController
+        routesViewController.station = self.station
+        return routesViewController as UIViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {

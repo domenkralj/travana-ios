@@ -48,6 +48,9 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         // protcol which is called every time when page view controller is swiped (not set by buttons)
         self.stationPageViewController.stationPageViewControllerListener = self
         
+        // pass station data to station page view controller
+        self.stationPageViewController.station = self.station
+        
         // set station name text
         self.stationNameText.text = self.station.name
         
@@ -67,6 +70,9 @@ class StationViewController: UIViewController, StationPageViewControllerListener
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? StationPageViewController, segue.identifier == "showStationPageViewController" {
+            // pass station data to station page view controller
+            vc.station = self.station
+            //vc.stationPageViewControllerListener = self
             self.stationPageViewController = vc
         }
     }
