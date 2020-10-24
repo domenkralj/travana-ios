@@ -13,7 +13,7 @@ class LppRouteOnStation: Decodable, Encodable {
     public var routeId: String
     public var routeNumber: String
     public var tripId: String
-    public var routeName: String
+    public var routeName: String?
     public var routeGroupName: String
     public var isGarage: Bool
     

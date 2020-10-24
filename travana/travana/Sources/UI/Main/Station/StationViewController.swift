@@ -51,7 +51,7 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         self.stationNameText.text = self.station.name
         
         // set station to center view
-        self.setToCenterView(show: station.refId.toInt() % 2 == 0)
+        self.setToCenterView(show: station.refId.toInt() % 2 == 1)
         
         // TODO - CHECK IF STATION IS FAVORITES
         // IF YES SET isStationInFavorites

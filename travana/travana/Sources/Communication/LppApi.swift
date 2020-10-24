@@ -17,6 +17,7 @@ class LppApi {
     private static let BUSES_ON_ROUTE_LINK = "https://data.lpp.si/api/bus/buses-on-route"
     private static let LPP_DETOURS_INFO = "https://www.lpp.si/javni-prevoz/obvozi"
     private static let ROUTES_ON_STATION_LINK = "https://data.lpp.si/api/station/routes-on-station"
+    private static let TIMETABLE_LINK = "https://data.lpp.si/api/station/timetable"
     
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "LppApi")
     private let httpClient: HttpClient
@@ -219,6 +220,44 @@ class LppApi {
                 callback(Response.success(data: routesOnStation!))
             } catch let parseError {
                 let errorMessage = "Error retrieving routes on station data, parsing json to object failed: \(parseError)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+    }
+    
+    public func getTimetable(stationCode: String, routeGroupNumber: String, nextHours: Int, previousHours: Int, callback: @escaping (Response<LppTimetable>) -> ()) {
+        
+        let params = ["station-code": stationCode, "route-group-number": routeGroupNumber, "next-hours" : String(nextHours), "previous-hours" : String(previousHours)]
+        
+        var timetable: LppTimetable? = nil
+        
+        self.httpClient.getRequest(urlStr: LppApi.TIMETABLE_LINK, params: params, headers: nil) { [weak self] (error, response) in
+        guard let self = self else { return }
+            
+            if error != nil {
+                let errorMessage = "Error retrieving timetable data, error: \(error!)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            if response == nil {
+                let errorMessage = "Error retrieving timetable data, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            do {
+                timetable = try self.decoder.decode(LppApiResponse<LppTimetable>.self, from: Data(response!.utf8)).data!
+                callback(Response.success(data: timetable!))
+            } catch let parseError {
+                let errorMessage = "Error retrieving timetable data, parsing json to object failed: \(parseError)"
                 self.logger.error(errorMessage)
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))

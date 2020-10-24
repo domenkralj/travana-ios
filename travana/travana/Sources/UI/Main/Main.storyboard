@@ -789,7 +789,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radohova vas/Šentvidu" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VoO-kU-HYh">
                                 <rect key="frame" x="71" y="61" width="177" height="48"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -938,15 +938,31 @@
             <objects>
                 <viewController storyboardIdentifier="StationArrivalsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eQk-v1-4dx" customClass="StationArrivalsViewController" customModule="travana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fy1-aC-7E0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9im-cw-1qI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="9im-cw-1qI" firstAttribute="bottom" secondItem="BrC-Y6-zJN" secondAttribute="bottom" id="5pu-zL-T9O"/>
+                            <constraint firstItem="9im-cw-1qI" firstAttribute="top" secondItem="Fy1-aC-7E0" secondAttribute="top" id="NDE-qd-LLT"/>
+                            <constraint firstItem="9im-cw-1qI" firstAttribute="trailing" secondItem="BrC-Y6-zJN" secondAttribute="trailing" id="goO-dz-vhE"/>
+                            <constraint firstItem="9im-cw-1qI" firstAttribute="leading" secondItem="BrC-Y6-zJN" secondAttribute="leading" id="y2H-1f-nq3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="BrC-Y6-zJN"/>
                     </view>
+                    <size key="freeformSize" width="414" height="700"/>
+                    <connections>
+                        <outlet property="arrivalsTableView" destination="9im-cw-1qI" id="g0c-I9-bd8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8b-bN-mGA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4858" y="-250"/>
+            <point key="canvasLocation" x="4859.420289855073" y="-196.20535714285714"/>
         </scene>
         <!--Station Routes View Controller-->
         <scene sceneID="NZm-N6-FQc">
@@ -1139,9 +1155,9 @@
                                     <constraint firstItem="Wk6-Xl-eJI" firstAttribute="top" secondItem="iSk-5y-Jhh" secondAttribute="top" id="u82-Vw-1mc"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fp-7b-xvA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fp-7b-xvA">
                                 <rect key="frame" x="0.0" y="119.33333333333331" width="414" height="742.66666666666674"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6jC-qu-jtu">
                                 <rect key="frame" x="188.66666666666666" y="429.66666666666669" width="37" height="37"/>
@@ -1223,6 +1239,28 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="TIMETABLE"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Q2A-ud-OAr">
+                                <rect key="frame" x="107.00000000000001" y="420.66666666666669" width="200.33333333333337" height="55"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No schedules arrivals for today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiL-l2-Est">
+                                        <rect key="frame" x="0.0" y="0.0" width="200.33333333333334" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="no_schedules_arrivals_for_today"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_bus_time" translatesAutoresizingMaskIntoConstraints="NO" id="33q-pw-aVP">
+                                        <rect key="frame" x="85" y="25" width="30" height="30"/>
+                                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="0kn-OC-qJ4"/>
+                                            <constraint firstAttribute="height" constant="30" id="gFS-YD-CHJ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1232,6 +1270,7 @@
                             <constraint firstItem="YgF-Jf-bkl" firstAttribute="top" secondItem="sft-E2-Lvv" secondAttribute="top" constant="16" id="DKS-Kz-JEN"/>
                             <constraint firstItem="Zd4-72-2sH" firstAttribute="leading" secondItem="iSk-5y-Jhh" secondAttribute="trailing" constant="8" id="DoT-EB-Hkc"/>
                             <constraint firstItem="WCa-k7-Q1Z" firstAttribute="top" secondItem="QcM-Lk-vfx" secondAttribute="bottom" constant="10" id="HII-Nc-LdL"/>
+                            <constraint firstItem="Q2A-ud-OAr" firstAttribute="centerX" secondItem="sxc-KN-3QI" secondAttribute="centerX" id="HWK-4h-5dK"/>
                             <constraint firstItem="Zd4-72-2sH" firstAttribute="top" secondItem="NFW-yG-Qzu" secondAttribute="bottom" constant="4" id="HjG-Zs-hm2"/>
                             <constraint firstItem="6jC-qu-jtu" firstAttribute="centerY" secondItem="sxc-KN-3QI" secondAttribute="centerY" id="I7k-LO-wt9"/>
                             <constraint firstItem="6Fp-7b-xvA" firstAttribute="leading" secondItem="sft-E2-Lvv" secondAttribute="leading" id="JCg-GT-xSj"/>
@@ -1246,6 +1285,7 @@
                             <constraint firstItem="QcM-Lk-vfx" firstAttribute="top" secondItem="7vr-zt-uKd" secondAttribute="bottom" constant="50" id="hUt-Iq-YsQ"/>
                             <constraint firstItem="WCa-k7-Q1Z" firstAttribute="centerX" secondItem="sxc-KN-3QI" secondAttribute="centerX" id="iyX-yY-Lxd"/>
                             <constraint firstItem="NFW-yG-Qzu" firstAttribute="top" secondItem="sft-E2-Lvv" secondAttribute="top" constant="15" id="kIx-tw-0R1"/>
+                            <constraint firstItem="Q2A-ud-OAr" firstAttribute="centerY" secondItem="sxc-KN-3QI" secondAttribute="centerY" id="oKz-Gm-utX"/>
                             <constraint firstItem="7vr-zt-uKd" firstAttribute="leading" secondItem="YgF-Jf-bkl" secondAttribute="trailing" constant="15" id="rmN-Gw-qYY"/>
                             <constraint firstItem="CcD-Ap-XDX" firstAttribute="leading" secondItem="sft-E2-Lvv" secondAttribute="leading" constant="20" id="scD-ji-dsZ"/>
                             <constraint firstItem="YgF-Jf-bkl" firstAttribute="leading" secondItem="CcD-Ap-XDX" secondAttribute="trailing" constant="20" id="tz1-Oe-RFy"/>
@@ -1255,6 +1295,7 @@
                     <connections>
                         <outlet property="errorView" destination="QcM-Lk-vfx" id="dcP-Zb-tBZ"/>
                         <outlet property="loading" destination="6jC-qu-jtu" id="IOd-dC-Fke"/>
+                        <outlet property="noSchedulesArrivalsForTodayStackView" destination="Q2A-ud-OAr" id="AIJ-NF-Fz3"/>
                         <outlet property="routeNameText" destination="NFW-yG-Qzu" id="jtz-Et-fLI"/>
                         <outlet property="routeNumberText" destination="xdT-Cb-i9f" id="P8o-4c-hfg"/>
                         <outlet property="routeNumberView" destination="YgF-Jf-bkl" id="4nF-Qn-u2x"/>
@@ -1771,6 +1812,7 @@
         <image name="arrow.swap" catalog="system" width="128" height="100"/>
         <image name="exclamationmark.triangle.fill" catalog="system" width="128" height="112"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="ic_bus_time" width="59" height="59"/>
         <image name="ic_location_center" width="80" height="80"/>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>

@@ -135,7 +135,7 @@ class SearchViewController: UIViewController {
         for result in searchResult! {
             if result.resultType == SearchResultType.route {
                 let route = result.route!
-                var routeSearchid = route.routeName + "#" + route.shortRouteName + "#" + route.routeNumber
+                var routeSearchid = route.routeName + "#" + (route.shortRouteName ?? "") + "#" + route.routeNumber
                 routeSearchid = routeSearchid.replacingOccurrences(of: "ž", with: "z")
                 routeSearchid = routeSearchid.replacingOccurrences(of: "č", with: "c")
                 routeSearchid = routeSearchid.replacingOccurrences(of: "š", with: "s")
@@ -225,10 +225,10 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     // reneder result cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultTableViewCell", for: indexPath) as? SearchResultTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultTableViewCell", for: indexPath) as! SearchResultTableViewCell
         let result = filtertedSearchResult![indexPath.row]
-        cell?.setResultCell(result: result)
-        return cell!
+        cell.setResultCell(result: result)
+        return cell
     }
     
     // called when one of the cells is clicked

@@ -28,6 +28,15 @@ extension UIView {
     func setCornerRadius(cornerRadius: CGFloat) {
         self.layer.cornerRadius = cornerRadius
     }
+    
+    func setBorder(borderWidth: CGFloat, borderColor: UIColor) {
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.cgColor
+    }
+    
+    func setPadding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+        self.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10);
+    }
 
     /// Method for removing current constraints from UIView.
     private func removeConstraint(attribute: NSLayoutConstraint.Attribute) {

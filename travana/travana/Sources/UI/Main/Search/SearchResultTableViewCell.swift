@@ -39,12 +39,13 @@ class SearchResultTableViewCell: UITableViewCell {
             self.busLineView.setBackgroundColor(color: Colors.getColorFromString(string: route.routeNumber))
             self.busLineText.text = route.routeNumber
             self.mainText.text = route.routeName
+            self.toCenterView.isHidden = true
         } else if result.resultType == SearchResultType.station {
             let station = result.station!
             if station.refId.toInt() % 2 == 0 {
-                self.toCenterView.isHidden = false
-            } else {
                 self.toCenterView.isHidden = true
+            } else {
+                self.toCenterView.isHidden = false
             }
             self.stationImageView.isHidden = false
             self.busLineView.isHidden = true
