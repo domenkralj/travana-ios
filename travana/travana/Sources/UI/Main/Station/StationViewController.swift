@@ -44,10 +44,6 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         // set line view to be the half of the screen
         self.pageLineView.width(constant: UIScreen.main.bounds.width/2)
         
-        // add listner to the station page view controler
-        // protcol which is called every time when page view controller is swiped (not set by buttons)
-        self.stationPageViewController.stationPageViewControllerListener = self
-        
         // pass station data to station page view controller
         self.stationPageViewController.station = self.station
         
@@ -72,7 +68,12 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         if let vc = segue.destination as? StationPageViewController, segue.identifier == "showStationPageViewController" {
             // pass station data to station page view controller
             vc.station = self.station
-            //vc.stationPageViewControllerListener = self
+            
+            // add listner to the station page view controler
+            // protcol which is called every time when page view controller is swiped (not set by buttons)
+            vc.stationPageViewControllerListener = self
+            
+            vc.stationViewController = self
             self.stationPageViewController = vc
         }
     }

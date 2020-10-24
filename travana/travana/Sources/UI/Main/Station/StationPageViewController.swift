@@ -18,6 +18,7 @@ class StationPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     public var stationPageViewControllerListener: StationPageViewControllerListener? = nil
     public var station: LppStation!
+    public var stationViewController: StationViewController!
     
     // when view is loaded.
     override func viewDidLoad() {
@@ -51,10 +52,9 @@ class StationPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     // creates routes view controller
     private func getRoutesViewController() -> UIViewController {
-        print("hello domen")
-        print(station == nil)
         let routesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StationRoutesViewController") as! StationRoutesViewController
         routesViewController.station = self.station
+        routesViewController.stationViewController = self.stationViewController
         return routesViewController as UIViewController
     }
     

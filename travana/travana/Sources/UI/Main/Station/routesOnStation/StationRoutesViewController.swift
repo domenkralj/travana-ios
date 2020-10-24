@@ -12,6 +12,7 @@ import UIKit
 class StationRoutesViewController: UIViewController {
 
     public var station: LppStation!
+    public var stationViewController: StationViewController!
     private let lppApi: LppApi
     private var routesOnStation: [LppRouteOnStation]? = nil
     @IBOutlet weak var routesOnStationTableView: UITableView!
@@ -97,8 +98,14 @@ class StationRoutesViewController: UIViewController {
     
     // called when try again button is clicked
     @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
+        // set ui to loading
+        DispatchQueue.main.async {
+            self.setUI(state: ScreenState.loading)
+        }
         // try to retrieve routes on station data again
-        self.retrieveRoutesOnStation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.retrieveRoutesOnStation()
+        })
     }
 }
 
@@ -118,6 +125,8 @@ extension StationRoutesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RoutesOnStationTableViewCell", for: indexPath) as! RoutesOnStationTableViewCell
         let routeOnStation = self.routesOnStation![indexPath.row]
         cell.setCell(route: routeOnStation)
+        cell.station = self.station
+        cell.stationViewController = self.stationViewController
         return cell
     }
     

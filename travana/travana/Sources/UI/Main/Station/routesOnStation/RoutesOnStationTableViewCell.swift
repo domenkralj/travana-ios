@@ -10,6 +10,8 @@ import UIKit
 
 class RoutesOnStationTableViewCell: UITableViewCell {
     
+    public var stationViewController: StationViewController!
+    public var station: LppStation!
     private var route: LppRouteOnStation!
     
     @IBOutlet weak var routeNameText: UILabel!
@@ -32,9 +34,20 @@ class RoutesOnStationTableViewCell: UITableViewCell {
         self.routeNameText.text = route.routeGroupName
     }
     @IBAction func openTimetableButtonClicked(_ sender: UIButton) {
-        print("TODO OPEN " + self.route.routeId)
+        // pass data to TimetableViewController and open TimetableViewController
+        let lppRoute = LppRoute.getLppRoute(route: route)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TimetableViewController") as! TimetableViewController
+        vc.route = lppRoute
+        vc.station = self.station
+        vc.modalPresentationStyle = .fullScreen
+        self.stationViewController.present(vc, animated: true, completion: nil)
     }
     @IBAction func openRouteButtonClicked(_ sender: UIButton) {
-        print("TODO OPEN " + self.route.routeId)
+        // pass route data to RouteViewController and open RouteViewController
+        let lppRoute = LppRoute.getLppRoute(route: route)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as! RouteViewController
+        vc.route = lppRoute
+        vc.modalPresentationStyle = .fullScreen
+        self.stationViewController.present(vc, animated: true, completion: nil)
     }
 }

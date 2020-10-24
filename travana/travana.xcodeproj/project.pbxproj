@@ -52,6 +52,9 @@
 		2066F1B3252A4D1200DC221D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B2252A4D1200DC221D /* InfoViewController.swift */; };
 		2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */; };
 		2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */; };
+		206776122544393A0077484B /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206776112544393A0077484B /* TimetableViewController.swift */; };
+		206776152544433C0077484B /* TimetableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206776132544433C0077484B /* TimetableTableViewCell.swift */; };
+		206776162544433C0077484B /* TimetableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206776142544433C0077484B /* TimetableTableViewCell.xib */; };
 		2068F4C625337A0500975226 /* SearchResultDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F4C525337A0500975226 /* SearchResultDataContainer.swift */; };
 		2071C65B25433F3700FA80B2 /* StationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65A25433F3700FA80B2 /* StationPageViewController.swift */; };
 		2071C65D254344A500FA80B2 /* StationArrivalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */; };
@@ -128,6 +131,9 @@
 		2066F1B2252A4D1200DC221D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		2066F1B4252A58E100DC221D /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		2066F1B5252A58E100DC221D /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		206776112544393A0077484B /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
+		206776132544433C0077484B /* TimetableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableTableViewCell.swift; sourceTree = "<group>"; };
+		206776142544433C0077484B /* TimetableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimetableTableViewCell.xib; sourceTree = "<group>"; };
 		2068F4C525337A0500975226 /* SearchResultDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDataContainer.swift; sourceTree = "<group>"; };
 		2071C65A25433F3700FA80B2 /* StationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPageViewController.swift; sourceTree = "<group>"; };
 		2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalsViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 		2021B1212540BA6800F0A4CE /* Station */ = {
 			isa = PBXGroup;
 			children = (
+				20677610254439190077484B /* Timetable */,
 				2071C6622543725400FA80B2 /* routesOnStation */,
 				2021B1222540BDDA00F0A4CE /* StationViewController.swift */,
 				2071C65A25433F3700FA80B2 /* StationPageViewController.swift */,
@@ -511,6 +518,16 @@
 			path = Info;
 			sourceTree = "<group>";
 		};
+		20677610254439190077484B /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				206776112544393A0077484B /* TimetableViewController.swift */,
+				206776132544433C0077484B /* TimetableTableViewCell.swift */,
+				206776142544433C0077484B /* TimetableTableViewCell.xib */,
+			);
+			path = Timetable;
+			sourceTree = "<group>";
+		};
 		2071C6622543725400FA80B2 /* routesOnStation */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +648,7 @@
 				20518CA6252262DE0006F190 /* Loading.storyboard in Resources */,
 				2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */,
 				20518C2C25224F910006F190 /* Assets.xcassets in Resources */,
+				206776162544433C0077484B /* TimetableTableViewCell.xib in Resources */,
 				2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */,
 				20E3318C253D9F4100991CE1 /* InfoPlist.strings in Resources */,
 				20DC5003253EBB09008214F0 /* DetourTableViewCell.xib in Resources */,
@@ -737,10 +755,12 @@
 				20518C5A252252650006F190 /* RequestError.swift in Sources */,
 				20518C8D25225AD00006F190 /* Table.swift in Sources */,
 				20847F402538B2BB00EFC157 /* MovingLabel.swift in Sources */,
+				206776122544393A0077484B /* TimetableViewController.swift in Sources */,
 				20518C58252252330006F190 /* HttpError.swift in Sources */,
 				20518C81252259BD0006F190 /* UILabel.swift in Sources */,
 				2071C65F254344EE00FA80B2 /* StationRoutesViewController.swift in Sources */,
 				20E33191253DEFC400991CE1 /* Utils.swift in Sources */,
+				206776152544433C0077484B /* TimetableTableViewCell.swift in Sources */,
 				20518C632522537A0006F190 /* Logger.swift in Sources */,
 				20518CA4252262D30006F190 /* LoadingViewController.swift in Sources */,
 				20847F432538B4BC00EFC157 /* RouteStationTableViewCell.swift in Sources */,

@@ -45,7 +45,7 @@
                                 </constraints>
                                 <state key="normal" image="ic_show_timetable_button_background"/>
                                 <connections>
-                                    <action selector="openRouteButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7Ag-L3-eph"/>
+                                    <action selector="openTimetableButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fpd-xN-4sv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrc-tb-l89">
