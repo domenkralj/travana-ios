@@ -18,6 +18,7 @@ class LppApi {
     private static let LPP_DETOURS_INFO = "https://www.lpp.si/javni-prevoz/obvozi"
     private static let ROUTES_ON_STATION_LINK = "https://data.lpp.si/api/station/routes-on-station"
     private static let TIMETABLE_LINK = "https://data.lpp.si/api/station/timetable"
+    private static let ARRIVAL_LINK = "https://data.lpp.si/api/station/arrival"
     
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "LppApi")
     private let httpClient: HttpClient
@@ -258,6 +259,44 @@ class LppApi {
                 callback(Response.success(data: timetable!))
             } catch let parseError {
                 let errorMessage = "Error retrieving timetable data, parsing json to object failed: \(parseError)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+    }
+    
+        public func getArrivals(stationCode: String, callback: @escaping (Response<[LppArrival2]>) -> ()) {
+        
+        let params = ["station-code": stationCode]
+        
+        var arrivals: [LppArrival2]? = nil
+        
+        self.httpClient.getRequest(urlStr: LppApi.ARRIVAL_LINK, params: params, headers: nil) { [weak self] (error, response) in
+        guard let self = self else { return }
+            
+            if error != nil {
+                let errorMessage = "Error retrieving arrival data, error: \(error!)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            if response == nil {
+                let errorMessage = "Error retrieving arrival data, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            do {
+                arrivals = try self.decoder.decode(LppApiResponse<LppArrival2Wrapper>.self, from: Data(response!.utf8)).data!.arrivals
+                callback(Response.success(data: arrivals!))
+            } catch let parseError {
+                let errorMessage = "Error retrieving arrival data, parsing json to object failed: \(parseError)"
                 self.logger.error(errorMessage)
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))

@@ -61,7 +61,11 @@
 		20677622254472270077484B /* LppTimetableRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20677621254472270077484B /* LppTimetableRoute.swift */; };
 		20677624254472980077484B /* LppTimetableTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20677623254472980077484B /* LppTimetableTimes.swift */; };
 		20677628254497FD0077484B /* ArrivalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20677626254497FD0077484B /* ArrivalsTableViewCell.swift */; };
-		20677629254497FD0077484B /* ArrivalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20677627254497FD0077484B /* ArrivalsTableViewCell.xib */; };
+		2068655B25459D19000DCD80 /* ArrivalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068655A25459D19000DCD80 /* ArrivalCollectionViewCell.swift */; };
+		2068655F2545C933000DCD80 /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068655E2545C933000DCD80 /* UICollectionViewLeftAlignedLayout.swift */; };
+		206865632545CE4C000DCD80 /* LppArrival2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206865622545CE4C000DCD80 /* LppArrival2.swift */; };
+		206865652545CE7D000DCD80 /* LppArrival2Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206865642545CE7D000DCD80 /* LppArrival2Station.swift */; };
+		206865672545CF6D000DCD80 /* LppArrival2Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206865662545CF6D000DCD80 /* LppArrival2Wrapper.swift */; };
 		2068F4C625337A0500975226 /* SearchResultDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068F4C525337A0500975226 /* SearchResultDataContainer.swift */; };
 		2071C65B25433F3700FA80B2 /* StationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65A25433F3700FA80B2 /* StationPageViewController.swift */; };
 		2071C65D254344A500FA80B2 /* StationArrivalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */; };
@@ -147,7 +151,11 @@
 		20677621254472270077484B /* LppTimetableRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppTimetableRoute.swift; sourceTree = "<group>"; };
 		20677623254472980077484B /* LppTimetableTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppTimetableTimes.swift; sourceTree = "<group>"; };
 		20677626254497FD0077484B /* ArrivalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsTableViewCell.swift; sourceTree = "<group>"; };
-		20677627254497FD0077484B /* ArrivalsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivalsTableViewCell.xib; sourceTree = "<group>"; };
+		2068655A25459D19000DCD80 /* ArrivalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalCollectionViewCell.swift; sourceTree = "<group>"; };
+		2068655E2545C933000DCD80 /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
+		206865622545CE4C000DCD80 /* LppArrival2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival2.swift; sourceTree = "<group>"; };
+		206865642545CE7D000DCD80 /* LppArrival2Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival2Station.swift; sourceTree = "<group>"; };
+		206865662545CF6D000DCD80 /* LppArrival2Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppArrival2Wrapper.swift; sourceTree = "<group>"; };
 		2068F4C525337A0500975226 /* SearchResultDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDataContainer.swift; sourceTree = "<group>"; };
 		2071C65A25433F3700FA80B2 /* StationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPageViewController.swift; sourceTree = "<group>"; };
 		2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalsViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +324,7 @@
 		20518C67252256640006F190 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2068655C2545C913000DCD80 /* UICollectionView */,
 				20518C8B25225AC50006F190 /* Table */,
 				20518C8825225AA10006F190 /* String */,
 				20518C8525225A4F0006F190 /* UIView */,
@@ -451,8 +460,8 @@
 				2021B1212540BA6800F0A4CE /* Station */,
 				20DC5008253F5D93008214F0 /* Web */,
 				2082010725378FDE009F00C3 /* Route */,
-				2066F1AF252A4CCF00DC221D /* Info */,
 				2066F1AE252A4CC700DC221D /* Settings */,
+				2066F1AF252A4CCF00DC221D /* Info */,
 				2066F1AD252A4CBB00DC221D /* Search */,
 				2066F1AA252A4B8200DC221D /* Detours */,
 				20518C9E2522616D0006F190 /* MainViewController.swift */,
@@ -485,13 +494,16 @@
 				20677619254470070077484B /* Timetable */,
 				20538FF8252F8FDF00EBD06A /* LppApiResponse.swift */,
 				20538FFA252F92AB00EBD06A /* LppStation.swift */,
-				20538FFE252F955E00EBD06A /* LppRoute.swift */,
 				20847F452538CA9A00EFC157 /* LppStationArrival.swift */,
 				20847F472538CBCA00EFC157 /* LppArrival.swift */,
+				20538FFE252F955E00EBD06A /* LppRoute.swift */,
 				20EA6DDD253AEB2D0062A133 /* LppBus.swift */,
 				207EC14A253CB9EA00888B30 /* Lpp.swift */,
 				20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */,
 				2071C66025436A7D00FA80B2 /* LppRouteOnStation.swift */,
+				206865622545CE4C000DCD80 /* LppArrival2.swift */,
+				206865642545CE7D000DCD80 /* LppArrival2Station.swift */,
+				206865662545CF6D000DCD80 /* LppArrival2Wrapper.swift */,
 			);
 			path = LppApiObjects;
 			sourceTree = "<group>";
@@ -560,9 +572,17 @@
 			children = (
 				2071C65C254344A500FA80B2 /* StationArrivalsViewController.swift */,
 				20677626254497FD0077484B /* ArrivalsTableViewCell.swift */,
-				20677627254497FD0077484B /* ArrivalsTableViewCell.xib */,
+				2068655A25459D19000DCD80 /* ArrivalCollectionViewCell.swift */,
 			);
 			path = Arrivals;
+			sourceTree = "<group>";
+		};
+		2068655C2545C913000DCD80 /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2068655E2545C933000DCD80 /* UICollectionViewLeftAlignedLayout.swift */,
+			);
+			path = UICollectionView;
 			sourceTree = "<group>";
 		};
 		2071C6622543725400FA80B2 /* routesOnStation */ = {
@@ -678,7 +698,6 @@
 			files = (
 				2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */,
 				20518CA1252261910006F190 /* Main.storyboard in Resources */,
-				20677629254497FD0077484B /* ArrivalsTableViewCell.xib in Resources */,
 				2071C666254372F300FA80B2 /* RoutesOnStationTableViewCell.xib in Resources */,
 				20518C9625225D0F0006F190 /* Localizable.strings in Resources */,
 				2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */,
@@ -780,8 +799,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2071C66125436A7D00FA80B2 /* LppRouteOnStation.swift in Sources */,
+				206865652545CE7D000DCD80 /* LppArrival2Station.swift in Sources */,
 				20518C8A25225AAB0006F190 /* String.swift in Sources */,
 				20538FF9252F8FDF00EBD06A /* LppApiResponse.swift in Sources */,
+				206865632545CE4C000DCD80 /* LppArrival2.swift in Sources */,
 				2068F4C625337A0500975226 /* SearchResultDataContainer.swift in Sources */,
 				20518CAA2522687B0006F190 /* TravanaAppDataContainer.swift in Sources */,
 				20518C9F2522616D0006F190 /* MainViewController.swift in Sources */,
@@ -808,6 +829,7 @@
 				208201092537900A009F00C3 /* RouteViewController.swift in Sources */,
 				2071C65B25433F3700FA80B2 /* StationPageViewController.swift in Sources */,
 				20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */,
+				206865672545CF6D000DCD80 /* LppArrival2Wrapper.swift in Sources */,
 				20518C53252250680006F190 /* HttpClient.swift in Sources */,
 				20677624254472980077484B /* LppTimetableTimes.swift in Sources */,
 				20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */,
@@ -829,12 +851,14 @@
 				20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */,
 				20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */,
 				2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */,
+				2068655B25459D19000DCD80 /* ArrivalCollectionViewCell.swift in Sources */,
 				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,
 				20677628254497FD0077484B /* ArrivalsTableViewCell.swift in Sources */,
 				20EA6DE1253AF2710062A133 /* RouteDataContainer.swift in Sources */,
 				207EC14B253CB9EA00888B30 /* Lpp.swift in Sources */,
 				2067761B2544701A0077484B /* LppTimetableStation.swift in Sources */,
 				20DC5005253EFDC6008214F0 /* LppDetourInfo.swift in Sources */,
+				2068655F2545C933000DCD80 /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				20518C9125225B040006F190 /* Constatnts.swift in Sources */,
 				20518C2525224F900006F190 /* SceneDelegate.swift in Sources */,
 				20518C742522570E0006F190 /* Localizable.swift in Sources */,

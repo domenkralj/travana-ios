@@ -47,7 +47,9 @@ class StationPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     // creates arrivals view controller
     private func getArrivalsViewController() -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StationArrivalsViewController")
+        let arrivalsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StationArrivalsViewController") as! StationArrivalsViewController
+        arrivalsViewController.station = self.station
+        return arrivalsViewController
     }
     
     // creates routes view controller

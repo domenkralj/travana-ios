@@ -13,4 +13,8 @@ struct Utils {
         return number * .pi / 180
     }
     
+    public static func routeNumberToInt(routeNumber: String) -> Int? {
+        return Int(routeNumber.replacingOccurrences( of:"[^0-9]", with: "", options: .regularExpression))
+    }
+    
 }

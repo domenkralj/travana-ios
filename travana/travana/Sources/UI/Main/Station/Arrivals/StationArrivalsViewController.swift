@@ -11,15 +11,36 @@ import UIKit
 // view used for showing stations arrivals
 class StationArrivalsViewController: UIViewController {
 
+    public var station: LppStation!
+    private var lppApi: LppApi
+    private var arrivals: [[LppArrival2]]? = nil
+    
     @IBOutlet weak var arrivalsTableView: UITableView!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let appData: TravanaAppDataContainer = app.getAppData()
+        self.lppApi = appData.getLppApi()
+        
+        super.init(coder: aDecoder)
+    }
+    
     
     // when view is loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.arrivalsTableView.dataSource = self
-        self.arrivalsTableView.delegate = self
-        self.arrivalsTableView.register(UINib(nibName: "ArrivalsTableViewCell", bundle: nil), forCellReuseIdentifier: "ArrivalsTableViewCell")
+        self.lppApi.getArrivals(stationCode: station.refId) {
+            (result) in
+            if result.success {
+                self.arrivals = self.splitArrivalsByTripIdAndSort(arrivals: result.data)
+                DispatchQueue.main.async() {
+                    self.arrivalsTableView.reloadData()
+                }
+            } else {
+                print("ŽELVA ERROR")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,20 +54,60 @@ class StationArrivalsViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
+    
+    private func retrieveArrivals() {
+        
+    }
+    
+    // split arrivals by trip id and sort them by route number
+    private func splitArrivalsByTripIdAndSort(arrivals: [LppArrival2]?) -> [[LppArrival2]]? {
+        if arrivals == nil {
+            return nil
+        }
+        var splitedArrivals: [[LppArrival2]] = []
+        
+        // split arrivals by trip id
+        let innerArrivals = arrivals!
+        for arrival in innerArrivals {
+            var isArrivalAdded = false
+            for i in 0..<splitedArrivals.count {
+                
+                if arrival.tripId == splitedArrivals[i][0].tripId {
+                    splitedArrivals[i].append(arrival)
+                    isArrivalAdded = true
+                    break
+                }
+            }
+            if !isArrivalAdded {
+                splitedArrivals.append([arrival])
+            }
+        }
+        // sort array of arrivals by route number
+        splitedArrivals = splitedArrivals.sorted(by: { Utils.routeNumberToInt(routeNumber: $0[0].routeName)! < Utils.routeNumberToInt(routeNumber: $1[0].routeName)! })
+        
+        return splitedArrivals
+    }
+    
+    @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
+    }
 }
 
 extension StationArrivalsViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    // returns size of the tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        if arrivals == nil {
+            return 0
+        }
+        return arrivals!.count
     }
     
+    // renders arrivals table view size
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArrivalsTableViewCell", for: indexPath) as! ArrivalsTableViewCell
-        var string = ""
-        for _ in 0...indexPath.row {
-            string = string + String(indexPath.row) + " "
-        }
-        cell.customText.text = string
+        let arrivals = self.arrivals![indexPath.row]
+        cell.setCell(arrivals: arrivals)
+        cell.reloadCollectionViewArrivalsData()
         return cell
     }
 }
