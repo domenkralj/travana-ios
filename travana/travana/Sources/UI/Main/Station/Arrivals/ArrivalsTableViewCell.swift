@@ -68,6 +68,7 @@ extension ArrivalsTableViewCell: UICollectionViewDataSource, UICollectionViewDel
         return self.arrivals!.count
     }
     
+    // renders arrivals collection view cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.arrivalsCollectionView.dequeueReusableCell(withReuseIdentifier: "ArrivalCollectionViewCell", for: indexPath) as! ArrivalCollectionViewCell
         let arrival = self.arrivals![indexPath.row]
@@ -85,10 +86,6 @@ extension ArrivalsTableViewCell: UICollectionViewDataSource, UICollectionViewDel
             return CGSize(width: 85, height: 35)
         } else if arrival.type == Lpp.SCHEDULED {
             return CGSize(width: 70, height: 35)
-        } else if arrival.type == Lpp.APPROACHING_STATION {
-            // TODO
-        } else if arrival.type == Lpp.DETUR {
-            // TODO
         }
         return CGSize(width: 85, height: 35)
     }

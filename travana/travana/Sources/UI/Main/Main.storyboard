@@ -1119,12 +1119,18 @@
                                     <constraint firstItem="uA4-wg-0Z6" firstAttribute="leading" secondItem="qwQ-Qt-Akl" secondAttribute="leading" id="uSK-yP-CwJ"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oKg-69-MJC">
+                                <rect key="frame" x="188.66666666666666" y="331.66666666666669" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9im-cw-1qI" firstAttribute="bottom" secondItem="BrC-Y6-zJN" secondAttribute="bottom" id="5pu-zL-T9O"/>
                             <constraint firstItem="cA3-Sp-06m" firstAttribute="top" secondItem="BrC-Y6-zJN" secondAttribute="top" constant="50" id="Ael-sP-6tS"/>
                             <constraint firstItem="9im-cw-1qI" firstAttribute="top" secondItem="Fy1-aC-7E0" secondAttribute="top" id="NDE-qd-LLT"/>
+                            <constraint firstItem="oKg-69-MJC" firstAttribute="centerY" secondItem="Fy1-aC-7E0" secondAttribute="centerY" id="Ti1-n4-hHa"/>
+                            <constraint firstItem="oKg-69-MJC" firstAttribute="centerX" secondItem="Fy1-aC-7E0" secondAttribute="centerX" id="VQY-gY-0ge"/>
                             <constraint firstItem="qwQ-Qt-Akl" firstAttribute="centerX" secondItem="Fy1-aC-7E0" secondAttribute="centerX" id="anA-gI-bky"/>
                             <constraint firstItem="cA3-Sp-06m" firstAttribute="centerX" secondItem="Fy1-aC-7E0" secondAttribute="centerX" id="eyc-hY-dre"/>
                             <constraint firstItem="9im-cw-1qI" firstAttribute="trailing" secondItem="BrC-Y6-zJN" secondAttribute="trailing" id="goO-dz-vhE"/>
@@ -1136,6 +1142,9 @@
                     <size key="freeformSize" width="414" height="700"/>
                     <connections>
                         <outlet property="arrivalsTableView" destination="9im-cw-1qI" id="g0c-I9-bd8"/>
+                        <outlet property="errorView" destination="cA3-Sp-06m" id="8w1-wU-gqB"/>
+                        <outlet property="loading" destination="oKg-69-MJC" id="w0l-vQ-UrN"/>
+                        <outlet property="tryAgainView" destination="qwQ-Qt-Akl" id="Pxm-iz-Bvn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8b-bN-mGA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

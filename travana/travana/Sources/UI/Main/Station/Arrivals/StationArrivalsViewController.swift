@@ -14,6 +14,15 @@ class StationArrivalsViewController: UIViewController {
     public var station: LppStation!
     private var lppApi: LppApi
     private var arrivals: [[LppArrival2]]? = nil
+    private var screenState: ScreenState = ScreenState.loading
+    private var requestsFailedInRow = 0
+    private var updateLppDatatimer: Timer!
+    private static let MAX_REQUEST_FAILED_IN_ROW = 3
+    private static let REFRESH_RATE = 5.0     // 5 seconds
+    
+    @IBOutlet weak var loading: UIActivityIndicatorView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var tryAgainView: UIView!
     
     @IBOutlet weak var arrivalsTableView: UITableView!
     
@@ -30,17 +39,13 @@ class StationArrivalsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.lppApi.getArrivals(stationCode: station.refId) {
-            (result) in
-            if result.success {
-                self.arrivals = self.splitArrivalsByTripIdAndSort(arrivals: result.data)
-                DispatchQueue.main.async() {
-                    self.arrivalsTableView.reloadData()
-                }
-            } else {
-                print("ŽELVA ERROR")
-            }
-        }
+        // set ui to the error and try again view
+        self.errorView.setCornerRadius(cornerRadius: 20)
+        self.tryAgainView.setCornerRadius(cornerRadius: 15)
+        
+        self.setUI(state: ScreenState.loading)
+        
+        self.retrieveArrivals()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,15 +53,61 @@ class StationArrivalsViewController: UIViewController {
         
         // set status bar font to white
         setNeedsStatusBarAppearanceUpdate()
+        
+        // create timer which tries to update bus arrivals and bus locations data every 10 seconds
+        self.startUpadatingTimer()
     }
     
-    // set status bar font to white
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
+    override func viewWillDisappear(_ animated: Bool) {
+        // stop timer
+        self.stopUpdatingTimer()
     }
+    
     
     private func retrieveArrivals() {
-        
+        DispatchQueue.main.async() {
+            self.setUI(state: ScreenState.loading)
+        }
+        self.lppApi.getArrivals(stationCode: station.refId) {
+            (result) in
+            if result.success {
+                self.arrivals = self.splitArrivalsByTripIdAndSort(arrivals: result.data)
+                self.requestsFailedInRow = 0
+                DispatchQueue.main.async() {
+                    self.arrivalsTableView.reloadData()
+                    self.setUI(state: ScreenState.done)
+                }
+            } else {
+                DispatchQueue.main.async() {
+                    self.setUI(state: ScreenState.error)
+                }
+            }
+        }
+    }
+    
+    // update arrivals - ui is set just if current state is error
+    // this func is called from timer and never from user
+    @objc private func updateArrivals() {
+        self.lppApi.getArrivals(stationCode: station.refId) {
+            (result) in
+            if result.success {
+                self.arrivals = self.splitArrivalsByTripIdAndSort(arrivals: result.data)
+                self.requestsFailedInRow = 0
+                DispatchQueue.main.async() {
+                    if self.screenState == ScreenState.error {
+                        self.setUI(state: ScreenState.done)
+                    }
+                    self.arrivalsTableView.reloadData()
+                }
+            } else {
+                self.requestsFailedInRow += 1
+                if self.requestsFailedInRow > StationArrivalsViewController.MAX_REQUEST_FAILED_IN_ROW {
+                    DispatchQueue.main.async() {
+                        self.setUI(state: ScreenState.error)
+                    }
+                }
+            }
+        }
     }
     
     // split arrivals by trip id and sort them by route number
@@ -88,7 +139,49 @@ class StationArrivalsViewController: UIViewController {
         return splitedArrivals
     }
     
+    private func startUpadatingTimer() {
+        self.updateLppDatatimer = Timer.scheduledTimer(timeInterval: StationArrivalsViewController.REFRESH_RATE, target: self, selector: #selector(self.updateArrivals), userInfo: nil, repeats: true)
+    }
+    
+    private func stopUpdatingTimer() {
+        self.updateLppDatatimer?.invalidate()
+        self.updateLppDatatimer = nil
+    }
+    
+    // called when try again button is clicked
     @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
+        // set ui to loading
+        DispatchQueue.main.async {
+            self.setUI(state: ScreenState.loading)
+        }
+        // try to retieve data again
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.retrieveArrivals()
+        })
+    }
+    
+    // set ui, depends on screen state
+    private func setUI(state: ScreenState) {
+        switch state {
+        case ScreenState.done:
+            self.arrivalsTableView.isHidden = false
+            self.loading.stopAnimating()
+            self.errorView.isHidden = true
+            self.tryAgainView.isHidden = true
+            self.screenState = ScreenState.done
+        case ScreenState.error:
+            self.arrivalsTableView.isHidden = true
+            self.loading.stopAnimating()
+            self.errorView.isHidden = false
+            self.tryAgainView.isHidden = false
+            self.screenState = ScreenState.error
+        case ScreenState.loading:
+            self.arrivalsTableView.isHidden = true
+            self.loading.startAnimating()
+            self.errorView.isHidden = true
+            self.tryAgainView.isHidden = true
+            self.screenState = ScreenState.loading
+        }
     }
 }
 
