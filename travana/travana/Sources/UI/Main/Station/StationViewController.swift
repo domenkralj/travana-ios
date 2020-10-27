@@ -64,6 +64,7 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         setNeedsStatusBarAppearanceUpdate()
     }
     
+    // get an instance of the StationPageViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? StationPageViewController, segue.identifier == "showStationPageViewController" {
             // pass station data to station page view controller

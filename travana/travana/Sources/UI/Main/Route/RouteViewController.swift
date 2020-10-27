@@ -432,7 +432,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
 
     // called when center on location button is clicked
     // check if location is availible, update map camera view
-    @IBAction func centerOnLocationButtonClicked(_ sender: Any) {
+    @IBAction func centerOnLocationButtonClicked(_ sender: UIButton) {
         // if location is enabled, center map camera on location or ask for location
         if mapView.isMyLocationEnabled {
             let location: CLLocationCoordinate2D? = self.locationManager.location?.coordinate

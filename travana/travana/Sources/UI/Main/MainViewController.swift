@@ -19,15 +19,15 @@ class MainViewController: UIViewController {
         case collapsed
     }
     
-    var favoriteNearbyStationBottomSheetViewController:FavoriteNearbyStationsBottomSheetViewController!
-    var visualEffectView:UIVisualEffectView!
+    var favoriteNearbyStationBottomSheetViewController: FavoriteNearbyStationsBottomSheetViewController!
+    var visualEffectView: UIVisualEffectView!
     
-    var cardHeight:CGFloat = 0
-    let cardHandleAreaHeight:CGFloat = 150
+    var cardHeight: CGFloat = 0
+    let cardHandleAreaHeight: CGFloat = 150
     private let locationManager = CLLocationManager()
     
     var cardVisible = false
-    var nextState:CardState {
+    var nextState: CardState {
         return cardVisible ? .collapsed : .expanded
     }
     
@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var centerOnLocationView: UIView!
     
     override func viewDidLoad() {
         do {
@@ -52,7 +53,9 @@ class MainViewController: UIViewController {
         }
         
         // set corner radius to the top bar
-        self.topBarView.layer.cornerRadius = 10
+        self.topBarView.setCornerRadius(cornerRadius: 10)
+        
+        self.centerOnLocationView.setCornerRadius(cornerRadius: 27)
         
         // set up bottom sheet favorite, nearby station
         setUpBottomSheetViewController()
@@ -64,6 +67,29 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // set camera to Ljubljana - default city
+        let ljubljana = GMSCameraPosition.camera(
+          withLatitude: 46.056946,
+          longitude: 14.505751,
+          zoom: 12
+        )
+        self.mapView.camera = ljubljana
+        
+        // if location services are availible show location on map
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    self.mapView.isMyLocationEnabled = false
+                case .authorizedAlways, .authorizedWhenInUse:
+                    self.mapView.isMyLocationEnabled = true
+                default:
+                    self.mapView.isMyLocationEnabled = false
+            }
+        } else {
+            // Location services are not enabled
+            self.mapView.isMyLocationEnabled = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,17 +113,19 @@ class MainViewController: UIViewController {
         self.view.addSubview(visualEffectView)
         
         favoriteNearbyStationBottomSheetViewController = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FavoriteNearbyStationsBottomSheetViewController")) as? FavoriteNearbyStationsBottomSheetViewController
+        self.favoriteNearbyStationBottomSheetViewController.mainViewController = self
         self.addChild(favoriteNearbyStationBottomSheetViewController)
         self.view.addSubview(favoriteNearbyStationBottomSheetViewController.view)
         
         favoriteNearbyStationBottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
         
         favoriteNearbyStationBottomSheetViewController.view.clipsToBounds = true
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.handleCardTap(recognzier:)))
+    
+        // this should be commented - better ux
+        //favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
+        //let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.handleCardTap(recognzier:)))
+    
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.handleCardPan(recognizer:)))
-        
-        favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
         favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
         
         // enable user interaction with self.view
@@ -105,10 +133,14 @@ class MainViewController: UIViewController {
         
     }
     
-    @IBAction func handleCardTap(recognzier:UITapGestureRecognizer) {
+    public func tooggleFavoritesNeabyBottomSheetViewController() {
+        self.animateTransitionIfNeeded(state: nextState, duration: 0.9)
+    }
+    
+    @IBAction func handleCardTap(recognzier: UITapGestureRecognizer) {
         switch recognzier.state {
         case .ended:
-            animateTransitionIfNeeded(state: nextState, duration: 0.9)
+            self.animateTransitionIfNeeded(state: nextState, duration: 0.9)
         default:
             break
         }
@@ -122,9 +154,9 @@ class MainViewController: UIViewController {
             let translation = recognizer.translation(in: self.favoriteNearbyStationBottomSheetViewController.handleArea)
             var fractionComplete = translation.y / cardHeight
             fractionComplete = cardVisible ? fractionComplete : -fractionComplete
-            updateInteractiveTransition(fractionCompleted: fractionComplete)
+            self.updateInteractiveTransition(fractionCompleted: fractionComplete)
         case .ended:
-            continueInteractiveTransition()
+            self.continueInteractiveTransition()
         default:
             break
         }
@@ -204,6 +236,23 @@ class MainViewController: UIViewController {
         slideMenuNavigationController.presentationStyle = .menuSlideIn
         slideMenuNavigationController.navigationBar.isHidden = true
         self.present(slideMenuNavigationController, animated: true, completion: nil)
+    }
+    
+    // called when center on location button is clicked
+    @IBAction func centerOnLocationButtonClicked(_ sender: UIButton) {
+        // if location is enabled, center map camera on location or ask for location
+        if mapView.isMyLocationEnabled {
+            let location: CLLocationCoordinate2D? = self.locationManager.location?.coordinate
+            if location != nil {
+                self.mapView.animate(to: GMSCameraPosition.camera(withLatitude: location!.latitude, longitude: location!.longitude, zoom: 16.0))
+            } else {
+                // Do nothing - maybe show toast, that user location is not availible
+            }
+        } else {
+            // try to ask for user location
+            // ask for location use in foreground
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
 

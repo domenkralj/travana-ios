@@ -43,6 +43,9 @@
 		2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */; };
 		2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */; };
 		2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */; };
+		206671EE25489CC400799073 /* FavoriteStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671ED25489CC400799073 /* FavoriteStationsViewController.swift */; };
+		206671F025489CD300799073 /* NearbyStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671EF25489CD300799073 /* NearbyStationsViewController.swift */; };
+		206671F225489D2800799073 /* FavoriteNearbyStationsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */; };
 		2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1A0252A1D6600DC221D /* google-maps-style.json */; };
 		2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */; };
 		2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A6252A41D000DC221D /* SearchViewController.swift */; };
@@ -133,6 +136,9 @@
 		20538FFE252F955E00EBD06A /* LppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppRoute.swift; sourceTree = "<group>"; };
 		20539000252F97AD00EBD06A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		206671ED25489CC400799073 /* FavoriteStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStationsViewController.swift; sourceTree = "<group>"; };
+		206671EF25489CD300799073 /* NearbyStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsViewController.swift; sourceTree = "<group>"; };
+		206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsPageViewController.swift; sourceTree = "<group>"; };
 		2066F1A0252A1D6600DC221D /* google-maps-style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "google-maps-style.json"; sourceTree = "<group>"; };
 		2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsBottomSheetViewController.swift; sourceTree = "<group>"; };
 		2066F1A6252A41D000DC221D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -464,9 +470,9 @@
 				2066F1AF252A4CCF00DC221D /* Info */,
 				2066F1AD252A4CBB00DC221D /* Search */,
 				2066F1AA252A4B8200DC221D /* Detours */,
+				206671EC25489C8900799073 /* FavoriteNearbyStations */,
 				20518C9E2522616D0006F190 /* MainViewController.swift */,
 				20518CA0252261910006F190 /* Main.storyboard */,
-				2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */,
 				2066F1A8252A439300DC221D /* MainNavigationDrawerViewController.swift */,
 			);
 			path = Main;
@@ -506,6 +512,17 @@
 				206865662545CF6D000DCD80 /* LppArrival2Wrapper.swift */,
 			);
 			path = LppApiObjects;
+			sourceTree = "<group>";
+		};
+		206671EC25489C8900799073 /* FavoriteNearbyStations */ = {
+			isa = PBXGroup;
+			children = (
+				2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */,
+				206671ED25489CC400799073 /* FavoriteStationsViewController.swift */,
+				206671EF25489CD300799073 /* NearbyStationsViewController.swift */,
+				206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */,
+			);
+			path = FavoriteNearbyStations;
 			sourceTree = "<group>";
 		};
 		2066F1AA252A4B8200DC221D /* Detours */ = {
@@ -799,6 +816,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2071C66125436A7D00FA80B2 /* LppRouteOnStation.swift in Sources */,
+				206671EE25489CC400799073 /* FavoriteStationsViewController.swift in Sources */,
 				206865652545CE7D000DCD80 /* LppArrival2Station.swift in Sources */,
 				20518C8A25225AAB0006F190 /* String.swift in Sources */,
 				20538FF9252F8FDF00EBD06A /* LppApiResponse.swift in Sources */,
@@ -841,6 +859,7 @@
 				2066F1B1252A4CE300DC221D /* SettingsViewController.swift in Sources */,
 				2071C65D254344A500FA80B2 /* StationArrivalsViewController.swift in Sources */,
 				20518C77252257910006F190 /* Colors.swift in Sources */,
+				206671F025489CD300799073 /* NearbyStationsViewController.swift in Sources */,
 				20518C71252256D70006F190 /* Date.swift in Sources */,
 				2067761825446F8B0077484B /* LppTimetable.swift in Sources */,
 				20DC5002253EBB09008214F0 /* DetourTableViewCell.swift in Sources */,
@@ -848,6 +867,7 @@
 				2067761D254470A40077484B /* LppTimetableRouteGroup.swift in Sources */,
 				20847F462538CA9A00EFC157 /* LppStationArrival.swift in Sources */,
 				20518C7B252257CC0006F190 /* UIAlertController.swift in Sources */,
+				206671F225489D2800799073 /* FavoriteNearbyStationsPageViewController.swift in Sources */,
 				20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */,
 				20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */,
 				2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */,
