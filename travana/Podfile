@@ -10,5 +10,6 @@ target 'travana' do
   pod 'SwiftyJSON', '5.0.0'
   pod 'Willow', '5.2.1'
   pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils', '~> 3.4.1'
   pod 'SideMenu', "6.4.9" # Side menu (drawer)
 end

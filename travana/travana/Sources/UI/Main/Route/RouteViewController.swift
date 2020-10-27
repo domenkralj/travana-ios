@@ -397,6 +397,13 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         self.visualEffectView.removeFromSuperview()
     }
         
+    // called when one of the markers is clicked
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+      // center the map on tapped marker
+      mapView.animate(toLocation: marker.position)
+      return false
+    }
+    
     // called when info window (window, which is shown when user clicks on the marker)
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         //TODO - OPEN STATION VIEW CONTROLLER

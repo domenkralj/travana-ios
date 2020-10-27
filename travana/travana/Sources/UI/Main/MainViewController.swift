@@ -8,11 +8,12 @@
 
 import UIKit
 import GoogleMaps
+import GoogleMapsUtils
 import SideMenu
 import CoreLocation
  
 // ViewController used for controlling all container views of the main application
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, GMSMapViewDelegate {
     
     enum CardState {
         case expanded
@@ -34,11 +35,26 @@ class MainViewController: UIViewController {
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrupted:CGFloat = 0
     
+    public var stations: [LppStation]? = nil
+    
+    private let lppApi: LppApi
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "MainViewController")
+    private var clusterManager: GMUClusterManager!
 
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centerOnLocationView: UIView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var tryAgainView: UIView!
+    @IBOutlet weak var loadingView: UIView!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let appData: TravanaAppDataContainer = app.getAppData()
+        self.lppApi = appData.getLppApi()
+        
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         do {
@@ -52,6 +68,18 @@ class MainViewController: UIViewController {
             logger.error("One or more of the map styles failed to load. \(error)")
         }
         
+        // Set up the cluster manager with the supplied icon generator and
+        // renderer.
+        let iconGenerator = GMUDefaultClusterIconGenerator()
+        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+        let renderer = GMUDefaultClusterRenderer(mapView: mapView,
+                                    clusterIconGenerator: iconGenerator)
+        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm,
+                                                          renderer: renderer)
+
+        // Register self to listen to GMSMapViewDelegate events.
+        clusterManager.setMapDelegate(self)
+        
         // set corner radius to the top bar
         self.topBarView.setCornerRadius(cornerRadius: 10)
         
@@ -62,7 +90,15 @@ class MainViewController: UIViewController {
         
         // ask for location use in foreground
         self.locationManager.requestWhenInUseAuthorization()
-
+        
+        // set ui to the views
+        self.errorView.setCornerRadius(cornerRadius: 20)
+        self.tryAgainView.setCornerRadius(cornerRadius: 17)
+        self.loadingView.setCornerRadius(cornerRadius: 17)
+        
+        // retrive stations data, and draw stations markers and show favorites and nearby tableviews
+        self.retrieveStations()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,6 +138,69 @@ class MainViewController: UIViewController {
     // set status bar font to white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
+    }
+    
+    public func retrieveStations() {
+        DispatchQueue.main.async() {
+            self.setUI(state: ScreenState.loading)
+        }
+        self.lppApi.getStations() { (result) in
+            if result.success {
+                self.stations = result.data
+                DispatchQueue.main.async() {
+                    self.setUI(state: ScreenState.done)
+                    self.drawStations()
+                }
+            } else {
+                DispatchQueue.main.async() {
+                    self.setUI(state: ScreenState.error)
+                }
+            }
+        }
+    }
+    
+    public func drawStations() {
+        if self.stations == nil {
+            self.logger.error("Trying to draw stations markers without stations data")
+            return
+        }
+        
+        // create station markers
+        let stationMarkerView = UIImageView(image: UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate))
+        stationMarkerView.tintColor = UIColor.white
+        
+        // add stations markers
+        for station in self.stations! {
+            let stationCoor = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
+            
+            let stationMarker = GMSMarker(position: stationCoor)
+            stationMarker.title = station.name
+            stationMarker.userData = String(station.refId)    // add station code tag to marker - read station code - when user click on marker
+            stationMarker.snippet = ""                              // empty snippet creates info window better
+            stationMarker.iconView = stationMarkerView
+            stationMarker.isFlat = true
+            stationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            self.clusterManager.add(stationMarker)
+        }
+        
+    }
+    
+    // set ui, depends on screen state
+    private func setUI(state: ScreenState) {
+        switch state {
+        case ScreenState.done:
+            self.loadingView.isHidden = true
+            self.errorView.isHidden = true
+            self.tryAgainView.isHidden = true
+        case ScreenState.error:
+            self.loadingView.isHidden = true
+            self.errorView.isHidden = false
+            self.tryAgainView.isHidden = false
+        case ScreenState.loading:
+            self.loadingView.isHidden = false
+            self.errorView.isHidden = true
+            self.tryAgainView.isHidden = true
+        }
     }
     
     func setUpBottomSheetViewController() {
@@ -220,6 +319,24 @@ class MainViewController: UIViewController {
         }
     }
     
+    
+    // TODO
+    // called when one of the markers is clicked
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+      // center the map on tapped marker
+      mapView.animate(toLocation: marker.position)
+      // check if a cluster icon was tapped
+      if marker.userData is GMUCluster {
+        // zoom in on tapped cluster
+        mapView.animate(toZoom: mapView.camera.zoom + 1)
+        NSLog("Did tap cluster")
+        return true
+      }
+
+      NSLog("Did tap a normal marker")
+      return false
+    }
+    
     // called when search button is clicked
     @IBAction func searchButtonClicked(_ sender: UIButton) {
         // opean search view controller
@@ -253,6 +370,18 @@ class MainViewController: UIViewController {
             // ask for location use in foreground
             self.locationManager.requestWhenInUseAuthorization()
         }
+    }
+    
+    // called when try again button is clicked
+    @IBAction func tryAgainButtonClicked(_ sender: UIButton) {
+        // set ui to loading
+        DispatchQueue.main.async {
+            self.setUI(state: ScreenState.loading)
+        }
+        // try to retieve data again
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.retrieveStations()
+        })
     }
 }
 
