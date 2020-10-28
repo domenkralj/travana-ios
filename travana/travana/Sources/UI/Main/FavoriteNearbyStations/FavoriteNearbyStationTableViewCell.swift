@@ -74,12 +74,12 @@ extension FavoriteNearbyStationTableViewCell: UICollectionViewDataSource {
             return 10
         }
         
-        return station!.routeGroupsOnStation.count
+        return station!.routeGroupsOnStation!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.routesUiCollectionView.dequeueReusableCell(withReuseIdentifier: "RoutePillCollectionViewCell", for: indexPath) as! RoutePillCollectionViewCell
-        let routeNumber = station!.routeGroupsOnStation[indexPath.row]
+        let routeNumber = station!.routeGroupsOnStation![indexPath.row]
         cell.setCell(routeNumber: routeNumber)
         return cell
     }

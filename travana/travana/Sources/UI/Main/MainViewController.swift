@@ -36,11 +36,13 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     var animationProgressWhenInterrupted:CGFloat = 0
     
     public var stations: [LppStation]? = nil
+    public var screenState: ScreenState = ScreenState.loading
     
     private let lppApi: LppApi
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "MainViewController")
     private var clusterManager: GMUClusterManager!
-
+    private var isFirstTimeSet: Bool = true
+    
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centerOnLocationView: UIView!
@@ -96,6 +98,8 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         self.tryAgainView.setCornerRadius(cornerRadius: 17)
         self.loadingView.setCornerRadius(cornerRadius: 17)
         
+        self.setUI(state: ScreenState.loading)
+        
         // retrive stations data, and draw stations markers and show favorites and nearby tableviews
         self.retrieveStations()
         
@@ -104,13 +108,17 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // set camera to Ljubljana - default city
-        let ljubljana = GMSCameraPosition.camera(
-          withLatitude: 46.056946,
-          longitude: 14.505751,
-          zoom: 12
-        )
-        self.mapView.camera = ljubljana
+        
+        if isFirstTimeSet {
+            // set camera to Ljubljana - default city
+            let ljubljana = GMSCameraPosition.camera(
+              withLatitude: 46.056946,
+              longitude: 14.505751,
+              zoom: 12
+            )
+            self.mapView.camera = ljubljana
+            self.isFirstTimeSet = false
+        }
         
         // if location services are availible show location on map
         if CLLocationManager.locationServicesEnabled() {
@@ -165,11 +173,20 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     
     private func setFavoriteNearbyViewControllers() {
         let favoriteStationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[0] as! FavoriteStationsViewController
-        //let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
-        favoriteStationViewController.reloadViewController()
-        //nearbyStatationViewController.reloadViewController()
+        let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
+        
+        
+        // realod view controller if possible - if it is visible
+        if favoriteStationViewController.viewIfLoaded?.window != nil {
+            favoriteStationViewController.reloadViewController()
+        }
+        
+        if nearbyStatationViewController.viewIfLoaded?.window != nil {
+            nearbyStatationViewController.reloadViewController()
+        }
     }
     
+    // draw stations on the map
     private func drawStations() {
         if self.stations == nil {
             self.logger.error("Trying to draw stations markers without stations data")
@@ -200,27 +217,53 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     private func setUI(state: ScreenState) {
         
         let favoriteStationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[0] as! FavoriteStationsViewController
-        //let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
+        let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
         
         switch state {
         case ScreenState.done:
             self.loadingView.isHidden = true
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
-            favoriteStationViewController.setUI(state: ScreenState.done)
-            //nearbyStatationViewController.setUI(state: ScreenState.done)
+            self.screenState = ScreenState.done
+             
+            // set ui of favoriteStationViewController and nearbyStatationViewController - if possible
+            if favoriteStationViewController.viewIfLoaded?.window != nil {
+                favoriteStationViewController.setUI(state: ScreenState.done)
+            }
+            
+            if nearbyStatationViewController.viewIfLoaded?.window != nil {
+                nearbyStatationViewController.setUI(state: ScreenState.done)
+            }
+            
         case ScreenState.error:
             self.loadingView.isHidden = true
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
-            favoriteStationViewController.setUI(state: ScreenState.error)
-            //nearbyStatationViewController.setUI(state: ScreenState.error)
+            self.screenState = ScreenState.error
+            
+            // set ui of favoriteStationViewController and nearbyStatationViewController - if possible
+            if favoriteStationViewController.viewIfLoaded?.window != nil {
+                favoriteStationViewController.setUI(state: ScreenState.error)
+            }
+            
+            if nearbyStatationViewController.viewIfLoaded?.window != nil {
+                nearbyStatationViewController.setUI(state: ScreenState.error)
+            }
+            
         case ScreenState.loading:
             self.loadingView.isHidden = false
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
-            favoriteStationViewController.setUI(state: ScreenState.loading)
-            //nearbyStatationViewController.setUI(state: ScreenState.loading)
+            self.screenState = ScreenState.loading
+            
+            // set ui of favoriteStationViewController and nearbyStatationViewController - if possible
+            if favoriteStationViewController.viewIfLoaded?.window != nil {
+                favoriteStationViewController.setUI(state: ScreenState.loading)
+            }
+            
+            if nearbyStatationViewController.viewIfLoaded?.window != nil {
+                nearbyStatationViewController.setUI(state: ScreenState.loading)
+            }
         }
     }
     
@@ -340,8 +383,6 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    
-    // TODO
     // called when one of the markers is clicked
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
       // center the map on tapped marker
@@ -350,11 +391,8 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
       if marker.userData is GMUCluster {
         // zoom in on tapped cluster
         mapView.animate(toZoom: mapView.camera.zoom + 1)
-        print("Did tap cluster")
         return true
       }
-
-      print("Did tap a normal marker")
       return false
     }
     
@@ -373,11 +411,37 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             return nil
         }
         stationInfoWindow.setCell(station: markerStation!)
+        
+        // add click listner on the info window
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.openStationViewController (_:)))
+        stationInfoWindow.mainViewHolder.addGestureRecognizer(gesture)
+        
         return stationInfoWindow
     }
     
-    func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-
+    // called when info window (window, which is shown when user clicks on the marker)
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        // opens station view controller
+        let stationRefId = marker.title
+        var stationData: LppStation? = nil
+        for station in self.stations! {
+            if station.refId == stationRefId {
+                stationData = station
+                break
+            }
+        }
+        if stationData == nil {
+            return
+        }
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
+        vc.station = stationData
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    // opens station view controller
+    @objc func openStationViewController(_ sender:UITapGestureRecognizer){
+       print("open")
     }
     
     // called when search button is clicked

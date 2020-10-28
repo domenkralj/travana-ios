@@ -37,7 +37,7 @@ class StationInfoWindowUIView: UIView {
         self.routesUiCollectionView.dataSource = self
     
         // set height of the window depends of route group count
-        let routeGroupCount = station.routeGroupsOnStation.count
+        let routeGroupCount = station.routeGroupsOnStation!.count
         
         switch routeGroupCount {
         case 0..<6:
@@ -60,13 +60,13 @@ extension StationInfoWindowUIView: UICollectionViewDataSource {
     
     // returns size of the rotue pills collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return station.routeGroupsOnStation.count
+        return station.routeGroupsOnStation!.count
     }
     
     // renders route pills collection view
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = routesUiCollectionView.dequeueReusableCell(withReuseIdentifier: "RoutePillCollectionViewCell", for: indexPath) as! RoutePillCollectionViewCell
-        let routeGroupName = station.routeGroupsOnStation[indexPath.row]
+        let routeGroupName = station.routeGroupsOnStation![indexPath.row]
         cell.setCell(routeNumber: routeGroupName)
         return cell
     }

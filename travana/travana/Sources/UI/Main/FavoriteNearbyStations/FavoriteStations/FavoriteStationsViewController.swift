@@ -10,7 +10,7 @@ import UIKit
 
 class FavoriteStationsViewController: UIViewController {
 
-    public var mainViewController: MainViewController? = nil
+    public var mainViewController: MainViewController!
     private var favoriteStations: [LppStation]? = nil
     
     @IBOutlet weak var favoriteStationsTableView: UITableView!
@@ -31,6 +31,11 @@ class FavoriteStationsViewController: UIViewController {
         self.errorView.setCornerRadius(cornerRadius: 20)
         self.tryAgainView.setCornerRadius(cornerRadius: 15)
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.reloadViewController()
+        self.setUI(state: self.mainViewController.screenState)
     }
     
     // filter stations data and update table view

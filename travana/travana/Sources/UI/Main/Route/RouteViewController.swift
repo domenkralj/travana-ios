@@ -342,7 +342,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             
             let stationMarker = GMSMarker(position: stationCoor)
             stationMarker.title = station.name
-            stationMarker.userData = String(station.stationCode)    // add station code tag to marker - read station code - when user click on marker
+            stationMarker.userData = station                        // add station code tag to marker - read station code - when user click on marker
             stationMarker.snippet = ""                              // empty snippet creates info window better
             stationMarker.iconView = stationMarkerView
             stationMarker.isFlat = true
@@ -352,7 +352,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             
             let stationMarkerInner = GMSMarker(position: stationCoor)
             stationMarkerInner.title = station.name
-            stationMarkerInner.userData = String(station.stationCode)    // add station code tag to marker - read station code - when user click on marker
+            stationMarkerInner.userData = station                   // add station code tag to marker - read station code - when user click on marker
             stationMarkerInner.snippet = ""                         // empty snippet creates info window better
             stationMarkerInner.iconView = stationMarkerViewInner
             stationMarkerInner.isFlat = true
@@ -406,9 +406,17 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
     
     // called when info window (window, which is shown when user clicks on the marker)
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        //TODO - OPEN STATION VIEW CONTROLLER
-        print(marker.userData)
-        print("TODO - OPEN STATION VIEW CONTROLLER FOR STATION WITH: " + (marker.userData as? String ?? "user data is nil"))
+        // open station view controller
+        let stationArrival = marker.userData as? LppStationArrival
+        if stationArrival == nil {
+            return
+        }
+        let station = LppStation(intId: stationArrival!.stationIntId, latitude: stationArrival!.latitude, longitude: stationArrival!.longitude, name: stationArrival!.name, refId: stationArrival!.stationCode)
+        // open station view controller
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
+        vc.station = station
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func handleCardTap(recognzier:UITapGestureRecognizer) {
