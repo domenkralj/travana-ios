@@ -180,6 +180,14 @@ extension UIColor {
     static var MAIN_ORANGE: UIColor {
         return Colors.UIColorFromRGB(rgbValue: 0xFFBB33)
     }
+    
+    static var MAIN_BLUE: UIColor {
+        return Colors.UIColorFromRGB(rgbValue: 0x45BEE6)
+    }
+    
+    static var MAIN_GREEN: UIColor {
+        return Colors.UIColorFromRGB(rgbValue: 0x75E645)
+    }
 
 }
 

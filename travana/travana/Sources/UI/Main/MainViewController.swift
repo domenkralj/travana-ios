@@ -70,7 +70,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         
         // Set up the cluster manager with the supplied icon generator and
         // renderer.
-        let iconGenerator = GMUDefaultClusterIconGenerator()
+        let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [5, 10, 50, 200], backgroundColors: [UIColor.MAIN_ORANGE, UIColor.MAIN_BLUE, UIColor.MAIN_GREEN, UIColor.MAIN_RED])
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: mapView,
                                     clusterIconGenerator: iconGenerator)
@@ -352,6 +352,10 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
         stationInfoWindow.setCell(station: markerStation!)
         return stationInfoWindow
+    }
+    
+    func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
+
     }
     
     // called when search button is clicked
