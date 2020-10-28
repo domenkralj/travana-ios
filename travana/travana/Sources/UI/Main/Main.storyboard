@@ -302,7 +302,7 @@
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pin_nearby" translatesAutoresizingMaskIntoConstraints="NO" id="guA-Yo-Bci">
                                                                 <rect key="frame" x="18.333333333333314" y="0.0" width="25" height="25"/>
-                                                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="tintColor" red="0.27058823529411763" green="0.74509803921568629" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="bLc-jp-47a"/>
                                                                     <constraint firstAttribute="height" constant="25" id="edN-HV-vMJ"/>
@@ -342,7 +342,7 @@
                                         <rect key="frame" x="0.0" y="116" width="207" height="3"/>
                                         <color key="backgroundColor" red="0.84705882349999995" green="0.1019607843" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="207" id="gQt-Ks-kDA"/>
+                                            <constraint firstAttribute="width" priority="250" constant="207" id="gQt-Ks-kDA"/>
                                             <constraint firstAttribute="height" constant="3" id="n16-KA-Zp1"/>
                                         </constraints>
                                     </view>
@@ -385,7 +385,7 @@
                     <connections>
                         <outlet property="handleArea" destination="8U8-St-nfB" id="0cx-7T-bIX"/>
                         <outlet property="handleView" destination="ueq-5Z-jh8" id="TyL-XF-Bb8"/>
-                        <outlet property="pageLineView" destination="8U8-St-nfB" id="85I-Op-hxX"/>
+                        <outlet property="pageLineView" destination="vha-b3-CYe" id="hKe-2s-xMk"/>
                         <outlet property="pageLineViewConstraintLeftoSafeArea" destination="hsP-7k-EQB" id="LFA-be-hi4"/>
                     </connections>
                 </viewController>

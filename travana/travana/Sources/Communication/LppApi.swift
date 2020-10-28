@@ -32,9 +32,11 @@ class LppApi {
     
     public func getStations(callback: @escaping (Response<[LppStation]>) -> ()) {
         
+        let params = ["show-subroutes": "1"]
+        
         var stations: [LppStation]? = nil
         
-        self.httpClient.getRequest(urlStr: LppApi.STATIONS_DETAILS_LINK, params: nil, headers: nil) { [weak self] (error, response) in
+        self.httpClient.getRequest(urlStr: LppApi.STATIONS_DETAILS_LINK, params: params, headers: nil) { [weak self] (error, response) in
         guard let self = self else { return }
         
             if error != nil {

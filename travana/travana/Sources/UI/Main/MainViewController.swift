@@ -14,7 +14,7 @@ import CoreLocation
  
 // ViewController used for controlling all container views of the main application
 class MainViewController: UIViewController, GMSMapViewDelegate {
-    
+
     enum CardState {
         case expanded
         case collapsed
@@ -166,16 +166,15 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
         
         // create station markers
-        let stationMarkerView = UIImageView(image: UIImage(named: "ic_station_pin_marker")!.withRenderingMode(.alwaysTemplate))
-        stationMarkerView.tintColor = UIColor.white
+        let stationMarkerView = UIImageView(image: UIImage(named: "ic_station_pin_marker_basic")!.withRenderingMode(.alwaysOriginal))
         
         // add stations markers
         for station in self.stations! {
             let stationCoor = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
             
             let stationMarker = GMSMarker(position: stationCoor)
-            stationMarker.title = station.name
-            stationMarker.userData = String(station.refId)    // add station code tag to marker - read station code - when user click on marker
+            stationMarker.title = station.refId
+            stationMarker.userData = station                        // add station code tag to marker - read station code - when user click on marker
             stationMarker.snippet = ""                              // empty snippet creates info window better
             stationMarker.iconView = stationMarkerView
             stationMarker.isFlat = true
@@ -329,12 +328,30 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
       if marker.userData is GMUCluster {
         // zoom in on tapped cluster
         mapView.animate(toZoom: mapView.camera.zoom + 1)
-        NSLog("Did tap cluster")
+        print("Did tap cluster")
         return true
       }
 
-      NSLog("Did tap a normal marker")
+      print("Did tap a normal marker")
       return false
+    }
+    
+    // create custom info window
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        let stationInfoWindow = Bundle.main.loadNibNamed("StationInfoWindow", owner: self, options: nil)?[0] as! StationInfoWindowUIView
+        let stationRefId = marker.title
+        var markerStation: LppStation? = nil
+        for station in self.stations! {
+            if station.refId == stationRefId {
+                markerStation = station
+                break
+            }
+        }
+        if markerStation == nil {
+            return nil
+        }
+        stationInfoWindow.setCell(station: markerStation!)
+        return stationInfoWindow
     }
     
     // called when search button is clicked

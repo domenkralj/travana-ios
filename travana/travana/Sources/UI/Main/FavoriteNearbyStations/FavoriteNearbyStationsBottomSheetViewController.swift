@@ -33,6 +33,9 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
     // get an instance of the FavoriteNearbyStationsPageViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FavoriteNearbyStationsPageViewController, segue.identifier == "showFavoriteNearbyStationsPageViewController" {
