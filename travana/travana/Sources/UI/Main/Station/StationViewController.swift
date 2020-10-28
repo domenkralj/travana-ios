@@ -53,8 +53,9 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         // set station to center view
         self.setToCenterView(show: station.refId.toInt() % 2 == 1)
         
-        // TODO - CHECK IF STATION IS FAVORITES
-        // IF YES SET isStationInFavorites
+        self.isStationInFavorites = LppApi.isStationInFavorites(stationRefId: station.refId)
+        self.setFavoritesButton(selected: self.isStationInFavorites)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,9 +152,14 @@ class StationViewController: UIViewController, StationPageViewControllerListener
     
     // called when add to favorites button is clicked
     @IBAction func addToFavoritesButtonClicked(_ sender: UIButton) {
+        // remove or add stations to favorites and set ui
+        if isStationInFavorites {
+            LppApi.removeStationFromFavorites(stationRefId: self.station.refId)
+        } else {
+            LppApi.addStationToFavorites(stationRefId: self.station.refId)
+        }
         self.isStationInFavorites = !self.isStationInFavorites
         self.setFavoritesButton(selected: isStationInFavorites)
-        // TODO ADD OR REMOVE STATION FROM FAVORITES
     }
     
     // called when opposite station button is clicked

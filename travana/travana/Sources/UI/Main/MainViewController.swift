@@ -133,6 +133,9 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         
         // set status bar font to white
         setNeedsStatusBarAppearanceUpdate()
+        
+        // reload view controllers - if one of the stations were added to favorites this will be updated here
+        self.setFavoriteNearbyViewControllers()
     }
     
     // set status bar font to white
@@ -164,7 +167,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     private func setFavoriteNearbyViewControllers() {
         let favoriteStationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[0] as! FavoriteStationsViewController
         //let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
-        favoriteStationViewController.favoriteStationsTableView.reloadData()
+        favoriteStationViewController.reloadViewController()
     }
     
     private func drawStations() {

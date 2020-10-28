@@ -11,12 +11,14 @@ import UIKit
 class FavoriteStationsViewController: UIViewController {
 
     public var mainViewController: MainViewController? = nil
+    private var favoriteStations: [LppStation]? = nil
     
     @IBOutlet weak var favoriteStationsTableView: UITableView!
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
-
+    @IBOutlet weak var noFavoritesAddedStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,39 @@ class FavoriteStationsViewController: UIViewController {
         self.errorView.setCornerRadius(cornerRadius: 20)
         self.tryAgainView.setCornerRadius(cornerRadius: 15)
 
+    }
+    
+    // filter stations data and update table view
+    public func reloadViewController() {
+    
+        let fullStations = self.mainViewController?.stations
+        if fullStations == nil {
+            DispatchQueue.main.async {
+                self.favoriteStationsTableView.reloadData()
+            }
+            return
+        }
+        var innerFavoriteStations: [LppStation] = []
+        for station in fullStations! {
+            if LppApi.isStationInFavorites(stationRefId: station.refId) {
+                innerFavoriteStations.append(station)
+            }
+        }
+        self.favoriteStations = innerFavoriteStations
+        
+        DispatchQueue.main.async {
+            if self.favoriteStations!.count == 0 {
+                self.noFavoritesAddedStackView.isHidden = false
+                self.favoriteStationsTableView.isHidden = true
+            } else {
+                self.noFavoritesAddedStackView.isHidden = true
+                self.favoriteStationsTableView.isHidden = false
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.favoriteStationsTableView.reloadData()
+        }
     }
     
     // set ui, depends on screen state
@@ -68,16 +103,26 @@ class FavoriteStationsViewController: UIViewController {
 extension FavoriteStationsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.mainViewController?.stations == nil {
+        if self.favoriteStations == nil {
             return 0
         }
         
-        return self.mainViewController!.stations!.count
+        return self.favoriteStations!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteNearbyStationTableViewCell", for: indexPath) as! FavoriteNearbyStationTableViewCell
-        cell.setCell(station: self.mainViewController!.stations![indexPath.row])
+        cell.setCell(station: self.favoriteStations![indexPath.row])
         return cell
+    }
+    
+    // called when one of the cells is clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // open station view controller
+        let station = self.favoriteStations![indexPath.row]
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
+        vc.station = station
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }

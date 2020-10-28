@@ -16,8 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="60" height="32"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3G" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNU-XN-l7C">
-                        <rect key="frame" x="21" y="8" width="18" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lNU-XN-l7C">
+                        <rect key="frame" x="6" y="3" width="48" height="26"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,6 +28,10 @@
             <constraints>
                 <constraint firstItem="lNU-XN-l7C" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="SYU-ha-lCA"/>
                 <constraint firstItem="lNU-XN-l7C" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bc7-wH-XvK"/>
+                <constraint firstItem="lNU-XN-l7C" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="fLb-nu-nEi"/>
+                <constraint firstAttribute="bottom" secondItem="lNU-XN-l7C" secondAttribute="bottom" constant="3" id="rQH-Kb-6eO"/>
+                <constraint firstAttribute="trailing" secondItem="lNU-XN-l7C" secondAttribute="trailing" constant="6" id="twm-g4-ehM"/>
+                <constraint firstItem="lNU-XN-l7C" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="vqm-nO-Jdf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="60" height="32"/>

@@ -11,13 +11,14 @@ import UIKit
 class FavoriteNearbyStationTableViewCell: UITableViewCell {
 
     private var station: LppStation? = nil
-    private let FAVORITE_BUTTON_WITDTH: CGFloat = 22
+    private let TO_CENTER_VIEW_WIDTH: CGFloat = 56
     
     @IBOutlet weak var stationNameText: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var toCenterView: UIView!
     @IBOutlet weak var routesUiCollectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toCenterViewLeftConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,17 +39,20 @@ class FavoriteNearbyStationTableViewCell: UITableViewCell {
         
         // set to center view
         if station.refId.toInt() % 2 == 0 {
+            self.toCenterView.width(constant: 0)
             self.toCenterView.isHidden = true
+            self.toCenterViewLeftConstraint.constant = 0
         } else {
+            self.toCenterView.width(constant: TO_CENTER_VIEW_WIDTH)
             self.toCenterView.isHidden = false
+            self.toCenterViewLeftConstraint.constant = 10
         }
         
         // set favorite button view
-        // TODO - READ FROM SHEARD PREFRENCES
-        if true {
-            self.favoriteButton.width(constant: FAVORITE_BUTTON_WITDTH)
+        if LppApi.isStationInFavorites(stationRefId: self.station!.refId) {
+            self.favoriteButton.isHidden = false
         } else {
-            self.favoriteButton.width(constant: 0)
+            self.favoriteButton.isHidden = true
         }
         
         self.routesUiCollectionView.dataSource = self

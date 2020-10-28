@@ -21,6 +21,9 @@ class LppApi {
     private static let TIMETABLE_LINK = "https://data.lpp.si/api/station/timetable"
     private static let ARRIVAL_LINK = "https://data.lpp.si/api/station/arrival"
     
+    private static let preferences = UserDefaults.standard
+    private static let IS_IN_FAVORITES_KEY = "IS_IN_FAVORITES_KEY_"
+    
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "LppApi")
     private let httpClient: HttpClient
     private let decoder: JSONDecoder
@@ -28,6 +31,28 @@ class LppApi {
     required init?(httpClient: HttpClient) {
         self.httpClient = httpClient
         self.decoder = JSONDecoder()
+    }
+    
+    public static func addStationToFavorites(stationRefId: String) {
+        let key = LppApi.IS_IN_FAVORITES_KEY + stationRefId
+        LppApi.preferences.set(true, forKey: key)
+        preferences.synchronize()
+    }
+    
+    public static func removeStationFromFavorites(stationRefId: String) {
+        let key = LppApi.IS_IN_FAVORITES_KEY + stationRefId
+        LppApi.preferences.set(false, forKey: key)
+        preferences.synchronize()
+    }
+    
+    public static func isStationInFavorites(stationRefId: String) -> Bool {
+        let key = LppApi.IS_IN_FAVORITES_KEY + stationRefId
+
+        if LppApi.preferences.object(forKey: key) == nil {
+            return false
+        } else {
+            return LppApi.preferences.bool(forKey: key)
+        }
     }
     
     public func getStations(callback: @escaping (Response<[LppStation]>) -> ()) {
