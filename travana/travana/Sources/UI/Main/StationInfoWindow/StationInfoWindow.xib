@@ -49,7 +49,7 @@
                             </subviews>
                         </stackView>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="REx-JN-p0t">
-                            <rect key="frame" x="12" y="40" width="242" height="68"/>
+                            <rect key="frame" x="12" y="44" width="242" height="64"/>
                             <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ERW-wB-oYG">
                                 <size key="itemSize" width="30" height="20"/>
@@ -64,7 +64,7 @@
                         <constraint firstItem="9UP-Qp-qBN" firstAttribute="top" secondItem="xFO-Kd-sOp" secondAttribute="top" constant="12" id="9Qj-dQ-3br"/>
                         <constraint firstAttribute="trailing" secondItem="REx-JN-p0t" secondAttribute="trailing" constant="12" id="AMr-t6-QZ5"/>
                         <constraint firstAttribute="trailing" secondItem="9UP-Qp-qBN" secondAttribute="trailing" constant="12" id="L7X-ts-FWy"/>
-                        <constraint firstItem="REx-JN-p0t" firstAttribute="top" secondItem="9UP-Qp-qBN" secondAttribute="bottom" constant="8" id="PHW-dD-SCL"/>
+                        <constraint firstItem="REx-JN-p0t" firstAttribute="top" secondItem="9UP-Qp-qBN" secondAttribute="bottom" constant="12" id="PHW-dD-SCL"/>
                         <constraint firstItem="REx-JN-p0t" firstAttribute="leading" secondItem="xFO-Kd-sOp" secondAttribute="leading" constant="12" id="kp4-hT-hNs"/>
                         <constraint firstItem="9UP-Qp-qBN" firstAttribute="leading" secondItem="xFO-Kd-sOp" secondAttribute="leading" constant="12" id="p25-O4-zYk"/>
                         <constraint firstAttribute="bottom" secondItem="REx-JN-p0t" secondAttribute="bottom" constant="12" id="qoQ-8K-I6M"/>

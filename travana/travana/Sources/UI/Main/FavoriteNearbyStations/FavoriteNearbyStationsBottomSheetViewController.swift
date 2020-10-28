@@ -13,7 +13,7 @@ import UIKit
 class FavoriteNearbyStationsBottomSheetViewController: UIViewController, FavoriteNearbyStationPageViewControllerListener {
 
     public var mainViewController: MainViewController!
-    private var favoriteNearbyStationsPageViewController: FavoriteNearbyStationsPageViewController!
+    public var favoriteNearbyStationsPageViewController: FavoriteNearbyStationsPageViewController!
     private var screenType: FavoriteNearbyStationsScreenType = FavoriteNearbyStationsScreenType.favorites
     
     @IBOutlet weak var handleArea: UIView!
@@ -42,6 +42,7 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
             // add listner to the station page view controler
             // protcol which is called every time when page view controller is swiped (not set by buttons)
             vc.favoriteNearbyStationPageViewControllerListener = self
+            vc.mainViewController = self.mainViewController
             self.favoriteNearbyStationsPageViewController = vc
         }
     }

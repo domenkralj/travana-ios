@@ -70,7 +70,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         
         // Set up the cluster manager with the supplied icon generator and
         // renderer.
-        let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [5, 10, 50, 200], backgroundColors: [UIColor.MAIN_ORANGE, UIColor.MAIN_BLUE, UIColor.MAIN_GREEN, UIColor.MAIN_RED])
+        let iconGenerator = GMUDefaultClusterIconGenerator(buckets: [5, 10, 50, 200], backgroundColors: [UIColor.MAIN_ORANGE_DARKER, UIColor.MAIN_BLUE, UIColor.MAIN_GREEN_DARKER, UIColor.MAIN_RED])
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: mapView,
                                     clusterIconGenerator: iconGenerator)
@@ -150,6 +150,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
                 DispatchQueue.main.async() {
                     self.setUI(state: ScreenState.done)
                     self.drawStations()
+                    self.setFavoriteNearbyViewControllers()                             // reload tableviews in the favorite and nearby stations view controllers
                 }
             } else {
                 DispatchQueue.main.async() {
@@ -159,7 +160,14 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    public func drawStations() {
+    // TODO
+    private func setFavoriteNearbyViewControllers() {
+        let favoriteStationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[0] as! FavoriteStationsViewController
+        //let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
+        favoriteStationViewController.favoriteStationsTableView.reloadData()
+    }
+    
+    private func drawStations() {
         if self.stations == nil {
             self.logger.error("Trying to draw stations markers without stations data")
             return
@@ -185,20 +193,28 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     }
     
     // set ui, depends on screen state
+    // this function also sets ui of the favoriteStationsViewController and nearbyStationsViewController
     private func setUI(state: ScreenState) {
+        
+        let favoriteStationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[0] as! FavoriteStationsViewController
+        //let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
+        
         switch state {
         case ScreenState.done:
             self.loadingView.isHidden = true
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
+            favoriteStationViewController.setUI(state: ScreenState.done)
         case ScreenState.error:
             self.loadingView.isHidden = true
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
+            favoriteStationViewController.setUI(state: ScreenState.error)
         case ScreenState.loading:
             self.loadingView.isHidden = false
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
+            favoriteStationViewController.setUI(state: ScreenState.loading)
         }
     }
     

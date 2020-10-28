@@ -11,9 +11,10 @@ import UIKit
 // page view controller used for controlling views in stationViewController (arrivals or routes)
 class FavoriteNearbyStationsPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
-    private(set) lazy var orderedViewControllers: [UIViewController] = {
+    private(set) lazy var favoriteNearbyViewControllers: [UIViewController] = {
         return [self.getFavoriteStationsViewController(), self.getNearbyStationsViewController()]}()
     
+    public var mainViewController: MainViewController? = nil
     public var favoriteNearbyStationPageViewControllerListener: FavoriteNearbyStationPageViewControllerListener? = nil
     
     // when view is loaded.
@@ -24,32 +25,34 @@ class FavoriteNearbyStationsPageViewController: UIPageViewController, UIPageView
         self.delegate = self
         
         // set first view controller - arrivals
-        if let firstViewController = self.orderedViewControllers.first { self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil) }
+        if let firstViewController = self.favoriteNearbyViewControllers.first { self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil) }
     }
     
     // set view to the favorite stations view
     public func setFavoriteStationsViewController() {
         DispatchQueue.main.async() {
-            self.setViewControllers([self.orderedViewControllers[0]], direction: .reverse, animated: true, completion: nil)
+            self.setViewControllers([self.favoriteNearbyViewControllers[0]], direction: .reverse, animated: true, completion: nil)
         }
     }
     
     // set view to the nearby stations view
     public func setNearbyStationsViewController() {
         DispatchQueue.main.async() {
-            self.setViewControllers([self.orderedViewControllers[1]], direction: .forward, animated: true, completion: nil)
+            self.setViewControllers([self.favoriteNearbyViewControllers[1]], direction: .forward, animated: true, completion: nil)
         }
     }
     
     // creates favorites stations view controller
     private func getFavoriteStationsViewController() -> UIViewController {
         let favoriteStationsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteStationsViewController") as! FavoriteStationsViewController
+        favoriteStationsViewController.mainViewController = self.mainViewController
         return favoriteStationsViewController
     }
     
     // creates nearby stations view controller
     private func getNearbyStationsViewController() -> UIViewController {
         let nearbyStationsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NearbyStationsViewController") as! NearbyStationsViewController
+        nearbyStationsViewController.mainViewController = self.mainViewController
         return nearbyStationsViewController
     }
     
@@ -63,7 +66,7 @@ class FavoriteNearbyStationsPageViewController: UIPageViewController, UIPageView
     // called every time when page is swiped right
     // change view controller
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = self.orderedViewControllers.firstIndex(of: viewController) else {
+        guard let viewControllerIndex = self.favoriteNearbyViewControllers.firstIndex(of: viewController) else {
             return nil
         }
         
@@ -73,21 +76,21 @@ class FavoriteNearbyStationsPageViewController: UIPageViewController, UIPageView
             return nil
         }
         
-        guard orderedViewControllers.count > previousIndex else {
+        guard favoriteNearbyViewControllers.count > previousIndex else {
             return nil
         }
-        return orderedViewControllers[previousIndex]
+        return favoriteNearbyViewControllers[previousIndex]
     }
     
     // called every time when page is swiped left
     // change view controller
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
+        guard let viewControllerIndex = favoriteNearbyViewControllers.firstIndex(of: viewController) else {
             return nil
         }
         
         let nextIndex = viewControllerIndex + 1
-        let orderedViewControllersCount = orderedViewControllers.count
+        let orderedViewControllersCount = favoriteNearbyViewControllers.count
 
         guard orderedViewControllersCount != nextIndex else {
             return nil
@@ -97,12 +100,12 @@ class FavoriteNearbyStationsPageViewController: UIPageViewController, UIPageView
             return nil
         }
         
-        return orderedViewControllers[nextIndex]
+        return favoriteNearbyViewControllers[nextIndex]
     }
     
     // called every time when page is swiped (not changed by buttons)
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let viewControllerIndex = self.orderedViewControllers.firstIndex(of: previousViewControllers[0])
+        let viewControllerIndex = self.favoriteNearbyViewControllers.firstIndex(of: previousViewControllers[0])
         if completed {
             // call protocol that page has been swiped
             if viewControllerIndex == 1 {

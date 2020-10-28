@@ -88,6 +88,8 @@
 		20D0E77525496DDA00EEB151 /* StationInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20D0E77425496DDA00EEB151 /* StationInfoWindow.xib */; };
 		20D0E77C2549771000EEB151 /* RoutePillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0E77A2549771000EEB151 /* RoutePillCollectionViewCell.swift */; };
 		20D0E77D2549771000EEB151 /* RoutePillCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20D0E77B2549771000EEB151 /* RoutePillCollectionViewCell.xib */; };
+		20D0E7832549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0E7812549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.swift */; };
+		20D0E7842549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20D0E7822549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.xib */; };
 		20DC5002253EBB09008214F0 /* DetourTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */; };
 		20DC5003253EBB09008214F0 /* DetourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */; };
 		20DC5005253EFDC6008214F0 /* LppDetourInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */; };
@@ -185,6 +187,8 @@
 		20D0E77425496DDA00EEB151 /* StationInfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationInfoWindow.xib; sourceTree = "<group>"; };
 		20D0E77A2549771000EEB151 /* RoutePillCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutePillCollectionViewCell.swift; sourceTree = "<group>"; };
 		20D0E77B2549771000EEB151 /* RoutePillCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutePillCollectionViewCell.xib; sourceTree = "<group>"; };
+		20D0E7812549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationTableViewCell.swift; sourceTree = "<group>"; };
+		20D0E7822549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteNearbyStationTableViewCell.xib; sourceTree = "<group>"; };
 		20DC5000253EBB09008214F0 /* DetourTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetourTableViewCell.swift; sourceTree = "<group>"; };
 		20DC5001253EBB09008214F0 /* DetourTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetourTableViewCell.xib; sourceTree = "<group>"; };
 		20DC5004253EFDC6008214F0 /* LppDetourInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppDetourInfo.swift; sourceTree = "<group>"; };
@@ -471,6 +475,7 @@
 		20518C9D252261310006F190 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				20D0E77E254995D400EEB151 /* RoutePillCollectionViewCell */,
 				20D0E77325496DC000EEB151 /* StationInfoWindow */,
 				2021B1212540BA6800F0A4CE /* Station */,
 				20DC5008253F5D93008214F0 /* Web */,
@@ -483,8 +488,6 @@
 				20518C9E2522616D0006F190 /* MainViewController.swift */,
 				20518CA0252261910006F190 /* Main.storyboard */,
 				2066F1A8252A439300DC221D /* MainNavigationDrawerViewController.swift */,
-				20D0E77A2549771000EEB151 /* RoutePillCollectionViewCell.swift */,
-				20D0E77B2549771000EEB151 /* RoutePillCollectionViewCell.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -528,10 +531,12 @@
 		206671EC25489C8900799073 /* FavoriteNearbyStations */ = {
 			isa = PBXGroup;
 			children = (
+				20D0E780254996A200EEB151 /* NearbyStations */,
+				20D0E77F2549963200EEB151 /* FavoriteStations */,
 				2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */,
-				206671ED25489CC400799073 /* FavoriteStationsViewController.swift */,
-				206671EF25489CD300799073 /* NearbyStationsViewController.swift */,
 				206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */,
+				20D0E7812549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.swift */,
+				20D0E7822549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.xib */,
 			);
 			path = FavoriteNearbyStations;
 			sourceTree = "<group>";
@@ -644,6 +649,31 @@
 			path = StationInfoWindow;
 			sourceTree = "<group>";
 		};
+		20D0E77E254995D400EEB151 /* RoutePillCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				20D0E77A2549771000EEB151 /* RoutePillCollectionViewCell.swift */,
+				20D0E77B2549771000EEB151 /* RoutePillCollectionViewCell.xib */,
+			);
+			path = RoutePillCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		20D0E77F2549963200EEB151 /* FavoriteStations */ = {
+			isa = PBXGroup;
+			children = (
+				206671ED25489CC400799073 /* FavoriteStationsViewController.swift */,
+			);
+			path = FavoriteStations;
+			sourceTree = "<group>";
+		};
+		20D0E780254996A200EEB151 /* NearbyStations */ = {
+			isa = PBXGroup;
+			children = (
+				206671EF25489CD300799073 /* NearbyStationsViewController.swift */,
+			);
+			path = NearbyStations;
+			sourceTree = "<group>";
+		};
 		20DC5008253F5D93008214F0 /* Web */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,6 +766,7 @@
 				20D0E77525496DDA00EEB151 /* StationInfoWindow.xib in Resources */,
 				2066F1B7252A58E100DC221D /* SearchResultTableViewCell.xib in Resources */,
 				20518CA1252261910006F190 /* Main.storyboard in Resources */,
+				20D0E7842549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.xib in Resources */,
 				2071C666254372F300FA80B2 /* RoutesOnStationTableViewCell.xib in Resources */,
 				20518C9625225D0F0006F190 /* Localizable.strings in Resources */,
 				2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */,
@@ -866,6 +897,7 @@
 				20847F432538B4BC00EFC157 /* RouteStationTableViewCell.swift in Sources */,
 				2021B1232540BDDA00F0A4CE /* StationViewController.swift in Sources */,
 				20518C8425225A2B0006F190 /* UIViewController.swift in Sources */,
+				20D0E7832549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.swift in Sources */,
 				208201092537900A009F00C3 /* RouteViewController.swift in Sources */,
 				2071C65B25433F3700FA80B2 /* StationPageViewController.swift in Sources */,
 				20EA6DDE253AEB2D0062A133 /* LppBus.swift in Sources */,
