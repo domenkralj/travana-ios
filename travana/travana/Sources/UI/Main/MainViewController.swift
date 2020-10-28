@@ -163,11 +163,11 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    // TODO
     private func setFavoriteNearbyViewControllers() {
         let favoriteStationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[0] as! FavoriteStationsViewController
         //let nearbyStatationViewController = self.favoriteNearbyStationBottomSheetViewController.favoriteNearbyStationsPageViewController.favoriteNearbyViewControllers[1] as! NearbyStationsViewController
         favoriteStationViewController.reloadViewController()
+        //nearbyStatationViewController.reloadViewController()
     }
     
     private func drawStations() {
@@ -208,16 +208,19 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
             favoriteStationViewController.setUI(state: ScreenState.done)
+            //nearbyStatationViewController.setUI(state: ScreenState.done)
         case ScreenState.error:
             self.loadingView.isHidden = true
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
             favoriteStationViewController.setUI(state: ScreenState.error)
+            //nearbyStatationViewController.setUI(state: ScreenState.error)
         case ScreenState.loading:
             self.loadingView.isHidden = false
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
             favoriteStationViewController.setUI(state: ScreenState.loading)
+            //nearbyStatationViewController.setUI(state: ScreenState.loading)
         }
     }
     
