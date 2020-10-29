@@ -364,6 +364,7 @@
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="riW-zs-fkg">
                                 <rect key="frame" x="0.0" y="120" width="414" height="776"/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="g3j-jq-aJu" kind="embed" identifier="showFavoriteNearbyStationsPageViewController" id="Co7-qR-6C4"/>
                                 </connections>

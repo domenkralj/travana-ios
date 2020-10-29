@@ -46,6 +46,7 @@
 		206671EE25489CC400799073 /* FavoriteStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671ED25489CC400799073 /* FavoriteStationsViewController.swift */; };
 		206671F025489CD300799073 /* NearbyStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671EF25489CD300799073 /* NearbyStationsViewController.swift */; };
 		206671F225489D2800799073 /* FavoriteNearbyStationsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */; };
+		20667D11254AD3B000CA178F /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20667D10254AD3B000CA178F /* Double.swift */; };
 		2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1A0252A1D6600DC221D /* google-maps-style.json */; };
 		2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */; };
 		2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A6252A41D000DC221D /* SearchViewController.swift */; };
@@ -145,6 +146,7 @@
 		206671ED25489CC400799073 /* FavoriteStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStationsViewController.swift; sourceTree = "<group>"; };
 		206671EF25489CD300799073 /* NearbyStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsViewController.swift; sourceTree = "<group>"; };
 		206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsPageViewController.swift; sourceTree = "<group>"; };
+		20667D10254AD3B000CA178F /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		2066F1A0252A1D6600DC221D /* google-maps-style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "google-maps-style.json"; sourceTree = "<group>"; };
 		2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsBottomSheetViewController.swift; sourceTree = "<group>"; };
 		2066F1A6252A41D000DC221D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		20518C67252256640006F190 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				20667D0F254AD39000CA178F /* Double */,
 				2068655C2545C913000DCD80 /* UICollectionView */,
 				20518C8B25225AC50006F190 /* Table */,
 				20518C8825225AA10006F190 /* String */,
@@ -539,6 +542,14 @@
 				20D0E7822549ABB600EEB151 /* FavoriteNearbyStationTableViewCell.xib */,
 			);
 			path = FavoriteNearbyStations;
+			sourceTree = "<group>";
+		};
+		20667D0F254AD39000CA178F /* Double */ = {
+			isa = PBXGroup;
+			children = (
+				20667D10254AD3B000CA178F /* Double.swift */,
+			);
+			path = Double;
 			sourceTree = "<group>";
 		};
 		2066F1AA252A4B8200DC221D /* Detours */ = {
@@ -926,6 +937,7 @@
 				206671F225489D2800799073 /* FavoriteNearbyStationsPageViewController.swift in Sources */,
 				20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */,
 				20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */,
+				20667D11254AD3B000CA178F /* Double.swift in Sources */,
 				2066F1A9252A439300DC221D /* MainNavigationDrawerViewController.swift in Sources */,
 				2068655B25459D19000DCD80 /* ArrivalCollectionViewCell.swift in Sources */,
 				2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */,

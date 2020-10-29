@@ -25,7 +25,6 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     
     var cardHeight: CGFloat = 0
     let cardHandleAreaHeight: CGFloat = 150
-    private let locationManager = CLLocationManager()
     
     var cardVisible = false
     var nextState: CardState {
@@ -42,6 +41,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "MainViewController")
     private var clusterManager: GMUClusterManager!
     private var isFirstTimeSet: Bool = true
+    private var locationManager = CLLocationManager()
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
@@ -157,7 +157,13 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
         self.lppApi.getStations() { (result) in
             if result.success {
-                self.stations = result.data
+                // sort stations by distance if possible
+                let locationValue: CLLocationCoordinate2D? = self.locationManager.location?.coordinate
+                if locationValue != nil {
+                     self.stations = result.data!.sorted(by: { Utils.getDistanceBetweenCoordinates(latitude1: $0.latitude, longitude1: $0.longitude, latitude2: locationValue!.latitude, longitude2: locationValue!.longitude) < Utils.getDistanceBetweenCoordinates(latitude1: $1.latitude, longitude1: $1.longitude, latitude2: locationValue!.latitude, longitude2: locationValue!.longitude) })
+                } else {
+                    self.stations = result.data
+                }
                 DispatchQueue.main.async() {
                     self.setUI(state: ScreenState.done)
                     self.drawStations()

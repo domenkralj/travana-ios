@@ -6,7 +6,6 @@
 //  Copyright © 2020 Domen Kralj. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UITableView {

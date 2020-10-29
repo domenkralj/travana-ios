@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NearbyStationsViewController: UIViewController {
 
     public var mainViewController: MainViewController!
     private var nearbyStations: [LppStation]? = nil
+    private var locationManager = CLLocationManager()
     
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
@@ -41,6 +43,39 @@ class NearbyStationsViewController: UIViewController {
     // filter stations data and update table view
     public func reloadViewController() {
     
+        let locationValue: CLLocationCoordinate2D? = self.locationManager.location?.coordinate
+        // set distance label
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    // Location services are not enabled
+                    self.locationIsNotAvailibleStackView.isHidden = false
+                    self.nearbyStationsTableView.isHidden = true
+                    return
+                case .authorizedAlways, .authorizedWhenInUse:
+                    // Location services should be enabled
+                    if locationValue != nil {
+                        self.locationIsNotAvailibleStackView.isHidden = true
+                        self.nearbyStationsTableView.isHidden = false
+                    } else {
+                        // Location services are not enabled
+                        self.locationIsNotAvailibleStackView.isHidden = false
+                        self.nearbyStationsTableView.isHidden = true
+                        return
+                    }
+                default:
+                    // Location services are not enabled
+                    self.locationIsNotAvailibleStackView.isHidden = false
+                    self.nearbyStationsTableView.isHidden = true
+                    return
+            }
+        } else {
+            // Location services are not enabled
+            self.locationIsNotAvailibleStackView.isHidden = false
+            self.nearbyStationsTableView.isHidden = true
+            return
+        }
+        
         let fullStations = self.mainViewController?.stations
         if fullStations == nil {
             DispatchQueue.main.async {
@@ -49,6 +84,8 @@ class NearbyStationsViewController: UIViewController {
             return
         }
         self.nearbyStations = fullStations!
+        // sort locations by distance - data is already sorted in main view controller - retrieve stations
+        //self.nearbyStations = self.nearbyStations!.sorted(by: { Utils.getDistanceBetweenCoordinates(latitude1: $0.latitude, longitude1: $0.longitude, latitude2: locationValue!.latitude, longitude2: locationValue!.longitude) < Utils.getDistanceBetweenCoordinates(latitude1: $1.latitude, longitude1: $1.longitude, latitude2: locationValue!.latitude, longitude2: locationValue!.longitude) })
         
         DispatchQueue.main.async {
             self.nearbyStationsTableView.reloadData()
@@ -94,6 +131,11 @@ extension NearbyStationsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.nearbyStations == nil {
             return 0
+        }
+        
+        // show just 50 stations
+        if self.nearbyStations!.count > 50 {
+            return 50
         }
         
         return self.nearbyStations!.count

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class FavoriteNearbyStationTableViewCell: UITableViewCell {
 
     private var station: LppStation? = nil
     private let TO_CENTER_VIEW_WIDTH: CGFloat = 56
+    private var locationManager = CLLocationManager()
     
     @IBOutlet weak var stationNameText: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -19,6 +21,7 @@ class FavoriteNearbyStationTableViewCell: UITableViewCell {
     @IBOutlet weak var routesUiCollectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var toCenterViewLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var distanceText: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,6 +56,39 @@ class FavoriteNearbyStationTableViewCell: UITableViewCell {
             self.favoriteButton.isHidden = false
         } else {
             self.favoriteButton.isHidden = true
+        }
+        
+        // set distance label
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    // Location services are not enabled
+                    self.distanceText.isHidden = true
+                case .authorizedAlways, .authorizedWhenInUse:
+                    // Location services should be enabled
+                    let locationValue: CLLocationCoordinate2D? = self.locationManager.location?.coordinate
+                    if locationValue != nil {
+                        let stationLocation = CLLocation(latitude: station.latitude, longitude: station.longitude)
+                        let userLocation = CLLocation(latitude: locationValue!.latitude, longitude: locationValue!.longitude)
+                        let distanceInMeters = userLocation.distance(from: stationLocation)
+                        
+                        if distanceInMeters < 1000 {
+                            self.distanceText.text = String(Int(distanceInMeters)) + " " + "m".localized
+                        } else {
+                            self.distanceText.text = String((distanceInMeters/1000.0).rounded(toPlaces: 1)) + " " + "km".localized
+                        }
+                    } else {
+                        // Location services are not enabled
+                        self.distanceText.isHidden = true
+                    }
+                default:
+                    // Location services are not enabled
+                    self.distanceText.isHidden = true
+                break
+            }
+        } else {
+            // Location services are not enabled
+            self.distanceText.isHidden = true
         }
         
         self.routesUiCollectionView.dataSource = self

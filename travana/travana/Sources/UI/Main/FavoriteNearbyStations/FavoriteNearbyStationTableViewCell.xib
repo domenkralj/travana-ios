@@ -58,8 +58,8 @@
                         <constraints>
                             <constraint firstAttribute="height" priority="999" constant="50" id="Jzl-s4-wtG"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iIq-x6-a7e">
-                            <size key="itemSize" width="35" height="22"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m9O-oQ-cw2">
+                            <size key="itemSize" width="30" height="21"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -94,6 +94,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="collectionViewHeightConstraint" destination="Jzl-s4-wtG" id="Dr7-zW-xQ3"/>
+                <outlet property="distanceText" destination="Cby-Jz-GDh" id="JqM-YF-9A8"/>
                 <outlet property="favoriteButton" destination="YlV-QX-ztC" id="kFl-uw-Acs"/>
                 <outlet property="routesUiCollectionView" destination="Hdo-wj-X0O" id="9H5-Bu-9Lf"/>
                 <outlet property="stationNameText" destination="Tld-SI-iyW" id="2X5-vX-fnB"/>
