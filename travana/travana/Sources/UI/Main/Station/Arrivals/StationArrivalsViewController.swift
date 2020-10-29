@@ -25,6 +25,7 @@ class StationArrivalsViewController: UIViewController {
     @IBOutlet weak var tryAgainView: UIView!
     
     @IBOutlet weak var arrivalsTableView: UITableView!
+    @IBOutlet weak var noUpcomingArrivalsStackView: UIStackView!
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -73,10 +74,19 @@ class StationArrivalsViewController: UIViewController {
             if result.success {
                 self.arrivals = self.splitArrivalsByTripIdAndSort(arrivals: result.data)
                 self.requestsFailedInRow = 0
+                
                 DispatchQueue.main.async() {
+                    if self.arrivals?.count == nil || self.arrivals!.count == 0 {
+                        self.noUpcomingArrivalsStackView.isHidden = false
+                        self.arrivalsTableView.isHidden = true
+                    } else {
+                        self.noUpcomingArrivalsStackView.isHidden = true
+                        self.arrivalsTableView.isHidden = false
+                    }
                     self.arrivalsTableView.reloadData()
                     self.setUI(state: ScreenState.done)
                 }
+                
             } else {
                 DispatchQueue.main.async() {
                     self.setUI(state: ScreenState.error)
@@ -92,6 +102,17 @@ class StationArrivalsViewController: UIViewController {
             (result) in
             if result.success {
                 self.arrivals = self.splitArrivalsByTripIdAndSort(arrivals: result.data)
+                
+                DispatchQueue.main.async() {
+                    if self.arrivals?.count == nil || self.arrivals!.count == 0 {
+                        self.noUpcomingArrivalsStackView.isHidden = false
+                        self.arrivalsTableView.isHidden = true
+                    } else {
+                        self.noUpcomingArrivalsStackView.isHidden = true
+                        self.arrivalsTableView.isHidden = false
+                    }
+                }
+                
                 self.requestsFailedInRow = 0
                 DispatchQueue.main.async() {
                     if self.screenState == ScreenState.error {
@@ -202,5 +223,16 @@ extension StationArrivalsViewController: UITableViewDataSource, UITableViewDeleg
         cell.setCell(arrivals: arrivals)
         cell.reloadCollectionViewArrivalsData()
         return cell
+    }
+    
+    // called when one of the cells is clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // open route view controller
+        let stationArrival = self.arrivals![indexPath.row][0]
+        let route = LppRoute(routeId: stationArrival.routeId, routeNumber: stationArrival.routeName, tripId: stationArrival.tripId, routeName: stationArrival.tripName, shortRouteName: stationArrival.tripName)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as! RouteViewController
+        vc.route = route
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }

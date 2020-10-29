@@ -21,7 +21,15 @@ class LppRoute: Decodable, Encodable {
         case tripId = "trip_id", routeId = "route_id", routeNumber = "route_number", routeName = "route_name", shortRouteName = "short_route_name", tripIntId = "trip_int_id"
     }
     
-    init(routeId: String, routeNumber: String, tripId: String, routeName: String?, routeGroupName: String) {
+    init(routeId: String, routeNumber: String, tripId: String, routeName: String, shortRouteName: String) {
+        self.routeId = routeId
+        self.routeNumber = routeNumber
+        self.tripId = tripId
+        self.routeName = routeName
+        self.shortRouteName = shortRouteName
+    }
+    
+    private init(routeId: String, routeNumber: String, tripId: String, routeName: String?, routeGroupName: String) {
         self.routeId = routeId
         self.routeNumber = routeNumber
         self.tripId = tripId

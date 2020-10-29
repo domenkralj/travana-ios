@@ -12,7 +12,7 @@ class LppTimetableRoute: Decodable, Encodable {
     
     public var timetable: [LppTimetableTimes]
     // on the backend "stations" is also avilible
-    public var name: String
+    public var name: String?
     public var parentName: String
     public var groupName: String
     public var routeNumberSuffix: String

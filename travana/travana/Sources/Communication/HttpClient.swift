@@ -12,7 +12,7 @@ import SwiftyJSON
 /// - HttpClient class provides HTTP request methods for GET and POST requests.
 class HttpClient {
     
-    private static let DEFAULT_TIMEOUT: Int = 10 // seconds
+    private static let DEFAULT_TIMEOUT: Int = 5 // seconds
     private let log: ConsoleLogger = LoggerFactory.getLogger(name: "HttpClientLog")
     
     init() {}

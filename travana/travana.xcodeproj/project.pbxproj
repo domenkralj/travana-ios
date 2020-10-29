@@ -47,6 +47,7 @@
 		206671F025489CD300799073 /* NearbyStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671EF25489CD300799073 /* NearbyStationsViewController.swift */; };
 		206671F225489D2800799073 /* FavoriteNearbyStationsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */; };
 		20667D11254AD3B000CA178F /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20667D10254AD3B000CA178F /* Double.swift */; };
+		20667D13254B448500CA178F /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20667D12254B448500CA178F /* Connectivity.swift */; };
 		2066F1A1252A1D6600DC221D /* google-maps-style.json in Resources */ = {isa = PBXBuildFile; fileRef = 2066F1A0252A1D6600DC221D /* google-maps-style.json */; };
 		2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */; };
 		2066F1A7252A41D000DC221D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066F1A6252A41D000DC221D /* SearchViewController.swift */; };
@@ -147,6 +148,7 @@
 		206671EF25489CD300799073 /* NearbyStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsViewController.swift; sourceTree = "<group>"; };
 		206671F125489D2800799073 /* FavoriteNearbyStationsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsPageViewController.swift; sourceTree = "<group>"; };
 		20667D10254AD3B000CA178F /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		20667D12254B448500CA178F /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		2066F1A0252A1D6600DC221D /* google-maps-style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "google-maps-style.json"; sourceTree = "<group>"; };
 		2066F1A4252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNearbyStationsBottomSheetViewController.swift; sourceTree = "<group>"; };
 		2066F1A6252A41D000DC221D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				20518C52252250680006F190 /* HttpClient.swift */,
 				20518CA7252267DE0006F190 /* LppApi.swift */,
 				20539000252F97AD00EBD06A /* Response.swift */,
+				20667D12254B448500CA178F /* Connectivity.swift */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				20847F482538CBCB00EFC157 /* LppArrival.swift in Sources */,
 				2066F1AC252A4BA000DC221D /* DetoursViewController.swift in Sources */,
 				2066F1A5252A3F4C00DC221D /* FavoriteNearbyStationsBottomSheetViewController.swift in Sources */,
+				20667D13254B448500CA178F /* Connectivity.swift in Sources */,
 				2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */,
 				2071C665254372F300FA80B2 /* RoutesOnStationTableViewCell.swift in Sources */,
 				20518C7E252258270006F190 /* UIFont.swift in Sources */,
