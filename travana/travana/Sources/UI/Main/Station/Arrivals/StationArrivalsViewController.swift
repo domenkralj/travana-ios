@@ -23,6 +23,7 @@ class StationArrivalsViewController: UIViewController {
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
+    @IBOutlet weak var errorText: UILabel!
     
     @IBOutlet weak var arrivalsTableView: UITableView!
     @IBOutlet weak var noUpcomingArrivalsStackView: UIStackView!
@@ -196,6 +197,13 @@ class StationArrivalsViewController: UIViewController {
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
             self.screenState = ScreenState.error
+            
+            if Connectivity.isConnectedToNetwork() {
+                self.errorText.text = "error_during_loading".localized
+            } else {
+                self.errorText.text = "no_internet_connection".localized
+            }
+            
         case ScreenState.loading:
             self.arrivalsTableView.isHidden = true
             self.loading.startAnimating()

@@ -54,6 +54,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var tryAgainView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var errorText: UILabel!
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -314,6 +315,13 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             self.errorView.isHidden = true
             self.tryAgainView.isHidden = true
             self.screenState = ScreenState.done
+
+            if Connectivity.isConnectedToNetwork() {
+                self.errorText.text = "error_during_loading".localized
+            } else {
+                self.errorText.text = "no_internet_connection".localized
+            }
+            
         case ScreenState.error:
             self.loadingView.isHidden = true
             self.errorView.isHidden = false

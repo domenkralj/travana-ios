@@ -18,6 +18,7 @@ class NearbyStationsViewController: UIViewController {
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
+    @IBOutlet weak var errorText: UILabel!
     @IBOutlet weak var locationIsNotAvailibleStackView: UIStackView!
     @IBOutlet weak var nearbyStationsTableView: UITableView!
     
@@ -105,6 +106,13 @@ class NearbyStationsViewController: UIViewController {
             self.loading.isHidden = true
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
+            
+            if Connectivity.isConnectedToNetwork() {
+                self.errorText.text = "error_during_loading".localized
+            } else {
+                self.errorText.text = "no_internet_connection".localized
+            }
+            
         case ScreenState.loading:
             self.nearbyStationsTableView.isHidden = true
             self.loading.isHidden = false

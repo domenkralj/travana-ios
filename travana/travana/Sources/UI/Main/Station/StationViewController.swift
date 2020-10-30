@@ -180,7 +180,7 @@ class StationViewController: UIViewController, StationPageViewControllerListener
                 // filter stations - check if stations with opposite ref id exits
                 let filteredStations = stations.filter { $0.refId.toInt() == oppositeStationRefId }
                 if filteredStations.isEmpty {
-                    Toast.show(message: "opposite_station_do_not_exits".localized, controller: self)
+                    Toast.show(message: "opposite_station_do_not_exit".localized, controller: self)
                     return
                 }
                 sender.isEnabled = true

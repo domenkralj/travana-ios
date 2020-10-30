@@ -18,6 +18,7 @@ class FavoriteStationsViewController: UIViewController {
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
     @IBOutlet weak var noFavoritesAddedStackView: UIStackView!
+    @IBOutlet weak var errorText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +85,13 @@ class FavoriteStationsViewController: UIViewController {
             self.loading.isHidden = true
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
+            
+            if Connectivity.isConnectedToNetwork() {
+                self.errorText.text = "error_during_loading".localized
+            } else {
+                self.errorText.text = "no_internet_connection".localized
+            }
+            
         case ScreenState.loading:
             self.favoriteStationsTableView.isHidden = true
             self.loading.isHidden = false

@@ -49,6 +49,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
     @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var errorText: UILabel!
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -246,6 +247,12 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             self.errorView.isHidden = false
             self.tryAgainView.isHidden = false
             self.screenState = ScreenState.error
+            
+            if Connectivity.isConnectedToNetwork() {
+                self.errorText.text = "error_during_loading".localized
+            } else {
+                self.errorText.text = "no_internet_connection".localized
+            }
             
             // set ui of favoriteStationViewController and nearbyStatationViewController - if possible
             if favoriteStationViewController.viewIfLoaded?.window != nil {

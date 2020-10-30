@@ -5,3 +5,31 @@
 "minutes_(3_min)" = "Minutes (3 min)";
 "hours_(14_35)" = "Hours (14:35)";
 "how_to_show_arrival_time" = "How to show arrival time";
+"error_during_loading" = "Error during loading";
+"no_internet_connection" = "No internet connection";
+"detours" = "Detours";
+"settings" = "Settings";
+"news" = "News";
+"info" = "Info";
+"version" = "Version 1.0.0";
+"loading" = "Loading";
+"try_again" = "Try Again";
+"arrivals" = "ARRIVALS";
+"routes" = "ROUTES";
+"timetable" = "TIMETABLE";
+"stations" = "Stations";
+"favorites" = "FAVORITES";
+"nearby" = "NEARBY";
+"no_favorites_added" = "No favorites added.";
+"location_is_not_available" = "Location is not available.";
+"no_upcoming_arrivals" = "No upcomming arrivals.";
+"no_scheduled_arrivals_for_today" = "No scheduled arrivals for today.";
+"data_about_detours_is_obtainer_text" = "Data about detours is obtained from www.lpp.si/obvozi";
+"ARRIVAL" = "ARRIVAL";
+"detur" = "DETOUR";
+"opposite_station_do_not_exit" = "Opposite station do not exit.";
+"error_ccured_try_again" = "Error occured, try again";
+"click_for_more" = "Click for more";
+"in_callaboration_with" = "In callaboration with";
+
+
