@@ -83,7 +83,7 @@ class MainNavigationDrawerViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         } else {
-            UIUtils.showToast(controller: self, message: "something_went_wrong_cannot_open_news", seconds: 3)
+            Toast.show(message: "something_went_wrong_cannot_open_news".localized, controller: self)
         }
     }
     

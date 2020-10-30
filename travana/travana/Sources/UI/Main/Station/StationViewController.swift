@@ -164,6 +164,38 @@ class StationViewController: UIViewController, StationPageViewControllerListener
     
     // called when opposite station button is clicked
     @IBAction func oppositeStationButtonClicked(_ sender: UIButton) {
+        sender.isEnabled = false
+        self.lppApi.getStations() {(result) in
+            if result.success {
+                let stations = result.data!
+                let currentStationRefId = self.station.refId.toInt()
+                
+                var oppositeStationRefId: Int!
+                if currentStationRefId % 2 == 0 {
+                    oppositeStationRefId = currentStationRefId - 1
+                } else {
+                    oppositeStationRefId = currentStationRefId + 1
+                }
+                
+                // filter stations - check if stations with opposite ref id exits
+                let filteredStations = stations.filter { $0.refId.toInt() == oppositeStationRefId }
+                if filteredStations.isEmpty {
+                    Toast.show(message: "opposite_station_do_not_exits".localized, controller: self)
+                    return
+                }
+                sender.isEnabled = true
+                    
+                // open opposite station view controller
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
+                vc.station = filteredStations[0]
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                    
+            } else {
+                Toast.show(message: "error_ccured_try_again".localized, controller: self)
+                sender.isEnabled = true
+            }
+        }
     }
 }
 

@@ -1346,7 +1346,7 @@
                                 <color key="tintColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" backgroundImage="arrow.swap" catalog="system"/>
                                 <connections>
-                                    <action selector="oppositeStationButtonClicked:" destination="CBQ-EL-7Ls" eventType="touchUpInside" id="BAC-m1-FvU"/>
+                                    <action selector="oppositeStationButtonClicked:" destination="CBQ-EL-7Ls" eventType="touchUpInside" id="1FJ-Rq-lnT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSd-xF-ZED">

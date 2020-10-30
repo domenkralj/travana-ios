@@ -169,7 +169,7 @@ extension DetoursViewController: UITableViewDataSource, UITableViewDelegate {
         if let url = URL(string: urlString) {
             self.openWebView(url: url, webTitle: urlString)
         } else {
-            UIUtils.showToast(controller: self, message: "canot_open_detailed_data_about_detour".localized, seconds: 2.5)
+            Toast.show(message: "canot_open_detailed_data_about_detour".localized, controller: self)
         }
     }
 }

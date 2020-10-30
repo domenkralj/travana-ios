@@ -28,6 +28,11 @@ class LppApi {
     private let httpClient: HttpClient
     private let decoder: JSONDecoder
     
+    // used for caching data - once data is loaded do not retrive it again
+    private var stations: [LppStation]? = nil
+    private var routes: [LppRoute]? = nil
+
+    
     required init?(httpClient: HttpClient) {
         self.httpClient = httpClient
         self.decoder = JSONDecoder()
@@ -57,6 +62,12 @@ class LppApi {
     
     public func getStations(callback: @escaping (Response<[LppStation]>) -> ()) {
         
+        // if data was already loaded - return cached stations
+        if self.stations != nil {
+            callback(Response.success(data: self.stations!))
+            return
+        }
+        
         let params = ["show-subroutes": "1"]
         
         var stations: [LppStation]? = nil
@@ -81,6 +92,7 @@ class LppApi {
             }
             do {
                 stations = try self.decoder.decode(LppApiResponse<[LppStation]>.self, from: Data(response!.utf8)).data
+                self.stations = stations
                 callback(Response.success(data: stations!))
             } catch let parseError {
                 let errorMessage = "Error retrieving stations data, parsing json to object failed: \(parseError)"
@@ -93,6 +105,11 @@ class LppApi {
     }
     
     public func getRoutes(callback: @escaping (Response<[LppRoute]>) -> ()) {
+        
+        if self.routes != nil {
+            callback(Response.success(data: self.routes!))
+            return
+        }
         
         var routes: [LppRoute]? = nil
         
@@ -116,6 +133,7 @@ class LppApi {
             }
             do {
                 routes = try self.decoder.decode(LppApiResponse<[LppRoute]>.self, from: Data(response!.utf8)).data
+                self.routes = routes
                 callback(Response.success(data: routes!))
             } catch let parseError {
                 let errorMessage = "Error retrieving routes data, parsing json to object failed: \(parseError)"

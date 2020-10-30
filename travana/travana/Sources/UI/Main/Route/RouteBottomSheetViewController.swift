@@ -15,6 +15,7 @@ class RouteBottomSheetViewController: UIViewController {
     public var showJustStationName = false
     public var route: LppRoute? = nil
     public var stationArrivals: [LppStationArrival]? = nil
+    private let lppApi: LppApi!
     private let logger: ConsoleLogger = LoggerFactory.getLogger(name: "RouteBottomSheetViewController")
     
     @IBOutlet weak var handleArea: UIView!
@@ -23,6 +24,14 @@ class RouteBottomSheetViewController: UIViewController {
     @IBOutlet weak var holderImageView: UIView!
     @IBOutlet weak var routeNumberView: UIView!
     @IBOutlet weak var routeNumberText: UILabel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let appData: TravanaAppDataContainer = app.getAppData()
+        self.lppApi = appData.getLppApi()
+        
+        super.init(coder: aDecoder)
+    }
     
     // when view is loaded.
     override func viewDidLoad() {
@@ -67,11 +76,46 @@ class RouteBottomSheetViewController: UIViewController {
     }
     
     // called when back button is clicked
-    @IBAction func backButtonClicked(_ sender: Any) {
+    @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func oppositeStationButtonClicked(_ sender: Any) {
-        // TODO CHECK IF OPPOSITE ROUTE EXTIS - AND OPEN IF
+    @IBAction func oppositeStationButtonClicked(_ sender: UIButton) {
+        DispatchQueue.main.async() {
+            sender.isEnabled = false
+        }
+        self.lppApi.getRoutes() {(result) in
+            if result.success {
+                let routes = result.data!
+                
+                DispatchQueue.main.async() {
+                    sender.isEnabled = true
+                }
+                
+                // filter stations - check if stations with opposite ref id exits
+                let filteredRoutes = routes.filter { $0.routeId == self.route!.routeId && $0.tripId != self.route!.tripId}
+                
+                if filteredRoutes.isEmpty {
+                    Toast.show(message: "opposite_route_do_not_exits".localized, controller: self)
+                    return
+                } else if filteredRoutes.count == 1 {
+                    // open opposite station view controller
+                    DispatchQueue.main.async() {
+                        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RouteViewController") as! RouteViewController
+                        vc.route = filteredRoutes[0]
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    // TODO - OPEN DIALOG
+                }
+                    
+            } else {
+                Toast.show(message: "error_ccured_try_again".localized, controller: self)
+                DispatchQueue.main.async() {
+                    sender.isEnabled = true
+                }
+            }
+        }
     }
 }
 
