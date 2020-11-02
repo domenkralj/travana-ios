@@ -76,6 +76,7 @@ class MainNavigationDrawerViewController: UIViewController {
     
     @IBAction func newsViewClicked() {
         let urlString = Constants.LPP_WEBSIDE_NEWS_LINK
+        
         if let url = URL(string: urlString) {
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
             vc.url = url

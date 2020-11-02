@@ -103,11 +103,11 @@ class RouteStationTableViewCell: UITableViewCell {
             
             switch arrival.type {
             case Lpp.PREDICTED:
-                self.secondArrivalTimeText.text = String(arrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.text = self.getArrivalTimeString(etaMin: arrival.etaMin)
                 self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = false
             case Lpp.SCHEDULED:
-                self.secondArrivalTimeText.text = String(arrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.text = self.getArrivalTimeString(etaMin: arrival.etaMin)
                 self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = true
             case Lpp.APPROACHING_STATION:
@@ -128,16 +128,16 @@ class RouteStationTableViewCell: UITableViewCell {
             
             switch firstArrival.type {
             case Lpp.PREDICTED:
-                self.firstArrivalTimeText.text = String(firstArrival.etaMin) + " " + "min".localized
-                self.firstArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
+                self.firstArrivalTimeText.text = self.getArrivalTimeString(etaMin: firstArrival.etaMin)
+                self.firstArrivalTimeText.font = UIFont.systemFont(ofSize: self.firstArrivalTimeText.font.pointSize)
                 self.firstArrivalTimeLiveIcon.isHidden = false
             case Lpp.SCHEDULED:
-                self.firstArrivalTimeText.text = String(firstArrival.etaMin) + " " + "min".localized
-                self.firstArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
+                self.firstArrivalTimeText.text = self.getArrivalTimeString(etaMin: firstArrival.etaMin)
+                self.firstArrivalTimeText.font = UIFont.systemFont(ofSize: self.firstArrivalTimeText.font.pointSize)
                 self.firstArrivalTimeLiveIcon.isHidden = true
             case Lpp.APPROACHING_STATION:
                 self.firstArrivalTimeLiveIcon.isHidden = true
-                self.firstArrivalTimeText.font = UIFont.boldSystemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
+                self.firstArrivalTimeText.font = UIFont.boldSystemFont(ofSize: self.firstArrivalTimeText.font.pointSize)
                 self.firstArrivalTimeText.text = "arrival".localized.uppercased()
             default:
                 self.log.error("Catching unkown station type")  // hide both containers
@@ -149,11 +149,11 @@ class RouteStationTableViewCell: UITableViewCell {
             
             switch secondArrival.type {
             case Lpp.PREDICTED:
-                self.secondArrivalTimeText.text = String(secondArrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.text = self.getArrivalTimeString(etaMin: secondArrival.etaMin)
                 self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = false
             case Lpp.SCHEDULED:
-                self.secondArrivalTimeText.text = String(secondArrival.etaMin) + " " + "min".localized
+                self.secondArrivalTimeText.text = self.getArrivalTimeString(etaMin: secondArrival.etaMin)
                 self.secondArrivalTimeText.font = UIFont.systemFont(ofSize: self.secondArrivalTimeText.font.pointSize)
                 self.secondArrivalTimeLiveIcon.isHidden = true
             case Lpp.APPROACHING_STATION:
@@ -166,6 +166,17 @@ class RouteStationTableViewCell: UITableViewCell {
             }
             
             return
+        }
+    }
+    
+    private func getArrivalTimeString(etaMin: Int) -> String {
+        // check settings and show time depends on settings (14 min, 12:33)
+        if UserDefaults.standard.object(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == nil && UserDefaults.standard.string(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == Constants.ARRIVAL_TIME_MODE_MINUTES {
+            return String(etaMin) + " " + "min"
+        } else {
+            let dateFormatterPrint = DateFormatter()
+            dateFormatterPrint.dateFormat = "HH:mm"
+            return dateFormatterPrint.string(from: Date().adding(minutes: etaMin))
         }
     }
     

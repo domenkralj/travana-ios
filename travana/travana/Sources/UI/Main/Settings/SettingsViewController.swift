@@ -19,6 +19,13 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set ui to the current set settings
+        if preferences.object(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == nil || preferences.string(forKey: Constants.ARRIVAL_TIME_MODE_KEY)! == Constants.ARRIVAL_TIME_MODE_MINUTES {
+            self.arrivalTimeSegmentedControl.selectedSegmentIndex = 0
+        } else {
+            self.arrivalTimeSegmentedControl.selectedSegmentIndex = 1
+        }
+        
         // localize arrivalTimeSegmentedControl
         self.arrivalTimeSegmentedControl.setTitle("minutes_(3_min)".localized, forSegmentAt: 0)
         self.arrivalTimeSegmentedControl.setTitle("hours_(14_35)".localized, forSegmentAt: 1)
@@ -50,7 +57,6 @@ class SettingsViewController: UIViewController {
         } else {
             self.preferences.set(Constants.ARRIVAL_TIME_MODE_HOURS, forKey: Constants.ARRIVAL_TIME_MODE_KEY)
         }
-        preferences.synchronize()
     }
 }
 

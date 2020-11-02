@@ -17,4 +17,9 @@ extension Date {
     static func getMillis(date: Date) -> Int64 {
         return Int64((date.timeIntervalSince1970 * 1000.0).rounded())
     }
+    
+    func adding(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+    }
+    
 }

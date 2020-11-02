@@ -6,8 +6,6 @@
 //  Copyright © 2020 Domen Kralj. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 
 // page view controller used for controlling views in stationViewController (arrivals or routes)

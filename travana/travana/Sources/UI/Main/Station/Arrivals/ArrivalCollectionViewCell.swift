@@ -12,6 +12,7 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
     
     private static let LIVE_ICON_WIDTH = 11
     private let log: ConsoleLogger = LoggerFactory.getLogger(name: "ArrivalsTableViewCell")
+    private var preferences = UserDefaults.standard
     
     @IBOutlet weak var isLiveIcon: UIImageView!
     @IBOutlet weak var etaMinText: UILabel!
@@ -25,7 +26,15 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
     }
     
     public func setCell(arrival: LppArrival2) {
-        self.etaMinText.text = String(arrival.etaMin) + " " + "min"
+        
+        // check settings and show time depends on settings (14 min, 12:33)
+        if preferences.object(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == nil || preferences.string(forKey: Constants.ARRIVAL_TIME_MODE_KEY)! == Constants.ARRIVAL_TIME_MODE_MINUTES {
+            self.etaMinText.text = String(arrival.etaMin) + " " + "min"
+        } else {
+            let dateFormatterPrint = DateFormatter()
+            dateFormatterPrint.dateFormat = "HH:mm"
+            self.etaMinText.text = dateFormatterPrint.string(from: Date().adding(minutes: arrival.etaMin))
+        }
         
         switch arrival.type {
         case Lpp.PREDICTED:
