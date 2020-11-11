@@ -75,7 +75,7 @@ class FavoriteNearbyStationTableViewCell: UITableViewCell {
                         if distanceInMeters < 1000 {
                             self.distanceText.text = String(Int(distanceInMeters)) + " " + "m".localized
                         } else {
-                            self.distanceText.text = String((distanceInMeters/1000.0).rounded(toPlaces: 1)) + " " + "km".localized
+                            self.distanceText.text = String((distanceInMeters / 1000.0).rounded(toPlaces: 1)) + " " + "km".localized
                         }
                     } else {
                         // Location services are not enabled
