@@ -11,5 +11,16 @@ target 'travana' do
   pod 'Willow', '5.2.1'
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils', '~> 3.4.1'
-  pod 'SideMenu', "6.4.9" # Side menu (drawer)
+  pod 'SideMenu', "6.5.0" # Side menu (drawer)
+end
+
+# https://stackoverflow.com/a/66420027
+
+post_install do |installer_representation|
+    installer_representation.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+            config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+        end
+    end
 end

@@ -297,10 +297,6 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         
         favoriteNearbyStationBottomSheetViewController.view.clipsToBounds = true
     
-        // this should be commented - better ux
-        //favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-        //let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.handleCardTap(recognzier:)))
-    
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.handleCardPan(recognizer:)))
         favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
         
@@ -468,6 +464,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     // called when menu button is clicked
     @IBAction func menuButtonClicked(_ sender: UIButton) {
         let settingsVc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainNavigationDrawerViewController"))
+        
         let slideMenuNavigationController = SideMenuNavigationController(rootViewController: settingsVc)
         slideMenuNavigationController.leftSide = true
         slideMenuNavigationController.presentationStyle = .menuSlideIn

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,7 +44,7 @@
                                     <constraint firstAttribute="width" constant="55" id="FcC-C4-h49"/>
                                     <constraint firstAttribute="height" constant="40" id="byG-Au-pFw"/>
                                 </constraints>
-                                <state key="normal" image="ic_show_timetable_button_background"/>
+                                <state key="normal" image="ic_show_timetable"/>
                                 <connections>
                                     <action selector="openTimetableButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fpd-xN-4sv"/>
                                 </connections>
@@ -54,7 +55,7 @@
                                     <constraint firstAttribute="height" constant="40" id="EqH-E1-e3w"/>
                                     <constraint firstAttribute="width" constant="55" id="SiB-kU-GDu"/>
                                 </constraints>
-                                <state key="normal" image="ic_show_route_button_background"/>
+                                <state key="normal" image="ic_show_route"/>
                                 <connections>
                                     <action selector="openRouteButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zDp-ZH-5Dp"/>
                                 </connections>
@@ -89,7 +90,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_show_route_button_background" width="108.5" height="80"/>
-        <image name="ic_show_timetable_button_background" width="108.5" height="80"/>
+        <image name="ic_show_route" width="108.5" height="80"/>
+        <image name="ic_show_timetable" width="108.5" height="80"/>
     </resources>
 </document>

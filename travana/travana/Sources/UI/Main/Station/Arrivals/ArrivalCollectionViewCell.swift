@@ -10,7 +10,7 @@ import UIKit
 
 class ArrivalCollectionViewCell: UICollectionViewCell {
     
-    private static let LIVE_ICON_WIDTH = 11
+    private static let LIVE_ICON_WIDTH = 15
     private let log: ConsoleLogger = LoggerFactory.getLogger(name: "ArrivalsTableViewCell")
     private var preferences = UserDefaults.standard
     
@@ -21,7 +21,7 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.contentView.setBorder(borderWidth: 2, borderColor: UIColor.MAIN_LIGHT_GREY)
+        // self.contentView.setBorder(borderWidth: 2, borderColor: UIColor.MAIN_LIGHT_GREY)
         self.contentView.setCornerRadius(cornerRadius: 17)
     }
     
@@ -41,12 +41,12 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
             self.isLiveIcon.isHidden = false
             self.isLiveIcon.width(constant: CGFloat(ArrivalCollectionViewCell.LIVE_ICON_WIDTH))
             self.etaMinTextLeftConstraint.constant = -8
-            self.contentView.setBackgroundColor(color: UIColor.MAIN_GREY)
+            self.contentView.setBackgroundColor(color: UIColor.MAIN_LIGHT_GREY_2)
         case Lpp.SCHEDULED:
             self.isLiveIcon.isHidden = true
             self.isLiveIcon.width(constant: 0)
             self.etaMinTextLeftConstraint.constant = 0
-            self.contentView.setBackgroundColor(color: UIColor.MAIN_GREY)
+            self.contentView.setBackgroundColor(color: UIColor.MAIN_LIGHT_GREY_2)
         case Lpp.APPROACHING_STATION:
             self.isLiveIcon.isHidden = true
             self.etaMinText.text = "arrival".localized.uppercased()

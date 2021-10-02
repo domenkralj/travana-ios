@@ -173,6 +173,10 @@ extension UIColor {
         return Colors.UIColorFromRGB(rgbValue: 0xC0C0C0)
     }
     
+    static var MAIN_LIGHT_GREY_2: UIColor {
+        return Colors.UIColorFromRGB(rgbValue: 0x323139)
+    }
+    
     static var MAIN_RED: UIColor {
         return Colors.UIColorFromRGB(rgbValue: 0xC72360)
     }

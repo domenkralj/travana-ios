@@ -301,7 +301,6 @@
 		20518C5E252252FD0006F190 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				20518C9C2522611A0006F190 /* Database */,
 				20518C9B252261140006F190 /* UI */,
 				20518C67252256640006F190 /* Extensions */,
 				20518C64252253A00006F190 /* Communication */,
@@ -469,13 +468,6 @@
 				20518C9D252261310006F190 /* Main */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		20518C9C2522611A0006F190 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Database;
 			sourceTree = "<group>";
 		};
 		20518C9D252261310006F190 /* Main */ = {
