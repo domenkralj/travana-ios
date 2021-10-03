@@ -29,6 +29,7 @@ class NearbyStationsViewController: UIViewController {
         self.nearbyStationsTableView.dataSource = self
         self.nearbyStationsTableView.delegate = self
         self.nearbyStationsTableView.register(UINib(nibName: "FavoriteNearbyStationTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteNearbyStationTableViewCell")
+        self.nearbyStationsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
         
         // set ui to the error and try again view
         self.errorView.setCornerRadius(cornerRadius: 20)
