@@ -19,6 +19,7 @@ class DetoursViewController: UIViewController {
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tryAgainView: UIView!
     @IBOutlet weak var errorText: UILabel!
+    @IBOutlet weak var noDetoursText: UILabel!
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -73,6 +74,10 @@ class DetoursViewController: UIViewController {
             if result.success {
                 self.detours = result.data
                 DispatchQueue.main.async() {
+                    if (self.detours!.isEmpty) {
+                        print("empty")
+                        self.noDetoursText.isHidden = false;
+                    }
                     self.setUI(state: ScreenState.done)
                     self.detoursTableView.reloadData()
                 }
