@@ -21,6 +21,9 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     @IBOutlet weak var pageLineView: UIView!
     @IBOutlet weak var pageLineViewConstraintLeftoSafeArea: NSLayoutConstraint!
     
+    @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var nearbyButton: UIButton!
+    
     // when view is loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,10 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     }
     
     override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.toggleStationScreenTypeButtons(screenType: self.screenType)
     }
     
     // get an instance of the FavoriteNearbyStationsPageViewController
@@ -54,10 +61,15 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     
     // toggle stations type buttons (arrivals or routes) and animate
     private func toggleStationScreenTypeButtons(screenType: FavoriteNearbyStationsScreenType) {
+    
         if screenType == FavoriteNearbyStationsScreenType.favorites {
-            self.pageLineViewConstraintLeftoSafeArea.constant = 0
+            let favoritesX = self.favoritesButton.titleLabel!.frame.minX
+            self.pageLineViewConstraintLeftoSafeArea.constant = favoritesX
+            self.pageLineView.width(constant: self.favoritesButton.intrinsicContentSize.width)
         } else {
-            self.pageLineViewConstraintLeftoSafeArea.constant = UIScreen.main.bounds.width/2
+            let routesX = self.nearbyButton.titleLabel!.frame.origin.x + self.nearbyButton.frame.origin.x
+            self.pageLineViewConstraintLeftoSafeArea.constant = routesX
+            self.pageLineView.width(constant: self.nearbyButton.intrinsicContentSize.width)
         }
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()

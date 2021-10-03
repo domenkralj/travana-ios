@@ -18,8 +18,8 @@
 "routes" = "Routes";
 "timetable" = "TIMETABLE";
 "stations" = "Stations";
-"favorites" = "FAVORITES";
-"nearby" = "NEARBY";
+"favorites" = "Favorites";
+"nearby" = "Nearby";
 "no_favorites_added" = "No favorites added.";
 "location_is_not_available" = "Location is not available.";
 "no_upcoming_arrivals" = "No upcomming arrivals.";

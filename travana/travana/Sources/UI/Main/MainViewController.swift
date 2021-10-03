@@ -135,6 +135,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             // Location services are not enabled
             self.mapView.isMyLocationEnabled = false
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,6 +146,8 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         
         // reload view controllers - if one of the stations were added to favorites this will be updated here
         self.setFavoriteNearbyViewControllers()
+        
+        // self.tooggleFavoritesNeabyBottomSheetViewController()
     }
     
     // set status bar font to white
@@ -293,7 +296,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         self.addChild(favoriteNearbyStationBottomSheetViewController)
         self.view.addSubview(favoriteNearbyStationBottomSheetViewController.view)
         
-        favoriteNearbyStationBottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
+        favoriteNearbyStationBottomSheetViewController.view.frame = CGRect(x: 0, y: 200, width: self.view.bounds.width, height: cardHeight)
         
         favoriteNearbyStationBottomSheetViewController.view.clipsToBounds = true
     
@@ -318,7 +321,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    @IBAction func handleCardPan (recognizer:UIPanGestureRecognizer) {
+    @IBAction func handleCardPan (recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             startInteractiveTransition(state: nextState, duration: 0.9)
@@ -340,7 +343,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
                 case .expanded:
-                    self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
+                    self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = 200 //self.view.frame.height - self.cardHeight
                 case .collapsed:
                     self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
                 }
