@@ -157,6 +157,13 @@ extension UIColor {
         return Colors.UIColorFromRGB(rgbValue: 0xD7D7D7)
     }
     
+    static var DARK_GREY_2: UIColor {
+        return Colors.UIColorFromRGB(rgbValue: 0x373A3E)
+    }
+    static var DARK_GREY_3: UIColor {
+        return Colors.UIColorFromRGB(rgbValue: 0x313438)
+    }
+    
     static var LIGHTER_BLACK: UIColor {
         return Colors.UIColorFromRGB(rgbValue: 0x424240)
     }
@@ -166,7 +173,7 @@ extension UIColor {
     }
     
     static var MAIN_GREY: UIColor {
-        return Colors.UIColorFromRGB(rgbValue: 0x212429)
+        return Colors.UIColorFromRGB(rgbValue: 0x212529)
     }
     
     static var MAIN_LIGHT_GREY: UIColor {

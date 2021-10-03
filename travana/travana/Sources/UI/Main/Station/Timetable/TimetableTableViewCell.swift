@@ -20,9 +20,8 @@ class TimetableTableViewCell: UITableViewCell {
         // remove cell highlight color when clicked
         self.selectionStyle = .none
         
-        self.hourCircleView.setBorder(borderWidth: 2, borderColor: UIColor.LIGHT_GREY)
         self.hourCircleView.setCornerRadius(cornerRadius: 20)
-        
+        self.hourCircleView.setBackgroundColor(color: UIColor.DARK_GREY_3)
     }
     
     public func setCell(timetableTimes: LppTimetableTimes) {
@@ -39,7 +38,7 @@ class TimetableTableViewCell: UITableViewCell {
         self.minutesText.text = minutesStringArray.joined(separator: "  ")
         
         if timetableTimes.isCurrent {
-            self.contentView.setBackgroundColor(color: UIColor.MAIN_RED)
+            self.contentView.setBackgroundColor(color: UIColor.DARK_GREY_2)
         } else {
             self.contentView.setBackgroundColor(color: UIColor.MAIN_GREY)
         }

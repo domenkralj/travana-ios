@@ -21,7 +21,6 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        // self.contentView.setBorder(borderWidth: 2, borderColor: UIColor.MAIN_LIGHT_GREY)
         self.contentView.setCornerRadius(cornerRadius: 17)
     }
     
@@ -40,7 +39,7 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
         case Lpp.PREDICTED:
             self.isLiveIcon.isHidden = false
             self.isLiveIcon.width(constant: CGFloat(ArrivalCollectionViewCell.LIVE_ICON_WIDTH))
-            self.etaMinTextLeftConstraint.constant = -8
+            self.etaMinTextLeftConstraint.constant = -10
             self.contentView.setBackgroundColor(color: UIColor.MAIN_LIGHT_GREY_2)
         case Lpp.SCHEDULED:
             self.isLiveIcon.isHidden = true
@@ -58,7 +57,7 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
             self.etaMinTextLeftConstraint.constant = 0
             self.contentView.setBackgroundColor(color: UIColor.MAIN_ORANGE)
         default:
-            self.log.error("Catching unkown station type")  // hide both containers
+            self.log.error("Catching unknown station type")
         }
         
     }

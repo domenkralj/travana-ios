@@ -51,13 +51,24 @@
                                             <action selector="menuButtonClicked:" destination="O1M-fY-L3C" eventType="touchUpInside" id="tFR-kz-my8"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtN-4k-PzM">
+                                        <rect key="frame" x="156.33333333333334" y="13.666666666666671" width="71.666666666666657" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="stations"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="WAW-Vz-Rn4" secondAttribute="trailing" constant="15" id="FYq-4F-Xiw"/>
+                                    <constraint firstItem="TtN-4k-PzM" firstAttribute="centerX" secondItem="YKz-1Y-LVp" secondAttribute="centerX" id="I6F-g9-S8A"/>
                                     <constraint firstAttribute="height" constant="50" id="Qek-rS-k1o"/>
                                     <constraint firstItem="88I-x0-7Yy" firstAttribute="leading" secondItem="YKz-1Y-LVp" secondAttribute="leading" constant="15" id="cFQ-f8-w7N"/>
                                     <constraint firstItem="WAW-Vz-Rn4" firstAttribute="centerY" secondItem="YKz-1Y-LVp" secondAttribute="centerY" id="fbf-xA-9tM"/>
+                                    <constraint firstItem="TtN-4k-PzM" firstAttribute="centerY" secondItem="YKz-1Y-LVp" secondAttribute="centerY" id="nXP-M2-ZXJ"/>
                                     <constraint firstItem="88I-x0-7Yy" firstAttribute="centerY" secondItem="YKz-1Y-LVp" secondAttribute="centerY" id="ocH-Eu-FoG"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="z0X-Is-aRF"/>
                                 </constraints>
@@ -1488,8 +1499,10 @@
                     </view>
                     <connections>
                         <outlet property="addToFavoritesButton" destination="jSd-xF-ZED" id="Gjm-wc-H6E"/>
+                        <outlet property="arrivalsButton" destination="J1l-eJ-KwM" id="1v6-C4-OWO"/>
                         <outlet property="pageLineView" destination="JPb-M3-6LA" id="HgR-hC-fn0"/>
                         <outlet property="pageLineViewConstraintLeftoSafeArea" destination="hnO-VA-Hkp" id="KsE-M9-tu2"/>
+                        <outlet property="routesButton" destination="bQx-49-Yh5" id="ChH-7Q-zao"/>
                         <outlet property="stationNameText" destination="VoO-kU-HYh" id="tC4-tO-V6N"/>
                         <outlet property="toCenterView" destination="cWc-Pi-l6L" id="kDq-uB-HQ7"/>
                     </connections>

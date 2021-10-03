@@ -25,6 +25,9 @@ class StationViewController: UIViewController, StationPageViewControllerListener
     @IBOutlet weak var pageLineView: UIView!
     @IBOutlet weak var pageLineViewConstraintLeftoSafeArea: NSLayoutConstraint!
     @IBOutlet weak var stationNameText: UILabel!
+    @IBOutlet weak var arrivalsButton: UIButton!
+    @IBOutlet weak var routesButton: UIButton!
+    
     
     required init?(coder aDecoder: NSCoder) {
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -40,9 +43,6 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         
         // set to center view
         self.toCenterView.setCornerRadius(cornerRadius: 13)
-        
-        // set line view to be the half of the screen
-        self.pageLineView.width(constant: UIScreen.main.bounds.width/2)
         
         // pass station data to station page view controller
         self.stationPageViewController.station = self.station
@@ -63,6 +63,13 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         
         // set status bar font to white
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.setStationScreenType(screenType: self.screenType)
+        // self.toggleStationScreenTypeButtons(screenType: self.screenType)
     }
     
     // get an instance of the StationPageViewController
@@ -100,8 +107,19 @@ class StationViewController: UIViewController, StationPageViewControllerListener
         }
     }
     
+    private func setStationScreenType(screenType: StationScreenType) {
+        
+        if self.screenType == StationScreenType.arrivals {
+            self.stationPageViewController.setStationArrivalsViewController()
+        } else {
+            self.stationPageViewController.setStationRoutesViewController()
+        }
+        self.toggleStationScreenTypeButtons(screenType: self.screenType)
+    }
+    
     // toggle station screen type
     private func toggleStationScreenType(screenType: StationScreenType) {
+        
         if self.screenType == StationScreenType.arrivals {
             self.screenType = StationScreenType.routes
             self.stationPageViewController.setStationRoutesViewController()
@@ -114,10 +132,15 @@ class StationViewController: UIViewController, StationPageViewControllerListener
     
     // toggle stations type buttons (arrivals or routes) and animate
     private func toggleStationScreenTypeButtons(screenType: StationScreenType) {
+    
         if screenType == StationScreenType.arrivals {
-            self.pageLineViewConstraintLeftoSafeArea.constant = 0
+            let arrivalsX = self.arrivalsButton.titleLabel!.frame.origin.x
+            self.pageLineViewConstraintLeftoSafeArea.constant = arrivalsX
+            self.pageLineView.width(constant: self.arrivalsButton.intrinsicContentSize.width)
         } else {
-            self.pageLineViewConstraintLeftoSafeArea.constant = UIScreen.main.bounds.width/2
+            let routesX = self.routesButton.titleLabel!.frame.origin.x + self.routesButton.frame.origin.x
+            self.pageLineViewConstraintLeftoSafeArea.constant = routesX
+            self.pageLineView.width(constant: self.routesButton.intrinsicContentSize.width)
         }
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
@@ -135,13 +158,15 @@ class StationViewController: UIViewController, StationPageViewControllerListener
     
     // called when arrivals button is clicked
     @IBAction func arrivalsButtonClicked(_ sender: UIButton) {
-        self.toggleStationScreenTypeButtons(screenType: StationScreenType.arrivals)
+        self.screenType = StationScreenType.arrivals
+        self.setStationScreenType(screenType: self.screenType)
         self.stationPageViewController.setStationArrivalsViewController()
     }
     
     // called when routes button is clicked
     @IBAction func routesButtonClicked(_ sender: UIButton) {
-        self.toggleStationScreenTypeButtons(screenType: StationScreenType.routes)
+        self.screenType = StationScreenType.routes
+        self.setStationScreenType(screenType: self.screenType)
         self.stationPageViewController.setStationRoutesViewController()
     }
     
