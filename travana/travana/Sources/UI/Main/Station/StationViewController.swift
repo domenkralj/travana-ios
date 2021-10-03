@@ -137,10 +137,14 @@ class StationViewController: UIViewController, StationPageViewControllerListener
             let arrivalsX = self.arrivalsButton.titleLabel!.frame.origin.x
             self.pageLineViewConstraintLeftoSafeArea.constant = arrivalsX
             self.pageLineView.width(constant: self.arrivalsButton.intrinsicContentSize.width)
+            self.arrivalsButton.setTitleColor(UIColor.MAIN_RED, for: .normal)
+            self.routesButton.setTitleColor(UIColor.MAIN_LIGHT_GREY, for: .normal)
         } else {
             let routesX = self.routesButton.titleLabel!.frame.origin.x + self.routesButton.frame.origin.x
             self.pageLineViewConstraintLeftoSafeArea.constant = routesX
             self.pageLineView.width(constant: self.routesButton.intrinsicContentSize.width)
+            self.arrivalsButton.setTitleColor(UIColor.MAIN_LIGHT_GREY, for: .normal)
+            self.routesButton.setTitleColor(UIColor.MAIN_RED, for: .normal)
         }
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()

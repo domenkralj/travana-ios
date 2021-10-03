@@ -163,7 +163,6 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         // reload view controllers - if one of the stations were added to favorites this will be updated here
         self.setFavoriteNearbyViewControllers()
         
-        // startInteractiveTransition(state: nextState, duration: 0.9)
     }
     
     // set status bar font to white

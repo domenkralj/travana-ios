@@ -82,15 +82,19 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     
     // toggle stations type buttons (arrivals or routes) and animate
     private func toggleStationScreenTypeButtons(screenType: FavoriteNearbyStationsScreenType) {
-    
+        
         if screenType == FavoriteNearbyStationsScreenType.favorites {
             let favoritesX = self.favoritesButton.titleLabel!.frame.minX
             self.pageLineViewConstraintLeftoSafeArea.constant = favoritesX
             self.pageLineView.width(constant: self.favoritesButton.intrinsicContentSize.width)
+            self.favoritesButton.setTitleColor(UIColor.MAIN_RED, for: .normal)
+            self.nearbyButton.setTitleColor(UIColor.MAIN_LIGHT_GREY, for: .normal)
         } else {
             let routesX = self.nearbyButton.titleLabel!.frame.origin.x + self.nearbyButton.frame.origin.x
             self.pageLineViewConstraintLeftoSafeArea.constant = routesX
             self.pageLineView.width(constant: self.nearbyButton.intrinsicContentSize.width)
+            self.favoritesButton.setTitleColor(UIColor.MAIN_LIGHT_GREY, for: .normal)
+            self.nearbyButton.setTitleColor(UIColor.MAIN_RED, for: .normal)
         }
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
