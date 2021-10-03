@@ -22,6 +22,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="702"/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.1450980392" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9M-fJ-gD4">
+                                <rect key="frame" x="0.0" y="44" width="414" height="65"/>
+                                <color key="backgroundColor" red="0.1280125976" green="0.14339971539999999" blue="0.15908515449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKz-1Y-LVp">
                                 <rect key="frame" x="15" y="59" width="384" height="50"/>
                                 <subviews>
@@ -209,19 +213,24 @@
                             <constraint firstItem="bqh-IQ-Ayc" firstAttribute="trailing" secondItem="Lyv-Op-Bdb" secondAttribute="trailing" id="8I7-By-dVz"/>
                             <constraint firstItem="ghB-aO-NS7" firstAttribute="centerX" secondItem="Slv-ui-MQc" secondAttribute="centerX" id="EKo-Af-pmg"/>
                             <constraint firstItem="dJc-z5-kTk" firstAttribute="centerX" secondItem="Slv-ui-MQc" secondAttribute="centerX" id="Ehm-RC-yTV"/>
+                            <constraint firstItem="YKz-1Y-LVp" firstAttribute="leading" secondItem="Slv-ui-MQc" secondAttribute="leading" constant="15" id="KcC-aS-Dx9"/>
                             <constraint firstAttribute="bottom" secondItem="bqh-IQ-Ayc" secondAttribute="bottom" constant="150" id="L5x-mc-URG"/>
                             <constraint firstItem="bqh-IQ-Ayc" firstAttribute="leading" secondItem="Lyv-Op-Bdb" secondAttribute="leading" id="QVA-9r-7zZ"/>
-                            <constraint firstItem="YKz-1Y-LVp" firstAttribute="leading" secondItem="Lyv-Op-Bdb" secondAttribute="leading" constant="15" id="Uc5-BN-abh"/>
+                            <constraint firstAttribute="trailing" secondItem="YKz-1Y-LVp" secondAttribute="trailing" constant="15" id="XaT-fW-Uus"/>
+                            <constraint firstItem="d9M-fJ-gD4" firstAttribute="trailing" secondItem="Lyv-Op-Bdb" secondAttribute="trailing" id="gCh-v5-3MB"/>
+                            <constraint firstItem="d9M-fJ-gD4" firstAttribute="top" secondItem="Lyv-Op-Bdb" secondAttribute="top" id="hLR-bd-Cho"/>
                             <constraint firstItem="ghB-aO-NS7" firstAttribute="top" secondItem="dJc-z5-kTk" secondAttribute="bottom" constant="15" id="m9P-Lo-EIC"/>
                             <constraint firstItem="532-jj-cHP" firstAttribute="centerX" secondItem="Slv-ui-MQc" secondAttribute="centerX" id="q3j-Dy-epC"/>
-                            <constraint firstItem="Lyv-Op-Bdb" firstAttribute="trailing" secondItem="YKz-1Y-LVp" secondAttribute="trailing" constant="15" id="qfa-rE-Pcf"/>
                             <constraint firstItem="YKz-1Y-LVp" firstAttribute="top" secondItem="Lyv-Op-Bdb" secondAttribute="top" constant="15" id="r7V-dm-87P"/>
                             <constraint firstItem="Lyv-Op-Bdb" firstAttribute="trailing" secondItem="GGc-Rr-6nZ" secondAttribute="trailing" constant="15" id="tr4-0o-wEu"/>
                             <constraint firstAttribute="bottom" secondItem="GGc-Rr-6nZ" secondAttribute="bottom" constant="165" id="vCD-lY-qee"/>
                             <constraint firstItem="532-jj-cHP" firstAttribute="top" secondItem="dJc-z5-kTk" secondAttribute="bottom" constant="15" id="ydp-Vh-MBH"/>
+                            <constraint firstItem="d9M-fJ-gD4" firstAttribute="leading" secondItem="Lyv-Op-Bdb" secondAttribute="leading" id="yp9-4i-a5Y"/>
+                            <constraint firstItem="YKz-1Y-LVp" firstAttribute="top" secondItem="d9M-fJ-gD4" secondAttribute="bottom" constant="-50" id="zS4-MH-pSM"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blurView" destination="d9M-fJ-gD4" id="44W-G0-uJY"/>
                         <outlet property="centerOnLocationView" destination="GGc-Rr-6nZ" id="PN4-Lt-4ln"/>
                         <outlet property="errorText" destination="NpP-99-Is5" id="BKO-PO-mVs"/>
                         <outlet property="errorView" destination="dJc-z5-kTk" id="PXS-sv-BwR"/>

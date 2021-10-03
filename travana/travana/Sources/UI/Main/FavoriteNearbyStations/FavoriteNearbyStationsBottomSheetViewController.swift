@@ -36,11 +36,10 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
-        self.toggleStationScreenTypeButtons(screenType: self.screenType)
+        print(self.screenType)
+        self.setStationScreenType(screenType: self.screenType)
+        //self.toggleStationScreenTypeButtons(screenType: self.screenType)
     }
     
     // get an instance of the FavoriteNearbyStationsPageViewController
@@ -56,7 +55,29 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     
     // called when FavoriteNearbyStationsPageViewController is swiped
     func pageSwiped(screenType: FavoriteNearbyStationsScreenType) {
-        self.toggleStationScreenTypeButtons(screenType: screenType)
+        self.toggleStationScreenType(screenType: screenType)
+    }
+    
+    private func toggleStationScreenType(screenType: FavoriteNearbyStationsScreenType) {
+        
+        if self.screenType == FavoriteNearbyStationsScreenType.favorites {
+            self.screenType = screenType
+            self.favoriteNearbyStationsPageViewController.setNearbyStationsViewController()
+        } else {
+            self.screenType = screenType
+            self.favoriteNearbyStationsPageViewController.setFavoriteStationsViewController()
+        }
+        self.toggleStationScreenTypeButtons(screenType: self.screenType)
+    }
+    
+    private func setStationScreenType(screenType: FavoriteNearbyStationsScreenType) {
+        self.screenType = screenType
+        if self.screenType == FavoriteNearbyStationsScreenType.favorites {
+            self.favoriteNearbyStationsPageViewController.setFavoriteStationsViewController()
+        } else {
+            self.favoriteNearbyStationsPageViewController.setNearbyStationsViewController()
+        }
+        self.toggleStationScreenTypeButtons(screenType: self.screenType)
     }
     
     // toggle stations type buttons (arrivals or routes) and animate

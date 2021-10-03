@@ -23,7 +23,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     var favoriteNearbyStationBottomSheetViewController: FavoriteNearbyStationsBottomSheetViewController!
     var visualEffectView: UIVisualEffectView!
     
-    var cardHeight: CGFloat = 0
+    var cardHeight: CGFloat = 60
     let cardHandleAreaHeight: CGFloat = 150
     
     var cardVisible = false
@@ -44,6 +44,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     private var locationManager = CLLocationManager()
     
     @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var centerOnLocationView: UIView!
     @IBOutlet weak var errorView: UIView!
@@ -136,6 +137,21 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             self.mapView.isMyLocationEnabled = false
         }
         
+        
+        // close card to the end - bug
+        
+        let frameAnimator = UIViewPropertyAnimator(duration: 0.1, dampingRatio: 1) {
+            let topbarBottomEdgeY = self.topBarView.frame.minY + self.topBarView.frame.height
+            self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = topbarBottomEdgeY
+        }
+        
+        frameAnimator.addCompletion { _ in
+            self.cardVisible = !self.cardVisible
+            self.runningAnimations.removeAll()
+        }
+        
+        frameAnimator.startAnimation()
+        runningAnimations.append(frameAnimator)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,7 +163,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         // reload view controllers - if one of the stations were added to favorites this will be updated here
         self.setFavoriteNearbyViewControllers()
         
-        // self.tooggleFavoritesNeabyBottomSheetViewController()
+        // startInteractiveTransition(state: nextState, duration: 0.9)
     }
     
     // set status bar font to white
@@ -285,7 +301,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     
     func setUpBottomSheetViewController() {
         
-        self.cardHeight = self.view.frame.height - (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 20)
+        self.cardHeight = self.view.frame.height // (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 20)
         
         visualEffectView = UIVisualEffectView()
         visualEffectView.frame = self.view.frame
@@ -296,9 +312,13 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         self.addChild(favoriteNearbyStationBottomSheetViewController)
         self.view.addSubview(favoriteNearbyStationBottomSheetViewController.view)
         
-        favoriteNearbyStationBottomSheetViewController.view.frame = CGRect(x: 0, y: 200, width: self.view.bounds.width, height: cardHeight)
-        
         favoriteNearbyStationBottomSheetViewController.view.clipsToBounds = true
+        
+        let topbarBottomEdgeY = self.topBarView.frame.minY + self.topBarView.frame.height
+        favoriteNearbyStationBottomSheetViewController.view.frame = CGRect(x: 0, y: topbarBottomEdgeY, width: self.view.bounds.width, height: cardHeight)
+        
+        self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = topbarBottomEdgeY
+        
     
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.handleCardPan(recognizer:)))
         favoriteNearbyStationBottomSheetViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
@@ -306,10 +326,23 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         // enable user interaction with self.view
         self.visualEffectView.removeFromSuperview()
         
+        self.animateTransitionIfNeeded(state: nextState, duration: 0.9)
+        
     }
     
     public func tooggleFavoritesNeabyBottomSheetViewController() {
         self.animateTransitionIfNeeded(state: nextState, duration: 0.9)
+        
+        // animate blur behind
+        if self.nextState == CardState.expanded {
+            UIView.animate(withDuration: 0.3) {
+                self.blurView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.blurView.alpha = 0
+            }
+        }
     }
     
     @IBAction func handleCardTap(recognzier: UITapGestureRecognizer) {
@@ -327,10 +360,29 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
             startInteractiveTransition(state: nextState, duration: 0.9)
         case .changed:
             let translation = recognizer.translation(in: self.favoriteNearbyStationBottomSheetViewController.handleArea)
+            
+            // animate blur behind
+            if translation.y < 0 {
+                self.blurView.alpha = CGFloat(abs(translation.y / self.view.frame.height))
+            } else {
+                self.blurView.alpha = CGFloat(1 - abs(translation.y / self.view.frame.height))
+            }
             var fractionComplete = translation.y / cardHeight
             fractionComplete = cardVisible ? fractionComplete : -fractionComplete
             self.updateInteractiveTransition(fractionCompleted: fractionComplete)
         case .ended:
+            
+            // animate blur behind
+            if self.nextState == CardState.expanded {
+                UIView.animate(withDuration: 0.3) {
+                    self.blurView.alpha = 1
+                }
+            } else {
+                UIView.animate(withDuration: 0.3) {
+                    self.blurView.alpha = 0
+                }
+            }
+            
             self.continueInteractiveTransition()
         default:
             break
@@ -338,12 +390,13 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         
     }
     
-    func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
+    func animateTransitionIfNeeded (state: CardState, duration: TimeInterval) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
                 case .expanded:
-                    self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = 200 //self.view.frame.height - self.cardHeight
+                    let topbarBottomEdgeY = self.topBarView.frame.minY + self.topBarView.frame.height
+                    self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = topbarBottomEdgeY
                 case .collapsed:
                     self.favoriteNearbyStationBottomSheetViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
                 }
@@ -373,7 +426,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    func startInteractiveTransition(state:CardState, duration:TimeInterval) {
+    func startInteractiveTransition(state: CardState, duration: TimeInterval) {
         if runningAnimations.isEmpty {
             animateTransitionIfNeeded(state: state, duration: duration)
         }
@@ -383,7 +436,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    func updateInteractiveTransition(fractionCompleted:CGFloat) {
+    func updateInteractiveTransition(fractionCompleted: CGFloat) {
         for animator in runningAnimations {
             animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
         }
