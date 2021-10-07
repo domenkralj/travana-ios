@@ -429,10 +429,10 @@
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="NOE-KD-fhI">
-                                <rect key="frame" x="140" y="362" width="134" height="46"/>
+                                <rect key="frame" x="136.33333333333331" y="342" width="141.33333333333331" height="86"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favorites added." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUk-QX-O9f">
-                                        <rect key="frame" x="0.0" y="0.0" width="134" height="18"/>
+                                        <rect key="frame" x="3.6666666666666572" y="0.0" width="134" height="18"/>
                                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -442,13 +442,27 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suit.heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kN9-Ul-8u9">
-                                        <rect key="frame" x="54.666666666666657" y="23" width="25" height="22"/>
+                                        <rect key="frame" x="58.333333333333314" y="23" width="25" height="22"/>
                                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="DSc-O9-OAx"/>
                                             <constraint firstAttribute="width" constant="25" id="cPW-zv-sej"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryu-qe-8EI">
+                                        <rect key="frame" x="0.0" y="49" width="141.33333333333334" height="37"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add favorites">
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="19"/>
+                                            <color key="baseForegroundColor" red="0.88477450609999997" green="0.20749461650000001" blue="0.45215982199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="add_favorites"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addFavoritesButtonClicked:" destination="wbx-Fn-nlT" eventType="touchUpInside" id="TtU-4X-TI1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -2159,7 +2173,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86E-n7-yfl">
-                                        <rect key="frame" x="20" y="15.666666666666661" width="30" height="24.333333333333353"/>
+                                        <rect key="frame" x="20" y="15.666666666666659" width="30" height="24.333333333333357"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="GGH-t2-7Cg"/>
                                             <constraint firstAttribute="width" constant="30" id="hLW-EL-fj0"/>
@@ -2275,6 +2289,9 @@
                             <constraint firstItem="Art-QG-Bld" firstAttribute="bottom" secondItem="JWA-9t-h0w" secondAttribute="bottom" constant="20" id="yi2-rL-TVb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="versionText" destination="k8T-GP-0Tj" id="ZP6-B3-7tb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQi-w1-hB4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

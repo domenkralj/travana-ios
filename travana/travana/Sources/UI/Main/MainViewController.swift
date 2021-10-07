@@ -518,6 +518,7 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
     
     // called when menu button is clicked
     @IBAction func menuButtonClicked(_ sender: UIButton) {
+        
         let settingsVc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainNavigationDrawerViewController"))
         
         let slideMenuNavigationController = SideMenuNavigationController(rootViewController: settingsVc)

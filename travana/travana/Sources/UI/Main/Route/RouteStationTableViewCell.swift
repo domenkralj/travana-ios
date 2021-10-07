@@ -171,7 +171,7 @@ class RouteStationTableViewCell: UITableViewCell {
     
     private func getArrivalTimeString(etaMin: Int) -> String {
         // check settings and show time depends on settings (14 min, 12:33)
-        if UserDefaults.standard.object(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == nil && UserDefaults.standard.string(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == Constants.ARRIVAL_TIME_MODE_MINUTES {
+        if UserDefaults.standard.object(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == nil || UserDefaults.standard.string(forKey: Constants.ARRIVAL_TIME_MODE_KEY) == Constants.ARRIVAL_TIME_MODE_MINUTES {
             return String(etaMin) + " " + "min"
         } else {
             let dateFormatterPrint = DateFormatter()

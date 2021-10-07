@@ -112,6 +112,12 @@ class FavoriteStationsViewController: UIViewController {
             self.mainViewController?.retrieveStations()
         })
     }
+    @IBAction func addFavoritesButtonClicked(_ sender: UIButton) {
+        // opean search view controller
+        let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController)!
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 extension FavoriteStationsViewController: UITableViewDataSource, UITableViewDelegate {

@@ -11,7 +11,7 @@
 "settings" = "Settings";
 "news" = "News";
 "info" = "Info";
-"version" = "Version 1.0.0";
+"version" = "Version";
 "loading" = "Loading";
 "try_again" = "Try Again";
 "arrivals" = "Arrivals";
@@ -24,13 +24,14 @@
 "location_is_not_available" = "Location is not available.";
 "no_upcoming_arrivals" = "No upcomming arrivals.";
 "no_scheduled_arrivals_for_today" = "No scheduled arrivals for today.";
-"data_about_detours_is_obtainer_text" = "Data about detours is obtained from www.lpp.si/obvozi";
+"data_about_detours_is_obtainer_text" = "Data about detours are obtained from www.lpp.si/obvozi";
 "ARRIVAL" = "ARRIVAL";
 "detur" = "DETOUR";
 "opposite_station_do_not_exit" = "Opposite station does not exit.";
 "error_ccured_try_again" = "Error occured, try again";
 "click_for_more" = "Click for more";
-"in_callaboration_with" = "In collaboration with";
+"in_collaboration_with" = "In collaboration with";
 "no_detours" = "There are currently no detours.";
+"add_favorites" = "Add favorites";
 
 

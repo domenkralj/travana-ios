@@ -11,9 +11,15 @@ import UIKit
 // Screen used for info data
 class InfoViewController: UIViewController {
 
+    @IBOutlet weak var versionText: UILabel!
+    
     // when view is loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        self.versionText.text = "version".localized + " " + (appVersion ?? "-.-.-")
     }
     
     override func viewWillAppear(_ animated: Bool) {

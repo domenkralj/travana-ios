@@ -205,7 +205,10 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
                     
                     // remove busses on route, if data is outdated
                     DispatchQueue.main.async() {
-                       for busMarker in self.busesOnRouteMarkers! {
+                        if self.busesOnRouteMarkers == nil {
+                            return
+                        }
+                        for busMarker in self.busesOnRouteMarkers! {
                             busMarker.map = nil
                         }
                     }
