@@ -1,1 +1,19 @@
+*.class
+.idea/
+
+# xcode and Pods
 Pods/
+travana/travana.xcworkspace/xcuserdata/
+travana/travana.xcodeproj/xcuserdata/
+travana/travana.xcodeproj/project.xcworkspace/xcuserdata/
+travana/travana.xcodeproj/xcshareddata/xcschemes/easydriver.xcscheme
+travana/travana.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/
+
+Podfile.lock
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+#MAC
+**/.DS_Store
+*.DS_Store
+travana/.DS_Store
