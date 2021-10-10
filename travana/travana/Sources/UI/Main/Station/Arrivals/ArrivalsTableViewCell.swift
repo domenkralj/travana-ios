@@ -81,12 +81,20 @@ extension ArrivalsTableViewCell: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let arrival = self.arrivals![indexPath.row]
         
+        var size = CGSize(width: 85, height: 35)
+        
         // returns collection view cell width depends on cell type
         if arrival.type == Lpp.PREDICTED {
-            return CGSize(width: 85, height: 35)
+            // same size as default
         } else if arrival.type == Lpp.SCHEDULED {
-            return CGSize(width: 70, height: 35)
+            size = CGSize(width: 70, height: 35)
         }
-        return CGSize(width: 85, height: 35)
+        
+        // to garage
+        if arrival.depot == 1 {
+            size = CGSize(width: size.width + 15, height: 35)
+        }
+        
+        return size
     }
 }

@@ -21,12 +21,13 @@ class LppStation: Decodable, Encodable {
         case intId = "int_id", latitude, longitude, name, refId = "ref_id", routeGroupsOnStation = "route_groups_on_station"
     }
     
-    init(intId: Int, latitude: Double, longitude: Double, name: String, refId: String) {
+    init(intId: Int, latitude: Double, longitude: Double, name: String, refId: String, routeGroupsOnStation: [String]) {
         self.intId = intId
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
         self.refId = refId
+        self.routeGroupsOnStation = routeGroupsOnStation
     }
     
 }

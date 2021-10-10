@@ -14,9 +14,12 @@ class RouteStationTableViewCell: UITableViewCell {
     @IBOutlet weak var firstArrivalTimeText: UILabel!
     @IBOutlet weak var firstArrivalTimeContainer: UIView!
     @IBOutlet weak var firstArrivalTimeLiveIcon: UIImageView!
+    @IBOutlet weak var firstArrivalToGarageIcon: UIImageView!
+    
     @IBOutlet weak var secondArrivalTimeText: UILabel!
     @IBOutlet weak var secondArrivalTimeContainer: UIView!
     @IBOutlet weak var secondArrivalTimeLiveIcon: UIImageView!
+    @IBOutlet weak var secondArrivalToGarageIcon: UIImageView!
     
     @IBOutlet weak var upperStationLineView: UIView!
     @IBOutlet weak var stationDotView: UIView!
@@ -101,6 +104,10 @@ class RouteStationTableViewCell: UITableViewCell {
             self.firstArrivalTimeContainer.isHidden = true
             self.secondArrivalTimeContainer.isHidden = false
             
+            if arrival.depot == 1 {
+                self.secondArrivalToGarageIcon.isHidden = false
+            }
+            
             switch arrival.type {
             case Lpp.PREDICTED:
                 self.secondArrivalTimeText.text = self.getArrivalTimeString(etaMin: arrival.etaMin)
@@ -126,6 +133,10 @@ class RouteStationTableViewCell: UITableViewCell {
             
             let firstArrival = arrivals[0]
             
+            if firstArrival.depot == 1 {
+                self.firstArrivalToGarageIcon.isHidden = false
+            }
+            
             switch firstArrival.type {
             case Lpp.PREDICTED:
                 self.firstArrivalTimeText.text = self.getArrivalTimeString(etaMin: firstArrival.etaMin)
@@ -146,6 +157,10 @@ class RouteStationTableViewCell: UITableViewCell {
             }
             
             let secondArrival = arrivals[1]
+            
+            if firstArrival.depot == 1 {
+                self.secondArrivalToGarageIcon.isHidden = false
+            }
             
             switch secondArrival.type {
             case Lpp.PREDICTED:
@@ -185,8 +200,7 @@ class RouteStationTableViewCell: UITableViewCell {
     public func hideArrivals() {
         self.firstArrivalTimeContainer.isHidden = true
         self.secondArrivalTimeContainer.isHidden = true
-    }
-    
+    }    
 }
 
 enum StationPositon {

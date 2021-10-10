@@ -144,7 +144,21 @@ extension RouteBottomSheetViewController: UITableViewDataSource, UITableViewDele
     
     // called when one of the cells is clicked
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked")
-        // TODO OPEN STATION VIEW CONTROLLER
+        if self.stationArrivals == nil {
+            return
+        }
+        
+        let stationArrival : LppStationArrival = self.stationArrivals![indexPath.row]
+        var routeGroupsOnStation : [String] = []
+        for arrival in stationArrival.arrivals {
+            routeGroupsOnStation.append(arrival.routeName)
+        }
+        
+        // pass route data to StationViewController and open StationViewController
+        let station : LppStation = LppStation(intId: stationArrival.stationIntId, latitude: stationArrival.latitude, longitude: stationArrival.longitude, name: stationArrival.name, refId: stationArrival.stationCode, routeGroupsOnStation: routeGroupsOnStation)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
+        vc.station = station
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }

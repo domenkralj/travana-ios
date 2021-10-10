@@ -422,7 +422,13 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         if stationArrival == nil {
             return
         }
-        let station = LppStation(intId: stationArrival!.stationIntId, latitude: stationArrival!.latitude, longitude: stationArrival!.longitude, name: stationArrival!.name, refId: stationArrival!.stationCode)
+        
+        var routeGroupsOnStation : [String] = []
+        for arrival in stationArrival!.arrivals {
+            routeGroupsOnStation.append(arrival.routeName)
+        }
+        
+        let station = LppStation(intId: stationArrival!.stationIntId, latitude: stationArrival!.latitude, longitude: stationArrival!.longitude, name: stationArrival!.name, refId: stationArrival!.stationCode, routeGroupsOnStation: routeGroupsOnStation)
         // open station view controller
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "StationViewController") as! StationViewController
         vc.station = station

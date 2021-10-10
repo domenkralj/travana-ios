@@ -15,8 +15,8 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
     private var preferences = UserDefaults.standard
     
     @IBOutlet weak var isLiveIcon: UIImageView!
+    @IBOutlet weak var isGarageIcon: UIImageView!
     @IBOutlet weak var etaMinText: UILabel!
-    @IBOutlet weak var etaMinTextLeftConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,26 +35,26 @@ class ArrivalCollectionViewCell: UICollectionViewCell {
             self.etaMinText.text = dateFormatterPrint.string(from: Date().adding(minutes: arrival.etaMin))
         }
         
+        if arrival.depot == 1 {
+            self.isGarageIcon.isHidden = false
+        }
+        
         switch arrival.type {
         case Lpp.PREDICTED:
             self.isLiveIcon.isHidden = false
             self.isLiveIcon.width(constant: CGFloat(ArrivalCollectionViewCell.LIVE_ICON_WIDTH))
-            self.etaMinTextLeftConstraint.constant = -10
             self.contentView.setBackgroundColor(color: UIColor.MAIN_LIGHT_GREY_2)
         case Lpp.SCHEDULED:
             self.isLiveIcon.isHidden = true
             self.isLiveIcon.width(constant: 0)
-            self.etaMinTextLeftConstraint.constant = 0
             self.contentView.setBackgroundColor(color: UIColor.MAIN_LIGHT_GREY_2)
         case Lpp.APPROACHING_STATION:
             self.isLiveIcon.isHidden = true
             self.etaMinText.text = "arrival".localized.uppercased()
-            self.etaMinTextLeftConstraint.constant = 0
             self.contentView.setBackgroundColor(color: UIColor.MAIN_RED)
         case Lpp.DETUR:
             self.isLiveIcon.isHidden = true
             self.etaMinText.text = "detour".localized.uppercased()
-            self.etaMinTextLeftConstraint.constant = 0
             self.contentView.setBackgroundColor(color: UIColor.MAIN_ORANGE)
         default:
             self.log.error("Catching unknown station type")

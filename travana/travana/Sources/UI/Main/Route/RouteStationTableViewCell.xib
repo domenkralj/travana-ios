@@ -41,10 +41,21 @@
                                             <constraint firstAttribute="width" constant="12" id="6R4-r8-Zgn"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_to_garage" translatesAutoresizingMaskIntoConstraints="NO" id="caG-17-iAh">
+                                        <rect key="frame" x="63" y="23" width="12" height="10"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="12" id="5hE-fb-aT0"/>
+                                            <constraint firstAttribute="height" constant="10" id="Hmn-Fm-DCN"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="teR-7Y-Jdv"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="V7N-Lx-6rO" secondAttribute="trailing" id="09z-Zv-bPd"/>
+                                    <constraint firstAttribute="bottom" secondItem="caG-17-iAh" secondAttribute="bottom" constant="2" id="437-gm-Yqa"/>
                                     <constraint firstItem="47q-Zk-Jop" firstAttribute="centerX" secondItem="sXx-ZJ-neQ" secondAttribute="centerX" id="A6n-Uq-eYb"/>
+                                    <constraint firstAttribute="trailing" secondItem="caG-17-iAh" secondAttribute="trailing" id="BJL-Ey-EgZ"/>
                                     <constraint firstItem="V7N-Lx-6rO" firstAttribute="top" secondItem="sXx-ZJ-neQ" secondAttribute="top" id="Jx8-fL-0T0"/>
                                     <constraint firstAttribute="width" constant="75" id="fhB-eB-tZF"/>
                                     <constraint firstItem="47q-Zk-Jop" firstAttribute="centerY" secondItem="sXx-ZJ-neQ" secondAttribute="centerY" id="vIx-iD-dp6"/>
@@ -68,8 +79,19 @@
                                             <constraint firstAttribute="width" constant="12" id="ZMh-PZ-PDf"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_to_garage" translatesAutoresizingMaskIntoConstraints="NO" id="wL5-CT-ycu">
+                                        <rect key="frame" x="63" y="25" width="12" height="10"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="Wfx-Bj-ORK"/>
+                                            <constraint firstAttribute="width" constant="12" id="Xm2-kt-Iae"/>
+                                            <constraint firstAttribute="height" constant="10" id="cmZ-5I-GsL"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="wL5-CT-ycu" secondAttribute="trailing" id="1Vu-7H-vek"/>
+                                    <constraint firstAttribute="bottom" secondItem="wL5-CT-ycu" secondAttribute="bottom" id="DUa-xR-wbe"/>
                                     <constraint firstAttribute="trailing" secondItem="SoG-XU-jpk" secondAttribute="trailing" id="fZa-Xu-RBw"/>
                                     <constraint firstItem="ltE-lm-nl6" firstAttribute="centerX" secondItem="L36-tc-eni" secondAttribute="centerX" id="hUq-ca-Hr3"/>
                                     <constraint firstAttribute="width" constant="75" id="igg-qK-Ehc"/>
@@ -132,9 +154,11 @@
                 <outlet property="firstArrivalTimeContainer" destination="sXx-ZJ-neQ" id="cMY-Iw-44c"/>
                 <outlet property="firstArrivalTimeLiveIcon" destination="V7N-Lx-6rO" id="eZh-EB-dsN"/>
                 <outlet property="firstArrivalTimeText" destination="47q-Zk-Jop" id="Tyi-24-MNd"/>
+                <outlet property="firstArrivalToGarageIcon" destination="caG-17-iAh" id="Npm-iH-74E"/>
                 <outlet property="secondArrivalTimeContainer" destination="L36-tc-eni" id="2ty-BP-SsC"/>
                 <outlet property="secondArrivalTimeLiveIcon" destination="SoG-XU-jpk" id="gZ5-lZ-whi"/>
                 <outlet property="secondArrivalTimeText" destination="ltE-lm-nl6" id="Pyn-e4-OnW"/>
+                <outlet property="secondArrivalToGarageIcon" destination="wL5-CT-ycu" id="C4y-40-jNN"/>
                 <outlet property="stationDotView" destination="D4c-tG-3CU" id="IaY-3C-4zg"/>
                 <outlet property="stationNameText" destination="CKE-N3-l82" id="MWl-eS-vSe"/>
                 <outlet property="upperStationLineView" destination="PDx-eO-Y1d" id="cOG-cY-y7i"/>
@@ -144,6 +168,7 @@
     </objects>
     <resources>
         <image name="ic_live_2" width="50" height="35"/>
+        <image name="ic_to_garage" width="28" height="28"/>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
