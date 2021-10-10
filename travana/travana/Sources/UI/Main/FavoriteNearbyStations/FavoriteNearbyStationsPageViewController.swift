@@ -108,10 +108,12 @@ class FavoriteNearbyStationsPageViewController: UIPageViewController, UIPageView
         let viewControllerIndex = self.favoriteNearbyViewControllers.firstIndex(of: previousViewControllers[0])
         if completed {
             // call protocol that page has been swiped
-            if viewControllerIndex == 1 {
-                self.favoriteNearbyStationPageViewControllerListener?.pageSwiped(screenType: FavoriteNearbyStationsScreenType.favorites)
-            } else {
-                self.favoriteNearbyStationPageViewControllerListener?.pageSwiped(screenType: FavoriteNearbyStationsScreenType.nearby)
+            if completed {
+                if viewControllerIndex == 1 {
+                    self.favoriteNearbyStationPageViewControllerListener?.pageSwiped(screenType: FavoriteNearbyStationsScreenType.favorites)
+                } else {
+                    self.favoriteNearbyStationPageViewControllerListener?.pageSwiped(screenType: FavoriteNearbyStationsScreenType.nearby)
+                }
             }
         }
     }

@@ -37,9 +37,7 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print(self.screenType)
         self.setStationScreenType(screenType: self.screenType)
-        //self.toggleStationScreenTypeButtons(screenType: self.screenType)
     }
     
     // get an instance of the FavoriteNearbyStationsPageViewController
@@ -55,7 +53,7 @@ class FavoriteNearbyStationsBottomSheetViewController: UIViewController, Favorit
     
     // called when FavoriteNearbyStationsPageViewController is swiped
     func pageSwiped(screenType: FavoriteNearbyStationsScreenType) {
-        self.toggleStationScreenType(screenType: screenType)
+        self.setStationScreenType(screenType: screenType)
     }
     
     private func toggleStationScreenType(screenType: FavoriteNearbyStationsScreenType) {
