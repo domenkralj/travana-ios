@@ -29,6 +29,12 @@ class SettingsViewController: UIViewController {
         // localize arrivalTimeSegmentedControl
         self.arrivalTimeSegmentedControl.setTitle("minutes_(3_min)".localized, forSegmentAt: 0)
         self.arrivalTimeSegmentedControl.setTitle("hours_(14_35)".localized, forSegmentAt: 1)
+        
+        // selected option color
+        self.arrivalTimeSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
+
+        // color of other options
+        self.arrivalTimeSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

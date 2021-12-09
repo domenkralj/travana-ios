@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = UIStoryboard(name: "Loading", bundle: nil).instantiateInitialViewController()!
         window!.makeKeyAndVisible()
         
+        window?.overrideUserInterfaceStyle = .light
+        
         return true
     }
 

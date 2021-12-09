@@ -344,15 +344,6 @@ class MainViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    @IBAction func handleCardTap(recognzier: UITapGestureRecognizer) {
-        switch recognzier.state {
-        case .ended:
-            self.animateTransitionIfNeeded(state: nextState, duration: 0.9)
-        default:
-            break
-        }
-    }
-    
     @IBAction func handleCardPan (recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:

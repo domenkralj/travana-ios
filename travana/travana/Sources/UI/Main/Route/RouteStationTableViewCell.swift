@@ -135,6 +135,8 @@ class RouteStationTableViewCell: UITableViewCell {
             
             if firstArrival.depot == 1 {
                 self.firstArrivalToGarageIcon.isHidden = false
+            } else {
+                self.firstArrivalToGarageIcon.isHidden = true
             }
             
             switch firstArrival.type {
@@ -160,6 +162,8 @@ class RouteStationTableViewCell: UITableViewCell {
             
             if firstArrival.depot == 1 {
                 self.secondArrivalToGarageIcon.isHidden = false
+            } else {
+                self.secondArrivalToGarageIcon.isHidden = true
             }
             
             switch secondArrival.type {

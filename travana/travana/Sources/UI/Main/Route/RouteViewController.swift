@@ -398,10 +398,8 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         
         routeBottomSheetViewController.view.clipsToBounds = true
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.handleCardTap(recognzier:)))
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.handleCardPan(recognizer:)))
         
-        routeBottomSheetViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
         routeBottomSheetViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
         
         // enable user interaction with self.view
@@ -435,16 +433,6 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
-    
-    @IBAction func handleCardTap(recognzier:UITapGestureRecognizer) {
-        switch recognzier.state {
-        case .ended:
-            animateTransitionIfNeeded(state: nextState, duration: 0.9)
-        default:
-            break
-        }
-    }
-    
     
     @IBAction func handleCardPan(recognizer:UIPanGestureRecognizer) {
         switch recognizer.state {
