@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LppStation: Decodable, Encodable {
+struct LppStation: Decodable, Encodable {
     
     public var intId: Int
     public var latitude: Double

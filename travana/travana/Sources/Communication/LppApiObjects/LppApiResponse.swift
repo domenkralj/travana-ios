@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LppApiResponse<T: Codable>: Codable {
+class LppApiResponse<T: Decodable>: Decodable {
 
     var success: Bool?
     var data: T?

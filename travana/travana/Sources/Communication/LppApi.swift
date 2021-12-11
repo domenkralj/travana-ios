@@ -424,7 +424,7 @@ class LppApi {
     
     public func getBusesAndArrivalsOnRoute(tripId: String, routeGroupNumber: String, callback: @escaping (Response<RouteDataContainer>) -> ()) {
         
-        var isOneRequestSuccesful = false
+        var numOfSuccesfulRequests = 0
         var routeStationArrivals: [LppStationArrival]? = nil
         var busesOnRoute: [LppBus]? = nil
         
@@ -432,11 +432,11 @@ class LppApi {
             (result) in
             if result.success {
                 routeStationArrivals = result.data!
-                if isOneRequestSuccesful {
-                    let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!)
+                if numOfSuccesfulRequests == 1 {
+                    let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!, route: nil)
                     callback(Response.success(data: routeData))
                 } else {
-                    isOneRequestSuccesful = true
+                    numOfSuccesfulRequests += 1
                 }
             } else {
                 let errorMessage = "Error retrieving arrivals on route data: \(result.error!)"
@@ -450,16 +450,80 @@ class LppApi {
             (result) in
             if result.success {
                 busesOnRoute = result.data!
-                if isOneRequestSuccesful {
-                    let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!)
+                if numOfSuccesfulRequests == 1 {
+                    let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!, route: nil)
                     callback(Response.success(data: routeData))
                 } else {
-                    isOneRequestSuccesful = true
+                    numOfSuccesfulRequests += 1
                 }
             } else {
                 let errorMessage = "Error retrieving buses on route data: \(result.error!)"
                 let error = RequestError.RequestFailedException(errorMessage)
                 callback(Response.failure(error: error))
+                return
+            }
+        }
+    
+    }
+    
+    // returns busses on route, arrivals for the route and detailed route path
+    public func getFullDetailedRouteData(tripId: String, routeId: String, routeGroupNumber: String, callback: @escaping (Response<RouteDataContainer>) -> ()) {
+        
+        var numOfSuccesfulRequests = 0
+        var routeStationArrivals: [LppStationArrival]? = nil
+        var busesOnRoute: [LppBus]? = nil
+        var route: LppRoute? = nil
+        
+        self.getArrivalsOnRoute(tripId: tripId) {
+            (result) in
+            if result.success {
+                routeStationArrivals = result.data!
+                if numOfSuccesfulRequests == 2 {
+                    let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!, route: route)
+                    callback(Response.success(data: routeData))
+                } else {
+                    numOfSuccesfulRequests += 1
+                }
+            } else {
+                let errorMessage = "Error retrieving arrivals on route data: \(result.error!)"
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+        
+        self.getBusesOnRoute(routeGroupNumber: routeGroupNumber) {
+            (result) in
+            if result.success {
+                busesOnRoute = result.data!
+                if numOfSuccesfulRequests == 2 {
+                    let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!, route: route)
+                    callback(Response.success(data: routeData))
+                } else {
+                    numOfSuccesfulRequests += 1
+                }
+            } else {
+                let errorMessage = "Error retrieving buses on route data: \(result.error!)"
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+        
+        self.getDetailedRoute(routeId: routeId) {
+            (result) in
+            
+            numOfSuccesfulRequests += 1
+            if result.success {
+                for routeIter in result.data! {
+                    if routeIter.tripId == tripId {
+                        route = routeIter
+                    }
+                }
+            }
+            if numOfSuccesfulRequests == 3 {
+                let routeData = RouteDataContainer(routeStationArrivals: routeStationArrivals!, busesOnRoute: busesOnRoute!, route: route)
+                callback(Response.success(data: routeData))
                 return
             }
         }

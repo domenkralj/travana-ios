@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LppRouteOnStation: Decodable, Encodable {
+struct LppRouteOnStation: Decodable, Encodable {
     
     public var routeId: String
     public var routeNumber: String

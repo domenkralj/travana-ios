@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LppArrival: Decodable, Encodable {
+struct LppArrival: Decodable, Encodable {
     
     public var routeId: String
     public var vehicleId: String

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LppArrival2Wrapper: Decodable, Encodable {
+struct LppArrival2Wrapper: Decodable, Encodable {
     
     public var arrivals: [LppArrival2]
     // api also support "station" value

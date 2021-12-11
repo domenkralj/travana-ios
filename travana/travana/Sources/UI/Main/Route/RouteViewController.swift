@@ -163,14 +163,16 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         DispatchQueue.main.async() {
             self.setUi(state: ScreenState.loading)
         }
-        self.lppApi.getBusesAndArrivalsOnRoute(tripId: route!.tripId, routeGroupNumber: route!.routeNumber) {
+        self.lppApi.getFullDetailedRouteData(tripId: route!.tripId, routeId: route!.routeId, routeGroupNumber: route!.routeNumber) {
             (result) in
             if result.success {
                 self.isRouteInitilized = true
                 DispatchQueue.main.async() {
                     self.setUi(state: ScreenState.done)
                     self.setOrUpdateBuses(buses: result.data!.busesOnRoute)
-                    self.drawRouteOnMapAndUpdateCamera(stations: result.data!.routeStationArrivals, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
+                    
+                    // draw line normally between stations
+                    self.drawRouteOnMapAndUpdateCamera(stations: result.data!.routeStationArrivals, route: result.data?.route, routeColor: Colors.getColorFromString(string: self.route!.routeNumber))
                     self.routeBottomSheetViewController.setStationsArrivals(stationArrivals: result.data!.routeStationArrivals)
                 }
             } else {
@@ -333,7 +335,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    private func drawRouteOnMapAndUpdateCamera(stations: [LppStationArrival], routeColor: UIColor) {
+    private func drawRouteOnMapAndUpdateCamera(stations: [LppStationArrival], route: LppRoute?, routeColor: UIColor) {
         
         let routePath = GMSMutablePath()
         var bounds = GMSCoordinateBounds()
@@ -344,6 +346,7 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
         
         let stationMarkerViewInner = UIImageView(image: UIImage(named: "ic_station_pin_marker_inner")!.withRenderingMode(.alwaysTemplate))
         stationMarkerViewInner.tintColor = UIColor.MAIN_GREY
+        
         
         // add markers and draw line between markers
         for station in stations {
@@ -371,14 +374,39 @@ class RouteViewController: UIViewController, GMSMapViewDelegate {
             stationMarkerInner.map = mapView
             
         }
-        let rectangle = GMSPolyline(path: routePath)
-        rectangle.strokeWidth = 6.0
-        rectangle.strokeColor = routeColor
-        rectangle.map = self.mapView
+        
+        if route != nil && route!.geoJsonShape != nil {
+            routePath.removeAllCoordinates()
+            if route?.geoJsonShape?.type == GeoJsonShapeType.GeoLine {
+                for coor in route!.geoJsonShape!.coordinates.value() as! [[Double]] {
+                    let coorPart = CLLocationCoordinate2D(latitude: coor[1], longitude: coor[0])
+                    routePath.add(coorPart)
+                }
+                drawTravanaRoutePolyline(path: routePath, routeColor: routeColor)
+            } else if route?.geoJsonShape?.type == GeoJsonShapeType.GeoMultiLine {
+                for oneShape in route!.geoJsonShape!.coordinates.value() as! [[[Double]]] {
+                    let routePath = GMSMutablePath()
+                    for coor in oneShape {
+                        let coorPart = CLLocationCoordinate2D(latitude: coor[1], longitude: coor[0])
+                        routePath.add(coorPart)
+                    }
+                    drawTravanaRoutePolyline(path: routePath, routeColor: routeColor)
+                }
+            }
+        } else {
+            drawTravanaRoutePolyline(path: routePath, routeColor: routeColor)
+        }
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
         self.mapView.animate(with: update)
         
+    }
+    
+    private func drawTravanaRoutePolyline(path: GMSMutablePath, routeColor: UIColor) {
+        let rectangle = GMSPolyline(path: path)
+        rectangle.strokeWidth = 6.0
+        rectangle.strokeColor = routeColor
+        rectangle.map = self.mapView
     }
     
     private func setUpRouteStationBottomSheetViewController(route: LppRoute) {

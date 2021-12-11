@@ -13,11 +13,11 @@ class RouteDataContainer {
 
     public var routeStationArrivals: [LppStationArrival]
     public var busesOnRoute: [LppBus]
-    // public var routePath: [CLLocation]
+    public var route: LppRoute?
     
-    init (routeStationArrivals: [LppStationArrival], busesOnRoute: [LppBus]) {
+    init (routeStationArrivals: [LppStationArrival], busesOnRoute: [LppBus], route: LppRoute?) {
         self.routeStationArrivals = routeStationArrivals
         self.busesOnRoute = busesOnRoute
-        // self.routePath = routePath
+        self.route = route
     }
 }
