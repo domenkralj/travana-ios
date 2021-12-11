@@ -16,9 +16,10 @@ class LppRoute: Decodable, Encodable {
     public var routeName: String
     public var shortRouteName: String?
     public var tripIntId: Int?
+    // public var geoJsonShape: GeoJsonShape?
     
     private enum CodingKeys : String, CodingKey {
-        case tripId = "trip_id", routeId = "route_id", routeNumber = "route_number", routeName = "route_name", shortRouteName = "short_route_name", tripIntId = "trip_int_id"
+        case tripId = "trip_id", routeId = "route_id", routeNumber = "route_number", routeName = "route_name", shortRouteName = "short_route_name", tripIntId = "trip_int_id"// , geoJsonShape = "geojson_shape"
     }
     
     init(routeId: String, routeNumber: String, tripId: String, routeName: String, shortRouteName: String) {

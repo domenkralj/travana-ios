@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
 
         // color of other options
         self.arrivalTimeSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

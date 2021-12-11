@@ -13,6 +13,7 @@ import Foundation
 class LppApi {
     
     private static let ACTIVE_ROUTES_LINK = "https://data.lpp.si/api/route/active-routes"
+    private static let ROUTES_LINK = "https://data.lpp.si/api/route/routes"
     private static let STATIONS_DETAILS_LINK = "https://data.lpp.si/api/station/station-details"
     private static let ARRIVALS_ON_ROUTE_LINK = "https://data.lpp.si/api/route/arrivals-on-route"
     private static let BUSES_ON_ROUTE_LINK = "https://data.lpp.si/api/bus/buses-on-route"
@@ -104,13 +105,52 @@ class LppApi {
         }
     }
     
+    // returns route data with route path
+    public func getDetailedRoute(routeId: String, callback: @escaping (Response<[LppRoute]>) -> ())  {
+        
+        let params = ["route_id": routeId,
+            "shape": "1"]
+        
+        var routes: [LppRoute]? = nil
+        
+        self.httpClient.getRequest(urlStr: LppApi.ROUTES_LINK, params: params, headers: nil) { [weak self] (error, response) in
+        guard let self = self else { return }
+        
+            if error != nil {
+                let errorMessage = "Error retrieving routes data, error: \(error!)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            
+            if response == nil {
+                let errorMessage = "Error retrieving routes data, response is null"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+            do {
+                routes = try self.decoder.decode(LppApiResponse<[LppRoute]>.self, from: Data(response!.utf8)).data
+                callback(Response.success(data: routes!))
+            } catch let parseError {
+                let errorMessage = "Error retrieving routes data, parsing json to object failed: \(parseError)"
+                self.logger.error(errorMessage)
+                let error = RequestError.RequestFailedException(errorMessage)
+                callback(Response.failure(error: error))
+                return
+            }
+        }
+    }
+    
     public func getRoutes(callback: @escaping (Response<[LppRoute]>) -> ()) {
         
         if self.routes != nil {
             callback(Response.success(data: self.routes!))
             return
         }
-        
+            
         var routes: [LppRoute]? = nil
         
         self.httpClient.getRequest(urlStr: LppApi.ACTIVE_ROUTES_LINK, params: nil, headers: nil) { [weak self] (error, response) in

@@ -40,6 +40,7 @@
 		20538FFB252F92AB00EBD06A /* LppStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20538FFA252F92AB00EBD06A /* LppStation.swift */; };
 		20538FFF252F955E00EBD06A /* LppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20538FFE252F955E00EBD06A /* LppRoute.swift */; };
 		20539001252F97AD00EBD06A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20539000252F97AD00EBD06A /* Response.swift */; };
+		20595B482764EA9A00859485 /* GeoJsonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20595B472764EA9A00859485 /* GeoJsonShape.swift */; };
 		2063D1FE2528FC2000E05A2D /* Pods-travana.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CA49DF5DCF8105E0A7AC23FB /* Pods-travana.debug.xcconfig */; };
 		2063D1FF2528FC2D00E05A2D /* Pods-travana.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 19F8770D61610EBB6227E30E /* Pods-travana.release.xcconfig */; };
 		2064DC8C2528CB0B00E80782 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */; };
@@ -143,6 +144,7 @@
 		20538FFA252F92AB00EBD06A /* LppStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppStation.swift; sourceTree = "<group>"; };
 		20538FFE252F955E00EBD06A /* LppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LppRoute.swift; sourceTree = "<group>"; };
 		20539000252F97AD00EBD06A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		20595B472764EA9A00859485 /* GeoJsonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonShape.swift; sourceTree = "<group>"; };
 		2064DC8B2528CB0B00E80782 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		206671ED25489CC400799073 /* FavoriteStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStationsViewController.swift; sourceTree = "<group>"; };
 		206671EF25489CD300799073 /* NearbyStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStationsViewController.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				206865622545CE4C000DCD80 /* LppArrival2.swift */,
 				206865642545CE7D000DCD80 /* LppArrival2Station.swift */,
 				206865662545CF6D000DCD80 /* LppArrival2Wrapper.swift */,
+				20595B472764EA9A00859485 /* GeoJsonShape.swift */,
 			);
 			path = LppApiObjects;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				20667D13254B448500CA178F /* Connectivity.swift in Sources */,
 				20348A32254C6E2C003809E6 /* Toast.swift in Sources */,
 				2066F1B6252A58E100DC221D /* SearchResultTableViewCell.swift in Sources */,
+				20595B482764EA9A00859485 /* GeoJsonShape.swift in Sources */,
 				2071C665254372F300FA80B2 /* RoutesOnStationTableViewCell.swift in Sources */,
 				20518C7E252258270006F190 /* UIFont.swift in Sources */,
 				2066F1B1252A4CE300DC221D /* SettingsViewController.swift in Sources */,
